@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Complete - Contoso</title>
+        <style>
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+            body {
+                font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+                background-color: #f5f5f5;
+                color: #252525;
+                line-height: 1.6;
+            }
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+            .main-container {
+                display: flex;
+                margin: 40px auto;
+                max-width: 1100px;
+                background-color: white;
+                border-radius: 6px;
+                overflow: hidden;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            }
+            .banner {
+                flex: 1;
+                background-color: #0078d4;
+                color: white;
+                padding: 50px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+            .content {
+                flex: 1;
+                padding: 50px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+            }
+            .logo {
+                max-width: 200px;
+                margin-bottom: 40px;
+            }
+            h1 {
+                font-size: 26px;
+                margin-bottom: 20px;
+                font-weight: 600;
+            }
+            .success-icon {
+                font-size: 72px;
+                margin-bottom: 30px;
+            }
+            .title {
+                font-size: 28px;
+                margin-bottom: 16px;
+                font-weight: 600;
+                color: #323130;
+            }
+            .subtitle {
+                font-size: 18px;
+                color: #605e5c;
+                margin-bottom: 40px;
+            }
+            .footer {
+                text-align: center;
+                margin-top: 30px;
+                font-size: 13px;
+                color: #777;
+            }
+            .footer a {
+                color: #0078d4;
+                text-decoration: none;
+            }
+            .footer a:hover {
+                text-decoration: underline;
+            }
+            @media (max-width: 768px) {
+                .main-container {
+                    flex-direction: column;
+                }
+                .banner {
+                    padding: 30px;
+                }
+                .content {
+                    padding: 30px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="main-container">
+                <div class="banner">
+                    <img
+                        src="{{.BaseURL}}/Contoso/Contoso-logo.png"
+                        alt="Contoso Logo"
+                        class="logo"
+                    />
+                    <h1>Thank you</h1>
+                    <p>
+                        Your submission has been received and processed
+                        successfully.
+                    </p>
+                </div>
+
+                <div class="content">
+                    <div class="success-icon">✅</div>
+                    <div class="title">Complete</div>
+                    <div class="subtitle">
+                        All required steps have been processed.
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>&copy; 2024 Contoso Corporation. All rights reserved.</p>
+                <p>
+                    <a href="#">Privacy Policy</a> |
+                    <a href="#">Terms of Use</a> |
+                    <a href="#">Contact Us</a>
+                </p>
+            </div>
+        </div>
+    </body>
+</html>
