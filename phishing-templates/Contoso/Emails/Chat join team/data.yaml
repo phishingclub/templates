@@ -1,0 +1,7 @@
+name: "Contoso - Chat join team"
+emails:
+  - name: "Contoso - Chat join team"
+    file: "email.html"
+    envelope from: "edit@this.tld"
+    from: "Contoso Chat <edit@this.tld>"
+    subject: "Join team"

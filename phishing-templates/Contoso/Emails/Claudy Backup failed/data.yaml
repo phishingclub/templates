@@ -1,0 +1,7 @@
+name: "Contoso - Backup failed"
+emails:
+  - name: "Contoso - Claudy - Backup failed"
+    file: "email.html"
+    envelope from: "edit@this.tld"
+    from: "Contoso <edit@this.tld>"
+    subject: "Backup failed"

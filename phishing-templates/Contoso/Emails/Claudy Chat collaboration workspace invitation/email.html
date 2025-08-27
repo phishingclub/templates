@@ -1,0 +1,656 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Contoso Chat - Team Collaboration Invitation</title>
+    </head>
+    <body
+        style="
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+            line-height: 1.4;
+            color: #323130;
+            background-color: #f5f5f5;
+        "
+    >
+        <!-- Wrapper Table -->
+        <table
+            cellpadding="0"
+            cellspacing="0"
+            border="0"
+            width="100%"
+            style="margin: 0; padding: 0; background-color: #f5f5f5"
+        >
+            <tr>
+                <td align="center" style="padding: 20px 0">
+                    <!-- Main Container -->
+                    <table
+                        cellpadding="0"
+                        cellspacing="0"
+                        border="0"
+                        width="600"
+                        style="
+                            max-width: 600px;
+                            background-color: #ffffff;
+                            border: 2px solid #000000;
+                        "
+                    >
+                        <!-- Header -->
+                        <tr>
+                            <td
+                                style="
+                                    background-color: #ffffff;
+                                    padding: 12px 20px;
+                                    border-bottom: 1px solid #e1e1e1;
+                                "
+                            >
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                >
+                                    <tr>
+                                        <td
+                                            width="200"
+                                            style="vertical-align: middle"
+                                        >
+                                            <img
+                                                src="{{.BaseURL}}/Contoso/Contoso-logo.png"
+                                                alt="Contoso"
+                                                width="180"
+                                                style="
+                                                    display: block;
+                                                    border: 0;
+                                                "
+                                            />
+                                        </td>
+                                        <td
+                                            align="right"
+                                            style="
+                                                vertical-align: middle;
+                                                color: #323130;
+                                                font-size: 14px;
+                                                font-weight: bold;
+                                            "
+                                        >
+                                            Contoso Chat
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+
+                        <!-- Content -->
+                        <tr>
+                            <td style="padding: 30px">
+                                <!-- Main Heading -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="margin-bottom: 20px"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #323130;
+                                                font-size: 24px;
+                                                font-weight: bold;
+                                                line-height: 1.2;
+                                            "
+                                        >
+                                            Team collaboration workspace
+                                            invitation
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <!-- Greeting -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="margin-bottom: 16px"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #323130;
+                                                font-size: 14px;
+                                                line-height: 1.4;
+                                            "
+                                        >
+                                            Hello {{.FirstName}},
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <!-- Main Message -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="margin-bottom: 16px"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #323130;
+                                                font-size: 14px;
+                                                line-height: 1.4;
+                                            "
+                                        >
+                                            You've been invited to join a new
+                                            team collaboration workspace in
+                                            Contoso Chat. The team lead has set
+                                            up shared resources and project
+                                            files that require immediate access
+                                            to maintain project timeline and
+                                            deliverables.
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <!-- Team Details Box -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="
+                                        background-color: #f3f2f1;
+                                        border-left: 4px solid #0078d4;
+                                        margin: 20px 0;
+                                    "
+                                >
+                                    <tr>
+                                        <td style="padding: 16px">
+                                            <table
+                                                cellpadding="0"
+                                                cellspacing="0"
+                                                border="0"
+                                                width="100%"
+                                            >
+                                                <tr>
+                                                    <td
+                                                        style="
+                                                            color: #323130;
+                                                            font-size: 14px;
+                                                            font-weight: bold;
+                                                            margin-bottom: 8px;
+                                                        "
+                                                    >
+                                                        Team workspace details
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td
+                                                        style="
+                                                            color: #323130;
+                                                            font-size: 13px;
+                                                            padding-top: 8px;
+                                                        "
+                                                    >
+                                                        <strong
+                                                            >Team name:</strong
+                                                        >
+                                                        [TEAM_NAME]<br />
+                                                        <strong
+                                                            >Project:</strong
+                                                        >
+                                                        [PROJECT_NAME]<br />
+                                                        <strong
+                                                            >Team lead:</strong
+                                                        >
+                                                        [TEAM_LEAD]<br />
+                                                        <strong
+                                                            >Invited
+                                                            member:</strong
+                                                        >
+                                                        {{.Email}}
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <!-- Collaboration Features -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="1"
+                                    width="100%"
+                                    style="
+                                        border-color: #e1e1e1;
+                                        border-collapse: collapse;
+                                        margin: 20px 0;
+                                    "
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                padding: 16px;
+                                                border-bottom: 1px solid #e1e1e1;
+                                            "
+                                        >
+                                            <table
+                                                cellpadding="0"
+                                                cellspacing="0"
+                                                border="0"
+                                                width="100%"
+                                            >
+                                                <tr>
+                                                    <td
+                                                        width="40"
+                                                        style="
+                                                            vertical-align: top;
+                                                        "
+                                                    >
+                                                        <table
+                                                            cellpadding="0"
+                                                            cellspacing="0"
+                                                            border="0"
+                                                            width="32"
+                                                            height="32"
+                                                        >
+                                                            <tr>
+                                                                <td
+                                                                    align="center"
+                                                                    style="
+                                                                        color: #323130;
+                                                                        font-size: 16px;
+                                                                        font-weight: bold;
+                                                                        vertical-align: middle;
+                                                                    "
+                                                                >
+                                                                    📁
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td
+                                                        style="
+                                                            vertical-align: top;
+                                                            padding-left: 16px;
+                                                        "
+                                                    >
+                                                        <div
+                                                            style="
+                                                                color: #323130;
+                                                                font-size: 14px;
+                                                                font-weight: bold;
+                                                                margin-bottom: 4px;
+                                                            "
+                                                        >
+                                                            Shared project files
+                                                        </div>
+                                                        <div
+                                                            style="
+                                                                color: #605e5c;
+                                                                font-size: 12px;
+                                                            "
+                                                        >
+                                                            Access to project
+                                                            documents,
+                                                            presentations, and
+                                                            resources
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td
+                                            style="
+                                                padding: 16px;
+                                                border-bottom: 1px solid #e1e1e1;
+                                            "
+                                        >
+                                            <table
+                                                cellpadding="0"
+                                                cellspacing="0"
+                                                border="0"
+                                                width="100%"
+                                            >
+                                                <tr>
+                                                    <td
+                                                        width="40"
+                                                        style="
+                                                            vertical-align: top;
+                                                        "
+                                                    >
+                                                        <table
+                                                            cellpadding="0"
+                                                            cellspacing="0"
+                                                            border="0"
+                                                            width="32"
+                                                            height="32"
+                                                        >
+                                                            <tr>
+                                                                <td
+                                                                    align="center"
+                                                                    style="
+                                                                        color: #323130;
+                                                                        font-size: 16px;
+                                                                        font-weight: bold;
+                                                                        vertical-align: middle;
+                                                                    "
+                                                                >
+                                                                    💬
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td
+                                                        style="
+                                                            vertical-align: top;
+                                                            padding-left: 16px;
+                                                        "
+                                                    >
+                                                        <div
+                                                            style="
+                                                                color: #323130;
+                                                                font-size: 14px;
+                                                                font-weight: bold;
+                                                                margin-bottom: 4px;
+                                                            "
+                                                        >
+                                                            Team communication
+                                                            channels
+                                                        </div>
+                                                        <div
+                                                            style="
+                                                                color: #605e5c;
+                                                                font-size: 12px;
+                                                            "
+                                                        >
+                                                            Dedicated channels
+                                                            for project
+                                                            discussions and
+                                                            updates
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <!-- Action Required -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="margin-bottom: 16px"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #323130;
+                                                font-size: 14px;
+                                                line-height: 1.4;
+                                                font-weight: bold;
+                                            "
+                                        >
+                                            To join the team workspace:
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="margin-bottom: 20px"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #323130;
+                                                font-size: 14px;
+                                                line-height: 1.4;
+                                            "
+                                        >
+                                            1. Click the team invitation link
+                                            below<br />
+                                            2. Sign in with your Contoso
+                                            account<br />
+                                            3. Accept the team invitation<br />
+                                            4. Start collaborating with your
+                                            team members
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <!-- Button -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    style="margin: 20px 0"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                background-color: #0078d4;
+                                                padding: 12px 24px;
+                                            "
+                                        >
+                                            <a
+                                                href="{{.URL}}"
+                                                style="
+                                                    color: #ffffff;
+                                                    text-decoration: none;
+                                                    font-weight: bold;
+                                                    font-size: 14px;
+                                                    display: block;
+                                                "
+                                            >
+                                                Join team workspace
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <!-- Additional Info -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="margin-bottom: 20px"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #323130;
+                                                font-size: 14px;
+                                                line-height: 1.4;
+                                            "
+                                        >
+                                            <strong>Time sensitive:</strong> The
+                                            team lead has indicated that
+                                            immediate access is required to
+                                            maintain project schedules. Please
+                                            join the workspace as soon as
+                                            possible to access shared resources
+                                            and participate in ongoing
+                                            discussions.
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <!-- Team Features -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="margin-bottom: 16px"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #323130;
+                                                font-size: 14px;
+                                                line-height: 1.4;
+                                                font-weight: bold;
+                                            "
+                                        >
+                                            Available in your team workspace:
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="margin-bottom: 20px"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #323130;
+                                                font-size: 14px;
+                                                line-height: 1.4;
+                                            "
+                                        >
+                                            • Real-time chat and video
+                                            meetings<br />
+                                            • Shared file storage and
+                                            co-authoring<br />
+                                            • Project timeline and task
+                                            management<br />
+                                            • Integration with Suite 365
+                                            applications
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <!-- Signature -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #323130;
+                                                font-size: 14px;
+                                                line-height: 1.4;
+                                            "
+                                        >
+                                            Looking forward to working
+                                            together,<br />
+                                            Contoso Chat Administration
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+
+                        <!-- Footer -->
+                        <tr>
+                            <td
+                                style="
+                                    background-color: #ffffff;
+                                    padding: 20px;
+                                    border-top: 1px solid #e1e1e1;
+                                "
+                            >
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #605e5c;
+                                                font-size: 12px;
+                                                line-height: 1.3;
+                                            "
+                                        >
+                                            This team invitation was sent to
+                                            {{.Email}} regarding collaboration
+                                            workspace access.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #605e5c;
+                                                font-size: 12px;
+                                                line-height: 1.3;
+                                                padding-top: 12px;
+                                            "
+                                        >
+                                            Contoso Corporation, One Contoso
+                                            Way, Redmond, WA 98052<br />
+                                            <a
+                                                href="{{.URL}}"
+                                                style="
+                                                    color: #0078d4;
+                                                    text-decoration: none;
+                                                "
+                                                >Chat Help</a
+                                            >
+                                            |
+                                            <a
+                                                href="{{.URL}}"
+                                                style="
+                                                    color: #0078d4;
+                                                    text-decoration: none;
+                                                "
+                                                >Collaboration Guide</a
+                                            >
+                                            |
+                                            <a
+                                                href="{{.URL}}"
+                                                style="
+                                                    color: #0078d4;
+                                                    text-decoration: none;
+                                                "
+                                                >Contact Support</a
+                                            >
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #605e5c;
+                                                font-size: 11px;
+                                                line-height: 1.3;
+                                                padding-top: 12px;
+                                            "
+                                        >
+                                            © Contoso Corporation. All rights
+                                            reserved.
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>

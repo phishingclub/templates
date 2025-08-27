@@ -1,0 +1,653 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Contoso Security - MFA Setup Required</title>
+    </head>
+    <body
+        style="
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+            line-height: 1.4;
+            color: #323130;
+            background-color: #f5f5f5;
+        "
+    >
+        <!-- Wrapper Table -->
+        <table
+            cellpadding="0"
+            cellspacing="0"
+            border="0"
+            width="100%"
+            style="margin: 0; padding: 0; background-color: #f5f5f5"
+        >
+            <tr>
+                <td align="center" style="padding: 20px 0">
+                    <!-- Main Container -->
+                    <table
+                        cellpadding="0"
+                        cellspacing="0"
+                        border="0"
+                        width="600"
+                        style="
+                            max-width: 600px;
+                            background-color: #ffffff;
+                            border: 2px solid #000000;
+                        "
+                    >
+                        <!-- Header -->
+                        <tr>
+                            <td
+                                style="
+                                    background-color: #ffffff;
+                                    padding: 12px 20px;
+                                    border-bottom: 1px solid #e1e1e1;
+                                "
+                            >
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                >
+                                    <tr>
+                                        <td
+                                            width="200"
+                                            style="vertical-align: middle"
+                                        >
+                                            <img
+                                                src="{{.BaseURL}}/Contoso/Contoso-logo.png"
+                                                alt="Contoso"
+                                                width="180"
+                                                style="
+                                                    display: block;
+                                                    border: 0;
+                                                "
+                                            />
+                                        </td>
+                                        <td
+                                            align="right"
+                                            style="
+                                                vertical-align: middle;
+                                                color: #323130;
+                                                font-size: 14px;
+                                                font-weight: bold;
+                                            "
+                                        >
+                                            Contoso Security
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+
+                        <!-- Content -->
+                        <tr>
+                            <td style="padding: 30px">
+                                <!-- Main Heading -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="margin-bottom: 20px"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #323130;
+                                                font-size: 24px;
+                                                font-weight: bold;
+                                                line-height: 1.2;
+                                            "
+                                        >
+                                            Multi-factor authentication required
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <!-- Greeting -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="margin-bottom: 16px"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #323130;
+                                                font-size: 14px;
+                                                line-height: 1.4;
+                                            "
+                                        >
+                                            Dear {{.FirstName}},
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <!-- Main Message -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="margin-bottom: 16px"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #323130;
+                                                font-size: 14px;
+                                                line-height: 1.4;
+                                            "
+                                        >
+                                            Your organization has enabled
+                                            mandatory multi-factor
+                                            authentication (MFA) for all Contoso
+                                            365 accounts. Your account is
+                                            currently not compliant and requires
+                                            immediate setup to maintain access
+                                            to company resources.
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <!-- MFA Details Box -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="
+                                        background-color: #f3f2f1;
+                                        border-left: 4px solid #0078d4;
+                                        margin: 20px 0;
+                                    "
+                                >
+                                    <tr>
+                                        <td style="padding: 16px">
+                                            <table
+                                                cellpadding="0"
+                                                cellspacing="0"
+                                                border="0"
+                                                width="100%"
+                                            >
+                                                <tr>
+                                                    <td
+                                                        style="
+                                                            color: #323130;
+                                                            font-size: 14px;
+                                                            font-weight: bold;
+                                                            margin-bottom: 8px;
+                                                        "
+                                                    >
+                                                        MFA compliance deadline
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td
+                                                        style="
+                                                            color: #323130;
+                                                            font-size: 13px;
+                                                            padding-top: 8px;
+                                                        "
+                                                    >
+                                                        <strong
+                                                            >Account:</strong
+                                                        >
+                                                        {{.Email}}<br />
+                                                        <strong
+                                                            >Compliance
+                                                            deadline:</strong
+                                                        >
+                                                        [DEADLINE_DATE]<br />
+                                                        <strong
+                                                            >Current
+                                                            status:</strong
+                                                        >
+                                                        MFA Not Configured<br />
+                                                        <strong
+                                                            >Required
+                                                            action:</strong
+                                                        >
+                                                        Immediate setup
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <!-- Security Requirements -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="1"
+                                    width="100%"
+                                    style="
+                                        border-color: #e1e1e1;
+                                        border-collapse: collapse;
+                                        margin: 20px 0;
+                                    "
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                padding: 16px;
+                                                border-bottom: 1px solid #e1e1e1;
+                                            "
+                                        >
+                                            <table
+                                                cellpadding="0"
+                                                cellspacing="0"
+                                                border="0"
+                                                width="100%"
+                                            >
+                                                <tr>
+                                                    <td
+                                                        width="40"
+                                                        style="
+                                                            vertical-align: top;
+                                                        "
+                                                    >
+                                                        <table
+                                                            cellpadding="0"
+                                                            cellspacing="0"
+                                                            border="0"
+                                                            width="32"
+                                                            height="32"
+                                                        >
+                                                            <tr>
+                                                                <td
+                                                                    align="center"
+                                                                    style="
+                                                                        color: #323130;
+                                                                        font-size: 16px;
+                                                                        font-weight: bold;
+                                                                        vertical-align: middle;
+                                                                    "
+                                                                >
+                                                                    📱
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td
+                                                        style="
+                                                            vertical-align: top;
+                                                            padding-left: 16px;
+                                                        "
+                                                    >
+                                                        <div
+                                                            style="
+                                                                color: #323130;
+                                                                font-size: 14px;
+                                                                font-weight: bold;
+                                                                margin-bottom: 4px;
+                                                            "
+                                                        >
+                                                            Enhanced account
+                                                            security
+                                                        </div>
+                                                        <div
+                                                            style="
+                                                                color: #605e5c;
+                                                                font-size: 12px;
+                                                            "
+                                                        >
+                                                            Additional
+                                                            verification layer
+                                                            prevents
+                                                            unauthorized access
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td
+                                            style="
+                                                padding: 16px;
+                                                border-bottom: 1px solid #e1e1e1;
+                                            "
+                                        >
+                                            <table
+                                                cellpadding="0"
+                                                cellspacing="0"
+                                                border="0"
+                                                width="100%"
+                                            >
+                                                <tr>
+                                                    <td
+                                                        width="40"
+                                                        style="
+                                                            vertical-align: top;
+                                                        "
+                                                    >
+                                                        <table
+                                                            cellpadding="0"
+                                                            cellspacing="0"
+                                                            border="0"
+                                                            width="32"
+                                                            height="32"
+                                                        >
+                                                            <tr>
+                                                                <td
+                                                                    align="center"
+                                                                    style="
+                                                                        color: #323130;
+                                                                        font-size: 16px;
+                                                                        font-weight: bold;
+                                                                        vertical-align: middle;
+                                                                    "
+                                                                >
+                                                                    🏢
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td
+                                                        style="
+                                                            vertical-align: top;
+                                                            padding-left: 16px;
+                                                        "
+                                                    >
+                                                        <div
+                                                            style="
+                                                                color: #323130;
+                                                                font-size: 14px;
+                                                                font-weight: bold;
+                                                                margin-bottom: 4px;
+                                                            "
+                                                        >
+                                                            Compliance
+                                                            requirement
+                                                        </div>
+                                                        <div
+                                                            style="
+                                                                color: #605e5c;
+                                                                font-size: 12px;
+                                                            "
+                                                        >
+                                                            Mandatory for all
+                                                            employees per
+                                                            company security
+                                                            policy
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <!-- Action Required -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="margin-bottom: 16px"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #323130;
+                                                font-size: 14px;
+                                                line-height: 1.4;
+                                                font-weight: bold;
+                                            "
+                                        >
+                                            To configure MFA for your account:
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="margin-bottom: 20px"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #323130;
+                                                font-size: 14px;
+                                                line-height: 1.4;
+                                            "
+                                        >
+                                            1. Click the setup link below<br />
+                                            2. Sign in to your Contoso
+                                            account<br />
+                                            3. Register your phone or
+                                            authenticator app<br />
+                                            4. Complete the verification process
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <!-- Button -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    style="margin: 20px 0"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                background-color: #0078d4;
+                                                padding: 12px 24px;
+                                            "
+                                        >
+                                            <a
+                                                href="{{.URL}}"
+                                                style="
+                                                    color: #ffffff;
+                                                    text-decoration: none;
+                                                    font-weight: bold;
+                                                    font-size: 14px;
+                                                    display: block;
+                                                "
+                                            >
+                                                Setup MFA now
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <!-- Additional Info -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="margin-bottom: 20px"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #323130;
+                                                font-size: 14px;
+                                                line-height: 1.4;
+                                            "
+                                        >
+                                            <strong>Important:</strong> Accounts
+                                            without MFA will be blocked from
+                                            accessing Contoso 365 services after
+                                            the deadline. This includes email,
+                                            Suite applications, Cloud, and
+                                            Chat. Please complete setup
+                                            immediately to avoid service
+                                            interruption.
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <!-- MFA Methods -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="margin-bottom: 16px"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #323130;
+                                                font-size: 14px;
+                                                line-height: 1.4;
+                                                font-weight: bold;
+                                            "
+                                        >
+                                            Available MFA methods:
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="margin-bottom: 20px"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #323130;
+                                                font-size: 14px;
+                                                line-height: 1.4;
+                                            "
+                                        >
+                                            • Contoso Authenticator app
+                                            (recommended)<br />
+                                            • SMS text message verification<br />
+                                            • Phone call verification<br />
+                                            • Hardware security keys
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <!-- Signature -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #323130;
+                                                font-size: 14px;
+                                                line-height: 1.4;
+                                            "
+                                        >
+                                            Stay secure,<br />
+                                            Contoso Security Team
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+
+                        <!-- Footer -->
+                        <tr>
+                            <td
+                                style="
+                                    background-color: #ffffff;
+                                    padding: 20px;
+                                    border-top: 1px solid #e1e1e1;
+                                "
+                            >
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #605e5c;
+                                                font-size: 12px;
+                                                line-height: 1.3;
+                                            "
+                                        >
+                                            This security notice was sent to
+                                            {{.Email}} regarding multi-factor
+                                            authentication setup.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #605e5c;
+                                                font-size: 12px;
+                                                line-height: 1.3;
+                                                padding-top: 12px;
+                                            "
+                                        >
+                                            Contoso Corporation, One Contoso
+                                            Way, Redmond, WA 98052<br />
+                                            <a
+                                                href="{{.URL}}"
+                                                style="
+                                                    color: #0078d4;
+                                                    text-decoration: none;
+                                                "
+                                                >Security Help</a
+                                            >
+                                            |
+                                            <a
+                                                href="{{.URL}}"
+                                                style="
+                                                    color: #0078d4;
+                                                    text-decoration: none;
+                                                "
+                                                >MFA Setup Guide</a
+                                            >
+                                            |
+                                            <a
+                                                href="{{.URL}}"
+                                                style="
+                                                    color: #0078d4;
+                                                    text-decoration: none;
+                                                "
+                                                >Contact Support</a
+                                            >
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #605e5c;
+                                                font-size: 11px;
+                                                line-height: 1.3;
+                                                padding-top: 12px;
+                                            "
+                                        >
+                                            © Contoso Corporation. All rights
+                                            reserved.
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>

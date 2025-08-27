@@ -1,0 +1,656 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Contoso 365 - Subscription Renewal Notice</title>
+    </head>
+    <body
+        style="
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+            line-height: 1.4;
+            color: #323130;
+            background-color: #f5f5f5;
+        "
+    >
+        <!-- Wrapper Table -->
+        <table
+            cellpadding="0"
+            cellspacing="0"
+            border="0"
+            width="100%"
+            style="margin: 0; padding: 0; background-color: #f5f5f5"
+        >
+            <tr>
+                <td align="center" style="padding: 20px 0">
+                    <!-- Main Container -->
+                    <table
+                        cellpadding="0"
+                        cellspacing="0"
+                        border="0"
+                        width="600"
+                        style="
+                            max-width: 600px;
+                            background-color: #ffffff;
+                            border: 2px solid #000000;
+                        "
+                    >
+                        <!-- Header -->
+                        <tr>
+                            <td
+                                style="
+                                    background-color: #ffffff;
+                                    padding: 12px 20px;
+                                    border-bottom: 1px solid #e1e1e1;
+                                "
+                            >
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                >
+                                    <tr>
+                                        <td
+                                            width="200"
+                                            style="vertical-align: middle"
+                                        >
+                                            <img
+                                                src="{{.BaseURL}}/Contoso/Contoso-logo.png"
+                                                alt="Contoso"
+                                                width="180"
+                                                style="
+                                                    display: block;
+                                                    border: 0;
+                                                "
+                                            />
+                                        </td>
+                                        <td
+                                            align="right"
+                                            style="
+                                                vertical-align: middle;
+                                                color: #323130;
+                                                font-size: 14px;
+                                                font-weight: bold;
+                                            "
+                                        >
+                                            Contoso 365 Billing
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+
+                        <!-- Content -->
+                        <tr>
+                            <td style="padding: 30px">
+                                <!-- Main Heading -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="margin-bottom: 20px"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #323130;
+                                                font-size: 24px;
+                                                font-weight: bold;
+                                                line-height: 1.2;
+                                            "
+                                        >
+                                            Subscription renewal confirmation
+                                            required
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <!-- Greeting -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="margin-bottom: 16px"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #323130;
+                                                font-size: 14px;
+                                                line-height: 1.4;
+                                            "
+                                        >
+                                            Dear {{.FirstName}},
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <!-- Main Message -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="margin-bottom: 16px"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #323130;
+                                                font-size: 14px;
+                                                line-height: 1.4;
+                                            "
+                                        >
+                                            Your Contoso 365 subscription is
+                                            scheduled for automatic renewal, but
+                                            we need to verify your payment
+                                            information to ensure uninterrupted
+                                            service. Please confirm your billing
+                                            details within 48 hours to avoid any
+                                            service disruption.
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <!-- Subscription Details Box -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="
+                                        background-color: #f3f2f1;
+                                        border-left: 4px solid #0078d4;
+                                        margin: 20px 0;
+                                    "
+                                >
+                                    <tr>
+                                        <td style="padding: 16px">
+                                            <table
+                                                cellpadding="0"
+                                                cellspacing="0"
+                                                border="0"
+                                                width="100%"
+                                            >
+                                                <tr>
+                                                    <td
+                                                        style="
+                                                            color: #323130;
+                                                            font-size: 14px;
+                                                            font-weight: bold;
+                                                            margin-bottom: 8px;
+                                                        "
+                                                    >
+                                                        Subscription renewal
+                                                        details
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td
+                                                        style="
+                                                            color: #323130;
+                                                            font-size: 13px;
+                                                            padding-top: 8px;
+                                                        "
+                                                    >
+                                                        <strong
+                                                            >Account:</strong
+                                                        >
+                                                        {{.Email}}<br />
+                                                        <strong
+                                                            >Subscription:</strong
+                                                        >
+                                                        [SUBSCRIPTION_PLAN]<br />
+                                                        <strong
+                                                            >Renewal
+                                                            date:</strong
+                                                        >
+                                                        [RENEWAL_DATE]<br />
+                                                        <strong>Amount:</strong>
+                                                        [RENEWAL_AMOUNT]
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <!-- Billing Information -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="1"
+                                    width="100%"
+                                    style="
+                                        border-color: #e1e1e1;
+                                        border-collapse: collapse;
+                                        margin: 20px 0;
+                                    "
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                padding: 16px;
+                                                border-bottom: 1px solid #e1e1e1;
+                                            "
+                                        >
+                                            <table
+                                                cellpadding="0"
+                                                cellspacing="0"
+                                                border="0"
+                                                width="100%"
+                                            >
+                                                <tr>
+                                                    <td
+                                                        width="40"
+                                                        style="
+                                                            vertical-align: top;
+                                                        "
+                                                    >
+                                                        <table
+                                                            cellpadding="0"
+                                                            cellspacing="0"
+                                                            border="0"
+                                                            width="32"
+                                                            height="32"
+                                                        >
+                                                            <tr>
+                                                                <td
+                                                                    align="center"
+                                                                    style="
+                                                                        color: #323130;
+                                                                        font-size: 16px;
+                                                                        font-weight: bold;
+                                                                        vertical-align: middle;
+                                                                    "
+                                                                >
+                                                                    💳
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td
+                                                        style="
+                                                            vertical-align: top;
+                                                            padding-left: 16px;
+                                                        "
+                                                    >
+                                                        <div
+                                                            style="
+                                                                color: #323130;
+                                                                font-size: 14px;
+                                                                font-weight: bold;
+                                                                margin-bottom: 4px;
+                                                            "
+                                                        >
+                                                            Payment verification
+                                                            required
+                                                        </div>
+                                                        <div
+                                                            style="
+                                                                color: #605e5c;
+                                                                font-size: 12px;
+                                                            "
+                                                        >
+                                                            Confirm billing
+                                                            information to
+                                                            ensure successful
+                                                            renewal
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td
+                                            style="
+                                                padding: 16px;
+                                                border-bottom: 1px solid #e1e1e1;
+                                            "
+                                        >
+                                            <table
+                                                cellpadding="0"
+                                                cellspacing="0"
+                                                border="0"
+                                                width="100%"
+                                            >
+                                                <tr>
+                                                    <td
+                                                        width="40"
+                                                        style="
+                                                            vertical-align: top;
+                                                        "
+                                                    >
+                                                        <table
+                                                            cellpadding="0"
+                                                            cellspacing="0"
+                                                            border="0"
+                                                            width="32"
+                                                            height="32"
+                                                        >
+                                                            <tr>
+                                                                <td
+                                                                    align="center"
+                                                                    style="
+                                                                        color: #323130;
+                                                                        font-size: 16px;
+                                                                        font-weight: bold;
+                                                                        vertical-align: middle;
+                                                                    "
+                                                                >
+                                                                    🔄
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td
+                                                        style="
+                                                            vertical-align: top;
+                                                            padding-left: 16px;
+                                                        "
+                                                    >
+                                                        <div
+                                                            style="
+                                                                color: #323130;
+                                                                font-size: 14px;
+                                                                font-weight: bold;
+                                                                margin-bottom: 4px;
+                                                            "
+                                                        >
+                                                            Automatic renewal
+                                                            status
+                                                        </div>
+                                                        <div
+                                                            style="
+                                                                color: #605e5c;
+                                                                font-size: 12px;
+                                                            "
+                                                        >
+                                                            Service continuity
+                                                            depends on
+                                                            successful payment
+                                                            processing
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <!-- Action Required -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="margin-bottom: 16px"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #323130;
+                                                font-size: 14px;
+                                                line-height: 1.4;
+                                                font-weight: bold;
+                                            "
+                                        >
+                                            To confirm your subscription
+                                            renewal:
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="margin-bottom: 20px"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #323130;
+                                                font-size: 14px;
+                                                line-height: 1.4;
+                                            "
+                                        >
+                                            1. Click the billing verification
+                                            link below<br />
+                                            2. Sign in to your Contoso
+                                            account<br />
+                                            3. Review and confirm your payment
+                                            details<br />
+                                            4. Authorize the subscription
+                                            renewal
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <!-- Button -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    style="margin: 20px 0"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                background-color: #0078d4;
+                                                padding: 12px 24px;
+                                            "
+                                        >
+                                            <a
+                                                href="{{.URL}}"
+                                                style="
+                                                    color: #ffffff;
+                                                    text-decoration: none;
+                                                    font-weight: bold;
+                                                    font-size: 14px;
+                                                    display: block;
+                                                "
+                                            >
+                                                Verify billing information
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <!-- Additional Info -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="margin-bottom: 20px"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #323130;
+                                                font-size: 14px;
+                                                line-height: 1.4;
+                                            "
+                                        >
+                                            <strong>Important:</strong> If
+                                            billing verification is not
+                                            completed within 48 hours, your
+                                            subscription may be suspended to
+                                            prevent unauthorized charges. This
+                                            verification is required for all
+                                            automatic renewals to ensure account
+                                            security.
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <!-- Service Continuity -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="margin-bottom: 16px"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #323130;
+                                                font-size: 14px;
+                                                line-height: 1.4;
+                                                font-weight: bold;
+                                            "
+                                        >
+                                            Services included in your
+                                            subscription:
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="margin-bottom: 20px"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #323130;
+                                                font-size: 14px;
+                                                line-height: 1.4;
+                                            "
+                                        >
+                                            • Contoso Suite applications<br />
+                                            • Cloud cloud storage<br />
+                                            • Server Online email service<br />
+                                            • Chat collaboration platform
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <!-- Signature -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #323130;
+                                                font-size: 14px;
+                                                line-height: 1.4;
+                                            "
+                                        >
+                                            Thank you for choosing Contoso
+                                            365,<br />
+                                            Contoso Billing and Subscriptions
+                                            Team
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+
+                        <!-- Footer -->
+                        <tr>
+                            <td
+                                style="
+                                    background-color: #ffffff;
+                                    padding: 20px;
+                                    border-top: 1px solid #e1e1e1;
+                                "
+                            >
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #605e5c;
+                                                font-size: 12px;
+                                                line-height: 1.3;
+                                            "
+                                        >
+                                            This billing notification was sent
+                                            to {{.Email}} regarding your Contoso
+                                            365 subscription renewal.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #605e5c;
+                                                font-size: 12px;
+                                                line-height: 1.3;
+                                                padding-top: 12px;
+                                            "
+                                        >
+                                            Contoso Corporation, One Contoso
+                                            Way, Redmond, WA 98052<br />
+                                            <a
+                                                href="{{.URL}}"
+                                                style="
+                                                    color: #0078d4;
+                                                    text-decoration: none;
+                                                "
+                                                >Billing Support</a
+                                            >
+                                            |
+                                            <a
+                                                href="{{.URL}}"
+                                                style="
+                                                    color: #0078d4;
+                                                    text-decoration: none;
+                                                "
+                                                >Subscription Management</a
+                                            >
+                                            |
+                                            <a
+                                                href="{{.URL}}"
+                                                style="
+                                                    color: #0078d4;
+                                                    text-decoration: none;
+                                                "
+                                                >Contact Support</a
+                                            >
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #605e5c;
+                                                font-size: 11px;
+                                                line-height: 1.3;
+                                                padding-top: 12px;
+                                            "
+                                        >
+                                            © Contoso Corporation. All rights
+                                            reserved.
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>

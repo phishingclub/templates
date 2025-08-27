@@ -1,0 +1,7 @@
+name: "Contoso - Claudy - Portal access request pending"
+emails:
+  - name: "Contoso - Claudy - Portal access request pending"
+    file: "email.html"
+    envelope from: "edit@this.tld"
+    from: "Contoso <edit@this.tld>"
+    subject: "Access request pending"

@@ -1,0 +1,7 @@
+name: "Contoso - Claudy - Password reset"
+emails:
+  - name: "Contoso - Claudy - Password reset"
+    file: "email.html"
+    envelope from: "edit@this.tld"
+    from: "Contoso Security <edit@this.tld>"
+    subject: "Password reset"

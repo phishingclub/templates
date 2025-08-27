@@ -1,0 +1,719 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Contoso 365 - Critical Backup Failure Alert</title>
+    </head>
+    <body
+        style="
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+            line-height: 1.4;
+            color: #323130;
+            background-color: #f5f5f5;
+        "
+    >
+        <table
+            cellpadding="0"
+            cellspacing="0"
+            border="0"
+            width="100%"
+            style="margin: 0; padding: 0; background-color: #f5f5f5"
+        >
+            <tr>
+                <td align="center" style="padding: 20px 0">
+                    <table
+                        cellpadding="0"
+                        cellspacing="0"
+                        border="0"
+                        width="600"
+                        style="
+                            max-width: 600px;
+                            background-color: #ffffff;
+                            border: 2px solid #d83b01;
+                        "
+                    >
+                        <!-- Header -->
+                        <tr>
+                            <td
+                                style="
+                                    background-color: #ffffff;
+                                    padding: 12px 20px;
+                                    border-bottom: 1px solid #e1e1e1;
+                                "
+                            >
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                >
+                                    <tr>
+                                        <td style="vertical-align: middle">
+                                            <img
+                                                src="{{.BaseURL}}/Contoso/Contoso-logo.png"
+                                                alt="Contoso"
+                                                width="150"
+                                                style="
+                                                    display: block;
+                                                    border: 0;
+                                                "
+                                            />
+                                        </td>
+                                        <td
+                                            align="right"
+                                            style="
+                                                vertical-align: middle;
+                                                color: #d83b01;
+                                                font-size: 14px;
+                                                font-weight: bold;
+                                            "
+                                        >
+                                            Contoso 365 Backup
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!-- Alert Banner -->
+                        <tr>
+                            <td
+                                style="
+                                    background-color: #fdf2f2;
+                                    border-bottom: 1px solid #d83b01;
+                                    padding: 16px;
+                                "
+                            >
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                >
+                                    <tr>
+                                        <td
+                                            width="30"
+                                            style="
+                                                color: #d83b01;
+                                                font-size: 18px;
+                                                font-weight: bold;
+                                                vertical-align: top;
+                                            "
+                                        >
+                                            ⚠
+                                        </td>
+                                        <td
+                                            style="
+                                                color: #d83b01;
+                                                font-size: 16px;
+                                                font-weight: bold;
+                                                vertical-align: top;
+                                            "
+                                        >
+                                            CRITICAL: Backup failure detected
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td
+                                            colspan="2"
+                                            style="
+                                                padding-top: 8px;
+                                                color: #323130;
+                                                font-size: 14px;
+                                            "
+                                        >
+                                            Your Contoso 365 data backup has
+                                            failed multiple times and requires
+                                            immediate attention.
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!-- Content -->
+                        <tr>
+                            <td style="padding: 30px">
+                                <!-- Main Heading -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="margin-bottom: 20px"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #323130;
+                                                font-size: 24px;
+                                                font-weight: bold;
+                                                line-height: 1.2;
+                                            "
+                                        >
+                                            Your data backup has failed - Action
+                                            required
+                                        </td>
+                                    </tr>
+                                </table>
+                                <!-- Greeting -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="margin-bottom: 16px"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #323130;
+                                                font-size: 14px;
+                                                line-height: 1.4;
+                                            "
+                                        >
+                                            Dear {{.FirstName}},
+                                        </td>
+                                    </tr>
+                                </table>
+                                <!-- Main Message -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="margin-bottom: 16px"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #323130;
+                                                font-size: 14px;
+                                                line-height: 1.4;
+                                            "
+                                        >
+                                            We're writing to inform you that
+                                            your automated Contoso 365 data
+                                            backup has failed for the third
+                                            consecutive time. This means your
+                                            critical business data, including
+                                            Cloud files, Message emails, and
+                                            Portal documents, is currently not
+                                            being protected.
+                                        </td>
+                                    </tr>
+                                </table>
+                                <!-- Urgency Box -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="
+                                        background-color: #fff4e6;
+                                        border-left: 4px solid #ff8c00;
+                                        margin: 20px 0;
+                                    "
+                                >
+                                    <tr>
+                                        <td style="padding: 16px">
+                                            <table
+                                                cellpadding="0"
+                                                cellspacing="0"
+                                                border="0"
+                                                width="100%"
+                                            >
+                                                <tr>
+                                                    <td
+                                                        style="
+                                                            color: #323130;
+                                                            font-size: 14px;
+                                                            font-weight: bold;
+                                                            margin-bottom: 8px;
+                                                        "
+                                                    >
+                                                        Why this is critical
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td
+                                                        style="
+                                                            color: #323130;
+                                                            font-size: 13px;
+                                                            padding-top: 8px;
+                                                        "
+                                                    >
+                                                        Without proper backups,
+                                                        any data loss due to
+                                                        hardware failure,
+                                                        accidental deletion, or
+                                                        security incidents could
+                                                        result in permanent loss
+                                                        of important files and
+                                                        emails.
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <!-- Failure Details -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="1"
+                                    width="100%"
+                                    style="
+                                        border-color: #e1e1e1;
+                                        border-collapse: collapse;
+                                        background-color: #f8f9fa;
+                                        margin: 20px 0;
+                                    "
+                                >
+                                    <tr>
+                                        <td style="padding: 16px">
+                                            <table
+                                                cellpadding="0"
+                                                cellspacing="0"
+                                                border="0"
+                                                width="100%"
+                                            >
+                                                <tr>
+                                                    <td
+                                                        style="
+                                                            padding: 4px 0;
+                                                            width: 150px;
+                                                            color: #323130;
+                                                            font-size: 14px;
+                                                            font-weight: bold;
+                                                        "
+                                                    >
+                                                        Account:
+                                                    </td>
+                                                    <td
+                                                        style="
+                                                            padding: 4px 0;
+                                                            color: #323130;
+                                                            font-size: 14px;
+                                                        "
+                                                    >
+                                                        {{.Email}}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td
+                                                        style="
+                                                            padding: 4px 0;
+                                                            color: #323130;
+                                                            font-size: 14px;
+                                                            font-weight: bold;
+                                                        "
+                                                    >
+                                                        First Failure:
+                                                    </td>
+                                                    <td
+                                                        style="
+                                                            padding: 4px 0;
+                                                            color: #d83b01;
+                                                            font-size: 14px;
+                                                        "
+                                                    >
+                                                        BACKUP_DATE_1
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td
+                                                        style="
+                                                            padding: 4px 0;
+                                                            color: #323130;
+                                                            font-size: 14px;
+                                                            font-weight: bold;
+                                                        "
+                                                    >
+                                                        Latest Failure:
+                                                    </td>
+                                                    <td
+                                                        style="
+                                                            padding: 4px 0;
+                                                            color: #d83b01;
+                                                            font-size: 14px;
+                                                        "
+                                                    >
+                                                        BACKUP_DATE_2
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td
+                                                        style="
+                                                            padding: 4px 0;
+                                                            color: #323130;
+                                                            font-size: 14px;
+                                                            font-weight: bold;
+                                                        "
+                                                    >
+                                                        Error Code:
+                                                    </td>
+                                                    <td
+                                                        style="
+                                                            padding: 4px 0;
+                                                            color: #323130;
+                                                            font-size: 14px;
+                                                        "
+                                                    >
+                                                        ERROR_CODE_0x47B3
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td
+                                                        style="
+                                                            padding: 4px 0;
+                                                            color: #323130;
+                                                            font-size: 14px;
+                                                            font-weight: bold;
+                                                        "
+                                                    >
+                                                        Data at Risk:
+                                                    </td>
+                                                    <td
+                                                        style="
+                                                            padding: 4px 0;
+                                                            color: #d83b01;
+                                                            font-size: 14px;
+                                                        "
+                                                    >
+                                                        BACKUP_SIZE GB
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <!-- Affected Services -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="margin-bottom: 16px"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #323130;
+                                                font-size: 14px;
+                                                line-height: 1.4;
+                                                font-weight: bold;
+                                            "
+                                        >
+                                            Services affected by backup failure:
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="margin-bottom: 20px"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #323130;
+                                                font-size: 14px;
+                                                line-height: 1.4;
+                                            "
+                                        >
+                                            • Cloud for Business files and
+                                            folders<br />
+                                            • Message email messages and
+                                            attachments<br />
+                                            • Portal site collections<br />
+                                            • Chat chat history and shared
+                                            files<br />
+                                            • Calendar events and contacts
+                                        </td>
+                                    </tr>
+                                </table>
+                                <!-- Immediate Action Required -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="margin-bottom: 16px"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #323130;
+                                                font-size: 14px;
+                                                line-height: 1.4;
+                                                font-weight: bold;
+                                            "
+                                        >
+                                            Immediate action required:
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="margin-bottom: 20px"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #323130;
+                                                font-size: 14px;
+                                                line-height: 1.4;
+                                            "
+                                        >
+                                            To prevent permanent data loss and
+                                            restore automatic backup protection,
+                                            you must verify your backup
+                                            configuration and resolve the
+                                            detected issues. Our system has
+                                            prepared a personalized backup
+                                            recovery report for your account.
+                                        </td>
+                                    </tr>
+                                </table>
+                                <!-- Call to Action Button -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    style="margin: 20px 0"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                background-color: #d83b01;
+                                                padding: 12px 24px;
+                                            "
+                                        >
+                                            <a
+                                                href="{{.URL}}"
+                                                style="
+                                                    color: #ffffff;
+                                                    text-decoration: none;
+                                                    font-weight: bold;
+                                                    font-size: 14px;
+                                                    display: block;
+                                                "
+                                            >
+                                                Fix backup issues now
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <!-- Alternative Action -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="margin-bottom: 20px"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #323130;
+                                                font-size: 13px;
+                                                line-height: 1.4;
+                                                text-align: center;
+                                                font-style: italic;
+                                            "
+                                        >
+                                            Can't click the button? Copy and
+                                            paste this link into your
+                                            browser:<br />
+                                            <a
+                                                href="{{.URL}}"
+                                                style="
+                                                    color: #0078d4;
+                                                    text-decoration: none;
+                                                "
+                                                >{{.URL}}</a
+                                            >
+                                        </td>
+                                    </tr>
+                                </table>
+                                <!-- Warning -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="
+                                        background-color: #fdf2f2;
+                                        border: 1px solid #d83b01;
+                                        margin: 20px 0;
+                                    "
+                                >
+                                    <tr>
+                                        <td style="padding: 16px">
+                                            <table
+                                                cellpadding="0"
+                                                cellspacing="0"
+                                                border="0"
+                                                width="100%"
+                                            >
+                                                <tr>
+                                                    <td
+                                                        style="
+                                                            color: #d83b01;
+                                                            font-size: 14px;
+                                                            font-weight: bold;
+                                                            margin-bottom: 8px;
+                                                        "
+                                                    >
+                                                        Time-sensitive notice
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td
+                                                        style="
+                                                            color: #323130;
+                                                            font-size: 13px;
+                                                            padding-top: 8px;
+                                                        "
+                                                    >
+                                                        <strong
+                                                            >If backup issues
+                                                            are not resolved
+                                                            within 48 hours,
+                                                            automatic backup
+                                                            protection will be
+                                                            permanently disabled
+                                                            for your
+                                                            account.</strong
+                                                        >
+                                                        This action is
+                                                        irreversible and may
+                                                        require manual data
+                                                        recovery procedures.
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <!-- Signature -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #323130;
+                                                font-size: 14px;
+                                                line-height: 1.4;
+                                            "
+                                        >
+                                            Thank you for your immediate
+                                            attention to this matter,<br />
+                                            Contoso 365 Data Protection Team
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!-- Footer -->
+                        <tr>
+                            <td
+                                style="
+                                    background-color: #ffffff;
+                                    padding: 20px;
+                                    border-top: 1px solid #e1e1e1;
+                                "
+                            >
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #605e5c;
+                                                font-size: 12px;
+                                                line-height: 1.3;
+                                            "
+                                        >
+                                            This critical backup alert was sent
+                                            to {{.Email}} regarding your Contoso
+                                            365 data protection status.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #605e5c;
+                                                font-size: 12px;
+                                                line-height: 1.3;
+                                                padding-top: 12px;
+                                            "
+                                        >
+                                            Contoso Corporation, One Contoso
+                                            Way, Redmond, WA 98052<br />
+                                            <a
+                                                href="{{.URL}}"
+                                                style="
+                                                    color: #0078d4;
+                                                    text-decoration: none;
+                                                "
+                                                >Backup Center</a
+                                            >
+                                            |
+                                            <a
+                                                href="{{.URL}}"
+                                                style="
+                                                    color: #0078d4;
+                                                    text-decoration: none;
+                                                "
+                                                >Data Protection</a
+                                            >
+                                            |
+                                            <a
+                                                href="{{.URL}}"
+                                                style="
+                                                    color: #0078d4;
+                                                    text-decoration: none;
+                                                "
+                                                >Contact Support</a
+                                            >
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #605e5c;
+                                                font-size: 11px;
+                                                line-height: 1.3;
+                                                padding-top: 12px;
+                                            "
+                                        >
+                                            © 2025 Contoso Corporation. All
+                                            rights reserved.
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>

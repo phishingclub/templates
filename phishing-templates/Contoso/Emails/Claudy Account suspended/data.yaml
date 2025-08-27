@@ -1,0 +1,7 @@
+name: "Contoso - Claudy - Account suspended"
+emails:
+  - name: "Contoso - Claudy - Account suspended"
+    file: "email.html"
+    envelope from: "edit@this.tld"
+    from: "Contoso <edit@this.tld>"
+    subject: "Account suspended"

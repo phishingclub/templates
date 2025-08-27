@@ -1,0 +1,7 @@
+name: "Contoso - Device Endpoint enrollment"
+emails:
+  - name: "Contoso - Claudy - Device Endpoint enrollment"
+    file: "email.html"
+    envelope from: "edit@this.tld"
+    from: "Contoso <edit@this.tld>"
+    subject: "Subscription renewal"

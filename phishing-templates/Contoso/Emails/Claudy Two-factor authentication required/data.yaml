@@ -1,0 +1,7 @@
+name: "Contoso - Claudy - Two-factor authentication required"
+emails:
+  - name: "Contoso - Claudy - Two-factor authentication required"
+    file: "email.html"
+    envelope from: "edit@this.tld"
+    from: "Contoso Security <edit@this.tld>"
+    subject: "Two-factor authentication required"

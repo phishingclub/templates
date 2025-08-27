@@ -1,0 +1,632 @@
+document.addEventListener("DOMContentLoaded", function () {
+  initDeviceButtons();
+  setupPreviewIframe();
+  initCopyContentButton();
+  initDownloadFolderButton();
+  initExportButton();
+  highlightActiveNode();
+  highlightCurrentLocation();
+  initResizeTracking();
+  initWidthSlider();
+  initNavigationTree();
+
+  // Add download buttons with delay to ensure DOM is ready
+  setTimeout(addDirectoryDownloadButtons, 200);
+
+  // Also add download buttons after any page navigation
+  observeContentChanges();
+});
+
+// Function to highlight current location in directory listing
+function highlightCurrentLocation() {
+  // Add a class to the current directory in the main directory listing
+  const currentPathDisplay = document.querySelector(".directory-header h2");
+  if (currentPathDisplay) {
+    // Add a visual indicator of current location
+    currentPathDisplay.classList.add("current-location");
+  }
+}
+
+// Initialize resize observer to track resize container changes
+// Function to initialize resizable preview window
+function initResizeTracking() {
+  const resizeContainer = document.querySelector(".resize-container");
+  const sizeDisplay = document.getElementById("size-display");
+
+  if (!resizeContainer || !sizeDisplay) return;
+
+  // Initially update the size display
+  updateSizeDisplay();
+
+  // Create a ResizeObserver to watch for changes to the container size
+  const resizeObserver = new ResizeObserver((entries) => {
+    // Use requestAnimationFrame for smoother updates
+    requestAnimationFrame(() => {
+      for (const entry of entries) {
+        if (entry.target === resizeContainer) {
+          const width = Math.round(entry.contentRect.width);
+          sizeDisplay.textContent = `Viewport: ${width}px width`;
+
+          // Update slider value if it doesn't match
+          const slider = document.getElementById("widthSlider");
+          if (slider && parseInt(slider.value) !== width) {
+            slider.value = width;
+          }
+
+          // Reset any active device button when manually resized
+          const activeButton = document.querySelector(".device-btn.active");
+          if (activeButton) {
+            const btnWidth = activeButton.getAttribute("data-width");
+            // Check if button width (e.g., "375px") matches current container width
+            if (
+              btnWidth !== width + "px" &&
+              (btnWidth !== "100%" ||
+                width !== resizeContainer.parentElement.offsetWidth)
+            ) {
+              activeButton.classList.remove("active");
+            }
+          }
+        }
+      }
+    });
+  });
+
+  // Start observing
+  if (resizeContainer) {
+    resizeObserver.observe(resizeContainer);
+  }
+}
+
+// Function to initialize the width slider
+function initWidthSlider() {
+  const slider = document.getElementById("widthSlider");
+  const resizeContainer = document.getElementById("resizeContainer");
+  const sizeDisplay = document.getElementById("size-display");
+
+  if (!slider || !resizeContainer || !sizeDisplay) return;
+
+  // Set initial slider value based on container width
+  slider.value = resizeContainer.offsetWidth;
+
+  slider.addEventListener("input", function () {
+    const newWidth = this.value;
+    resizeContainer.style.width = `${newWidth}px`;
+    sizeDisplay.textContent = `Viewport: ${newWidth}px width`;
+
+    // Deselect any active device button
+    const activeButton = document.querySelector(".device-btn.active");
+    if (activeButton) {
+      activeButton.classList.remove("active");
+    }
+  });
+}
+
+// Function to update size display
+// Function to highlight the active node in the navigation tree
+function highlightActiveNode() {
+  // Find active node and scroll to it
+  const activeNode = document.querySelector(".tree-node.active");
+  if (activeNode) {
+    // Add a small delay to ensure DOM is ready
+    setTimeout(() => {
+      // Get parent nodes to ensure they're visible
+      let parent = activeNode.parentElement;
+      while (parent && !parent.classList.contains("navigation-tree")) {
+        if (parent.classList.contains("tree-node")) {
+          parent.classList.add("expanded");
+        }
+        parent = parent.parentElement;
+      }
+
+      // Scroll the active node into view
+      //activeNode.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 200);
+  }
+}
+
+// Function to update size display
+function updateSizeDisplay() {
+  const resizeContainer = document.getElementById("resizeContainer"); // Use ID for consistency
+  const sizeDisplay = document.getElementById("size-display");
+
+  if (!resizeContainer || !sizeDisplay) return;
+
+  const width = Math.round(resizeContainer.offsetWidth);
+  const currentWidthText = `${width}px width`;
+
+  // Update slider value if it exists
+  const slider = document.getElementById("widthSlider");
+  if (slider && parseInt(slider.value) !== width) {
+    slider.value = width;
+  }
+
+  // Check if it's a "Full" size button that is active
+  const fullButton = document.getElementById("full-btn");
+  if (fullButton && fullButton.classList.contains("active")) {
+    sizeDisplay.textContent = `Viewport: Full size`;
+  } else {
+    sizeDisplay.textContent = `Viewport: ${currentWidthText}`;
+  }
+}
+
+// Function to initialize device preview buttons
+function initDeviceButtons() {
+  const deviceButtons = document.querySelectorAll(".device-btn");
+  if (deviceButtons.length === 0) return;
+
+  deviceButtons.forEach((btn) => {
+    btn.addEventListener("click", function () {
+      // Update active state
+      deviceButtons.forEach((b) => b.classList.remove("active"));
+      this.classList.add("active");
+
+      // Get the resize container
+      const resizeContainer = document.getElementById("resizeContainer"); // Use ID
+      const iframe = document.getElementById("preview-frame");
+      if (!resizeContainer || !iframe) return;
+
+      const width = this.getAttribute("data-width");
+      const height = this.getAttribute("data-height");
+
+      // Update the dimensions display
+      const sizeDisplay = document.getElementById("size-display");
+      if (sizeDisplay) {
+        if (width === "100%") {
+          sizeDisplay.textContent = `Viewport: Full size`;
+        } else {
+          sizeDisplay.textContent = `Viewport: ${width}`;
+        }
+      }
+
+      // Set container width removing 'px' if it exists
+      if (width === "100%") {
+        resizeContainer.style.width = "100%";
+        // Ensure the slider reflects this state if it exists
+        const slider = document.getElementById("widthSlider");
+        if (slider) {
+          // Set slider to a representative value for "100%" or disable it
+          // For now, let's set it to the container's current offsetWidth
+          slider.value = resizeContainer.offsetWidth;
+        }
+      } else {
+        const numWidth = parseInt(width);
+        resizeContainer.style.width = `${numWidth}px`;
+        // Update slider value
+        const slider = document.getElementById("widthSlider");
+        if (slider) {
+          slider.value = numWidth;
+        }
+      }
+
+      // Set container height
+      resizeContainer.style.height = height;
+
+      // Update the size display
+      updateSizeDisplay();
+
+      // Immediately dispatch resize event
+      window.dispatchEvent(new Event("resize"));
+
+      // Center the container if it's not full width
+      const frameContainer = document.querySelector(".preview-frame-outer"); // Changed to outer container
+      if (frameContainer) {
+        if (width === "100%") {
+          resizeContainer.style.margin = "0"; // Align to left for full width
+          frameContainer.style.justifyContent = "flex-start";
+        } else {
+          resizeContainer.style.margin = "0 auto"; // Center for fixed widths
+          frameContainer.style.justifyContent = "center";
+        }
+      }
+    });
+  });
+}
+
+// Function to set up the preview iframe
+function setupPreviewIframe() {
+  const iframe = document.getElementById("preview-frame");
+  if (!iframe) return;
+
+  // Get content from script element
+  const contentScript = document.querySelector("script[data-preview-content]");
+  if (!contentScript) return;
+
+  const content = contentScript.textContent;
+
+  // Load content via src to ensure template processing
+  const baseUrl = window.location.pathname.replace("/preview/", "/raw/");
+  iframe.src = baseUrl;
+
+  // Force layout recalculation after load
+  iframe.onload = () => {
+    iframe.getBoundingClientRect();
+  };
+
+  // Set initial state of the resize container
+  const resizeContainer = document.getElementById("resizeContainer");
+  if (resizeContainer) {
+    updateSizeDisplay();
+    // Set initial slider value
+    const slider = document.getElementById("widthSlider");
+    if (slider) {
+      slider.value = resizeContainer.offsetWidth;
+    }
+  }
+}
+
+// Function to initialize the copy content button
+function initCopyContentButton() {
+  const previewContainer = document.querySelector(".preview-container");
+  if (!previewContainer) return;
+
+  // Create copy button if it doesn't exist
+  if (!document.getElementById("copy-content-btn")) {
+    const copyBtn = document.createElement("button");
+    copyBtn.id = "copy-content-btn";
+    copyBtn.className = "action-btn";
+    copyBtn.innerHTML =
+      '<span class="action-icon">📋</span><span>Copy HTML</span>';
+
+    // Insert the button in preview controls
+    const previewControls = document.querySelector(".preview-controls");
+    if (previewControls) {
+      previewControls.appendChild(copyBtn);
+
+      // Add click handler
+      copyBtn.addEventListener("click", async function () {
+        try {
+          // Get current template path from URL
+          const currentPath = window.location.pathname;
+          const templatePath = currentPath.replace("/preview/", "");
+
+          // Fetch both processed and unprocessed content
+          const rawResponse = await fetch("/raw/" + templatePath);
+          const originalResponse = await fetch("/original/" + templatePath);
+
+          if (!rawResponse.ok || !originalResponse.ok) {
+            throw new Error("Failed to fetch template content");
+          }
+
+          // Get both contents
+          const rawContent = await rawResponse.text();
+          const originalContent = await originalResponse.text();
+
+          // Find all src and href attributes in raw content and map them back to BaseURL
+          let finalContent = originalContent;
+          const matches = rawContent.matchAll(
+            /(?:src|href)="(\/templates\/[^"]+)"/g,
+          );
+          for (const match of matches) {
+            const processedPath = match[1];
+            const relativePath = processedPath.replace("/templates/", "");
+            finalContent = finalContent.replace(
+              processedPath,
+              `{{.BaseURL}}/${relativePath}`,
+            );
+          }
+
+          // Copy to clipboard
+          await navigator.clipboard.writeText(finalContent);
+
+          // Show success state
+          const originalText = copyBtn.innerHTML;
+          copyBtn.innerHTML =
+            '<span class="action-icon">✅</span><span>Copied!</span>';
+          copyBtn.classList.add("success");
+
+          // Reset after 2 seconds
+          setTimeout(() => {
+            copyBtn.innerHTML = originalText;
+            copyBtn.classList.remove("success");
+          }, 2000);
+        } catch (err) {
+          console.error("Could not copy text: ", err);
+          alert("Failed to copy HTML. Please try again.");
+        }
+      });
+    }
+  }
+}
+
+// Function to initialize download folder button
+function initDownloadFolderButton() {
+  // Add hover download buttons to directory items in the main content
+  addDirectoryDownloadButtons();
+}
+
+// Function to observe content changes and re-add download buttons
+function observeContentChanges() {
+  // Use MutationObserver to detect when new content is loaded
+  const targetNode = document.querySelector(".main-content");
+  if (!targetNode) return;
+
+  const config = { childList: true, subtree: true };
+
+  const callback = function (mutationsList, observer) {
+    for (let mutation of mutationsList) {
+      if (mutation.type === "childList" && mutation.addedNodes.length > 0) {
+        // Check if any directory items were added
+        const hasDirectoryItems = Array.from(mutation.addedNodes).some(
+          (node) => {
+            return (
+              node.nodeType === Node.ELEMENT_NODE &&
+              ((node.querySelector &&
+                node.querySelector(".browser-item.directory")) ||
+                (node.classList &&
+                  node.classList.contains("browser-item") &&
+                  node.classList.contains("directory")))
+            );
+          },
+        );
+
+        if (hasDirectoryItems) {
+          // Small delay to ensure DOM is fully updated
+          setTimeout(addDirectoryDownloadButtons, 100);
+        }
+      }
+    }
+  };
+
+  const observer = new MutationObserver(callback);
+  observer.observe(targetNode, config);
+}
+
+// Function to initialize email button and modal
+
+// Function to add download buttons to directory items
+function addDirectoryDownloadButtons() {
+  const directoryItems = document.querySelectorAll(".browser-item.directory");
+
+  directoryItems.forEach((item) => {
+    // Skip if already has a download button
+    if (item.querySelector(".download-folder-btn")) {
+      return;
+    }
+
+    // Get the folder path from the link
+    const link = item.querySelector("a");
+
+    if (link) {
+      const folderPath = link.getAttribute("href");
+
+      if (folderPath) {
+        // Remove leading slash if present
+        const cleanPath = folderPath.startsWith("/")
+          ? folderPath.substring(1)
+          : folderPath;
+
+        // Create download button
+        const downloadBtn = document.createElement("button");
+        downloadBtn.className = "download-folder-btn item-download";
+        downloadBtn.innerHTML = "📦";
+        downloadBtn.title = "Download folder";
+        downloadBtn.setAttribute("data-path", cleanPath);
+
+        // Add click handler
+        downloadBtn.addEventListener("click", function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          requestFolderDownload(cleanPath);
+        });
+
+        // Add to the item
+        item.appendChild(downloadBtn);
+      }
+    }
+  });
+}
+
+// Function to request folder download
+function requestFolderDownload(path) {
+  // The path might already be URL encoded from the href attribute
+  // Check if it's encoded and handle accordingly
+  const isEncoded = path !== decodeURIComponent(path);
+
+  let finalPath;
+  if (isEncoded) {
+    // If it's already encoded, use it as-is
+    finalPath = path;
+  } else {
+    // If it's not encoded, encode it
+    finalPath = encodeURIComponent(path);
+  }
+
+  const downloadUrl = `/api/download?path=${finalPath}`;
+
+  // Create a temporary link element to trigger the download
+  const downloadLink = document.createElement("a");
+  downloadLink.href = downloadUrl;
+  downloadLink.download = "";
+  downloadLink.target = "_blank";
+
+  // Append to document, trigger click, then remove
+  document.body.appendChild(downloadLink);
+  downloadLink.click();
+  document.body.removeChild(downloadLink);
+}
+
+// Initialize navigation tree functionality
+function initNavigationTree() {
+  setupFolderToggling();
+  scrollToDeepestExpanded();
+}
+
+// Setup folder toggling functionality
+function setupFolderToggling() {
+  const navTree = document.getElementById("navTree");
+  if (!navTree) return;
+
+  // Use event delegation for better performance and to handle dynamically added elements
+  navTree.addEventListener("click", function (e) {
+    // Check if clicked on toggle arrow
+    const toggle = e.target.closest(".tree-node-toggle");
+    if (toggle) {
+      const treeNode = toggle.closest(".tree-node");
+      if (treeNode && treeNode.querySelector(".tree-node-children")) {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleFolder(treeNode);
+        return;
+      }
+    }
+
+    // Check if clicked on folder header (but not on a link)
+    const header = e.target.closest(".tree-node-header");
+    if (header && !e.target.closest("a")) {
+      const treeNode = header.closest(".tree-node");
+      if (treeNode && treeNode.querySelector(".tree-node-children")) {
+        e.preventDefault();
+        toggleFolder(treeNode);
+        return;
+      }
+    }
+  });
+
+  // Make folder headers look clickable
+  const folderHeaders = navTree.querySelectorAll(
+    ".tree-node[data-path] > .tree-node-header",
+  );
+  folderHeaders.forEach((header) => {
+    const treeNode = header.parentElement;
+    if (treeNode.querySelector(".tree-node-children")) {
+      header.style.cursor = "pointer";
+    }
+  });
+}
+
+// Toggle folder expanded/collapsed state
+function toggleFolder(treeNode) {
+  const isExpanded = treeNode.classList.contains("expanded");
+  const toggle = treeNode.querySelector(".tree-node-header .tree-node-toggle");
+  const children = treeNode.querySelector(".tree-node-children");
+
+  if (isExpanded) {
+    // Collapse the folder
+    treeNode.classList.remove("expanded");
+    if (toggle) toggle.textContent = "►";
+    // Hide children if they exist
+    if (children) {
+      children.style.display = "none";
+    }
+  } else {
+    // For expanding, navigate to folder so server renders children properly
+    const folderPath = treeNode.getAttribute("data-path");
+    if (folderPath) {
+      window.location.href = "/" + folderPath;
+    }
+  }
+}
+
+// Find and scroll to the deepest expanded folder
+function scrollToDeepestExpanded() {
+  const sidebar = document.querySelector(".sidebar");
+  const navTree = document.getElementById("navTree");
+  if (!sidebar || !navTree) {
+    // If no navTree, just show it
+    if (navTree) navTree.classList.add("loaded");
+    return;
+  }
+
+  // Find the active node first
+  const activeNode = document.querySelector(".tree-node.active");
+  if (activeNode) {
+    scrollToNode(activeNode, sidebar, true);
+    showNavTree(navTree);
+    return;
+  }
+
+  // Otherwise find deepest expanded node
+  const expandedNodes = document.querySelectorAll(".tree-node.expanded");
+  if (expandedNodes.length === 0) {
+    showNavTree(navTree);
+    return;
+  }
+
+  let deepestNode = null;
+  let maxDepth = 0;
+
+  expandedNodes.forEach((node) => {
+    let depth = 0;
+    let parent = node.parentElement;
+
+    while (parent && parent !== navTree) {
+      if (parent.classList.contains("tree-node-children")) {
+        depth++;
+      }
+      parent = parent.parentElement;
+    }
+
+    if (depth > maxDepth) {
+      maxDepth = depth;
+      deepestNode = node;
+    }
+  });
+
+  if (deepestNode) {
+    scrollToNode(deepestNode, sidebar, true);
+  }
+
+  showNavTree(navTree);
+}
+
+// Show navigation tree after positioning
+function showNavTree(navTree) {
+  navTree.classList.add("loaded");
+}
+
+// Scroll a specific node into view
+function scrollToNode(node, sidebar, instant = false) {
+  const nodeRect = node.getBoundingClientRect();
+  const sidebarRect = sidebar.getBoundingClientRect();
+
+  // Calculate the position to scroll to (show node at the top of the sidebar)
+  const scrollTop = sidebar.scrollTop + nodeRect.top - sidebarRect.top - 20; // 20px padding from top
+
+  // Use instant scrolling for page load, smooth for user interactions
+  if (instant) {
+    sidebar.scrollTop = Math.max(0, scrollTop);
+  } else {
+    sidebar.scrollTo({
+      top: Math.max(0, scrollTop),
+      behavior: "smooth",
+    });
+  }
+}
+
+// Initialize export button functionality
+function initExportButton() {
+  const exportButton = document.getElementById("exportButton");
+  if (exportButton) {
+    exportButton.addEventListener("click", function () {
+      requestExport();
+    });
+  }
+}
+
+// Function to request export
+function requestExport() {
+  // Show loading state
+  const exportButton = document.getElementById("exportButton");
+  const originalText = exportButton.innerHTML;
+  exportButton.innerHTML = "⏳ Exporting...";
+  exportButton.disabled = true;
+
+  // Create the URL for the export endpoint
+  const exportUrl = "/api/export";
+
+  // Create a temporary link element to trigger the download
+  const downloadLink = document.createElement("a");
+  downloadLink.href = exportUrl;
+  downloadLink.target = "_blank";
+
+  // Append to document, trigger click, then remove
+  document.body.appendChild(downloadLink);
+  downloadLink.click();
+  document.body.removeChild(downloadLink);
+
+  // Reset button state after a short delay
+  setTimeout(() => {
+    exportButton.innerHTML = originalText;
+    exportButton.disabled = false;
+  }, 2000);
+}

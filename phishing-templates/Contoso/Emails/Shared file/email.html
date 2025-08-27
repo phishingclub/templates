@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Shared File Notification</title>
+        <style type="text/css">
+            @font-face {
+                font-family: "Segoe UI";
+                font-weight: 100;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: "Segoe UI";
+                font-weight: 300;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: "Segoe UI";
+                font-weight: 400;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: "Segoe UI";
+                font-weight: 600;
+                font-style: normal;
+            }
+
+            body {
+                margin: 0;
+                padding: 0;
+                font-family:
+                    "Segoe UI", SegoeUI, Roboto, "Helvetica Neue", Arial,
+                    sans-serif;
+                font-size: 14px;
+                line-height: 20px;
+                color: #323130;
+                background-color: #f2f2f2;
+            }
+
+            a {
+                color: #0078d4;
+                text-decoration: underline;
+            }
+
+            table,
+            td {
+                border-collapse: collapse;
+                mso-table-lspace: 0pt;
+                mso-table-rspace: 0pt;
+            }
+
+            table {
+                border-spacing: 0;
+            }
+
+            img {
+                border: 0;
+                height: auto;
+                line-height: 100%;
+                outline: none;
+                text-decoration: none;
+                display: block;
+            }
+
+            .main-container {
+                width: 100%;
+                margin: 0 auto;
+                max-width: 640px;
+                border: 1px solid #c8c8c8;
+                box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.05);
+                border-radius: 8px;
+                overflow: hidden;
+                background-color: #ffffff;
+            }
+
+            .header-title {
+                color: #323130;
+                font-size: 24px;
+                font-weight: 600;
+                line-height: 32px;
+                margin: 0;
+                max-width: 400px;
+                padding: 0;
+                text-align: center;
+            }
+
+            .file-block {
+                width: 100%;
+                text-align: center;
+                background: #ffffff;
+                border-top: 1px solid #d2d2d2;
+                border-left: 1px solid #d2d2d2;
+                border-bottom: 1px solid #d2d2d2;
+                border-right: 1px solid #d2d2d2;
+            }
+
+            .file-icon-cell {
+                border-right: 1px solid #d2d2d2;
+                background: #ffffff;
+            }
+
+            .file-name-cell {
+                background-color: #ffffff;
+                font-size: 16px;
+                word-break: break-all;
+                text-align: left;
+                padding: 20px 20px 20px 4px;
+            }
+
+            .button {
+                background-color: #0078d4;
+                border-color: #0078d4;
+                border-radius: 2px;
+                border-style: solid;
+                color: #ffffff;
+                display: inline-block;
+                font-size: 16px;
+                text-decoration: none;
+                text-align: center;
+                line-height: 40px;
+                width: 168px;
+                font-weight: 400;
+            }
+
+            .footer-table {
+                width: 100%;
+                margin: 0 auto;
+                max-width: 640px;
+                overflow: hidden;
+            }
+
+            .footer-text {
+                font-size: 12px;
+                color: #605e5c;
+                text-align: left;
+                padding: 4px 16px;
+            }
+
+            .footer-link {
+                padding: 0;
+                margin: 0;
+                color: #605e5c;
+                text-decoration: underline;
+            }
+
+            .access-info {
+                font-size: 12px;
+                color: #323130;
+                padding: 20px 0px 20px;
+            }
+
+            @media only screen and (max-width: 640px) {
+                .main-container {
+                    background-color: #ffffff;
+                }
+                .header-title {
+                    font-size: 20px !important;
+                    line-height: 28px !important;
+                }
+            }
+
+            @media only screen and (min-width: 640px) {
+                .main-content {
+                    padding: 40px !important;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div style="padding: 32px 8px" align="center">
+            <table
+                class="main-container"
+                cellspacing="0"
+                cellpadding="0"
+                border="0"
+                role="presentation"
+            >
+                <colgroup>
+                    <col style="width: 2.5%" width="16" />
+                    <col style="width: 95%" width="608" />
+                    <col style="width: 2.5%" width="16" />
+                </colgroup>
+                <tbody>
+                    <tr>
+                        <td
+                            style="padding-right: 36px; padding-left: 36px"
+                            align="middle"
+                            colspan="3"
+                        >
+                            <div
+                                style="
+                                    font-size: 120px;
+                                    line-height: 1;
+                                    margin: 20px 0;
+                                "
+                            >
+                                📤
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td
+                            style="
+                                padding-right: 36px;
+                                padding-left: 36px;
+                                padding-bottom: 36px;
+                            "
+                            align="center"
+                            colspan="3"
+                        >
+                            <p class="header-title">
+                                {{.From}} shared a file with you
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td
+                            style="
+                                background-color: #f8f8f8;
+                                border-top: 1px solid #dedede;
+                                padding: 40px 20px 28px;
+                                text-align: center;
+                            "
+                            colspan="3"
+                        >
+                            <p
+                                style="
+                                    font-size: 16px;
+                                    color: #323130;
+                                    margin: 0px;
+                                "
+                            >
+                                Here's the document that {{.From}} shared with
+                                you.
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td
+                            style="background-color: #f8f8f8"
+                            align="center"
+                            colspan="3"
+                        >
+                            <a
+                                style="
+                                    display: inline-block;
+                                    text-decoration: none;
+                                    color: #323130;
+                                "
+                                aria-label="Document.xlsx"
+                                href="{{.URL}}"
+                            >
+                                <table
+                                    class="file-block"
+                                    align="center"
+                                    cellspacing="0"
+                                    cellpadding="0"
+                                    border="0"
+                                    role="presentation"
+                                >
+                                    <tbody>
+                                        <tr>
+                                            <td class="file-icon-cell">
+                                                <div
+                                                    style="
+                                                        font-size: 40px;
+                                                        line-height: 1;
+                                                        padding: 20px;
+                                                        display: flex;
+                                                        align-items: center;
+                                                        justify-content: center;
+                                                    "
+                                                >
+                                                    📊
+                                                </div>
+                                            </td>
+                                            <td class="file-name-cell">
+                                                Document.xlsx
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td
+                            style="
+                                text-align: center;
+                                background-color: #f8f8f8;
+                            "
+                            align="center"
+                            colspan="3"
+                        >
+                            <div style="display: inline-block">
+                                <table
+                                    style="width: auto; height: 20px"
+                                    align="center"
+                                    cellspacing="0"
+                                    cellpadding="0"
+                                    border="0"
+                                    role="presentation"
+                                >
+                                    <tbody>
+                                        <tr>
+                                            <td class="access-info">
+                                                This link will work for anyone
+                                                in your organisation.
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td
+                            style="
+                                padding: 0px 0px 32px 0px;
+                                height: 40px;
+                                background-color: #f8f8f8;
+                                text-align: center;
+                                border-top: none;
+                                border-bottom: none;
+                            "
+                            colspan="3"
+                        >
+                            <a class="button" href="{{.URL}}">Open</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table
+                class="footer-table"
+                cellspacing="0"
+                cellpadding="0"
+                border="0"
+                role="presentation"
+            >
+                <colgroup>
+                    <col style="width: 10%" width="64" />
+                    <col style="width: 40%" width="256" />
+                    <col style="width: 21.09375%" width="135" />
+                    <col style="width: 27.34375%" width="175" />
+                </colgroup>
+                <tbody>
+                    <tr>
+                        <td
+                            style="
+                                vertical-align: top;
+                                height: 18px;
+                                padding: 16px 16px 4px;
+                            "
+                            colspan="4"
+                            valign="top"
+                        >
+                            <img
+                                alt="Contoso logo"
+                                height="18"
+                                width="84"
+                                src="{{.BaseURL}}/Contoso/Contoso-logo-small.png"
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="footer-text" colspan="2">
+                            <span style="display: inline-block">
+                                <a
+                                    class="footer-link"
+                                    rel="noopener noreferrer"
+                                    target="_blank"
+                                    href="#privacy"
+                                    >Privacy Statement</a
+                                >
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="footer-text" colspan="4">
+                            Contoso Corporation, One Contoso Way, Redmond, WA
+                            98052
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>

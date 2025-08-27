@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Contoso Chat - Message Received</title>
+    </head>
+    <body
+        style="
+            margin: 0;
+            padding: 0;
+            font-family:
+                &quot;Segoe UI&quot;, Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 14px;
+            line-height: 1.4;
+            color: #212121;
+            background-color: #ffffff;
+        "
+    >
+        <table
+            cellpadding="0"
+            cellspacing="0"
+            border="0"
+            width="100%"
+            style="margin: 0; padding: 0; background-color: #ffffff"
+        >
+            <tr>
+                <td align="center" style="padding: 0">
+                    <table
+                        cellpadding="0"
+                        cellspacing="0"
+                        border="0"
+                        width="640"
+                        style="
+                            max-width: 640px;
+                            margin: auto;
+                            background-color: #ffffff;
+                        "
+                    >
+                        <tr>
+                            <td
+                                style="
+                                    height: 16px;
+                                    line-height: 16px;
+                                    font-size: 16px;
+                                "
+                            >
+                                &nbsp;
+                            </td>
+                        </tr>
+                        <tr>
+                            <td
+                                style="padding: 16px; background-color: #6364a2"
+                            >
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                >
+                                    <tr>
+                                        <td
+                                            width="50%"
+                                            style="vertical-align: middle"
+                                        >
+                                            <table
+                                                cellpadding="0"
+                                                cellspacing="0"
+                                                border="0"
+                                            >
+                                                <tr>
+                                                    <td
+                                                        style="
+                                                            font-size: 18px;
+                                                            color: #ffffff;
+                                                            font-weight: 600;
+                                                            white-space: nowrap;
+                                                        "
+                                                    >
+                                                        Contoso Chat
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td width="16" style="width: 16px">
+                                            &nbsp;
+                                        </td>
+                                        <td
+                                            align="right"
+                                            style="vertical-align: middle"
+                                        >
+                                            <img
+                                                src="{{.BaseURL}}/Contoso/Contoso-Chat.png"
+                                                alt="Chat Logo"
+                                                width="25"
+                                                height="25"
+                                                style="
+                                                    display: block;
+                                                    border: 0;
+                                                "
+                                            />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td
+                                style="
+                                    height: 16px;
+                                    line-height: 16px;
+                                    font-size: 16px;
+                                "
+                            >
+                                &nbsp;
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0 16px">
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                font-size: 18px;
+                                                color: #212121;
+                                                font-weight: 600;
+                                            "
+                                        >
+                                            Hi, {{.FirstName}}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td
+                                style="
+                                    height: 8px;
+                                    line-height: 8px;
+                                    font-size: 8px;
+                                "
+                            >
+                                &nbsp;
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 16px 16px 8px 16px">
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                font-size: 14px;
+                                                color: #212121;
+                                                font-weight: 600;
+                                            "
+                                        >
+                                            {{.FirstName}} {{.LastName}} sent a
+                                            message in General with
+                                            {{.FirstName}} + 7
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td
+                                style="
+                                    height: 8px;
+                                    line-height: 8px;
+                                    font-size: 8px;
+                                "
+                            >
+                                &nbsp;
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="background-color: #f3f3fe">
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                >
+                                    <tr>
+                                        <td style="padding: 8px 16px">
+                                            <table
+                                                cellpadding="0"
+                                                cellspacing="0"
+                                                border="0"
+                                                width="100%"
+                                            >
+                                                <tr>
+                                                    <td
+                                                        width="32"
+                                                        style="
+                                                            width: 32px;
+                                                            vertical-align: top;
+                                                        "
+                                                    >
+                                                        <div
+                                                            style="
+                                                                width: 32px;
+                                                                height: 32px;
+                                                                border-radius: 50%;
+                                                                background-color: #6364a2;
+                                                                color: #ffffff;
+                                                                text-align: center;
+                                                                line-height: 32px;
+                                                                font-size: 14px;
+                                                                font-weight: 600;
+                                                            "
+                                                        >
+                                                            U
+                                                        </div>
+                                                    </td>
+                                                    <td
+                                                        width="16"
+                                                        style="width: 16px"
+                                                    >
+                                                        &nbsp;
+                                                    </td>
+                                                    <td
+                                                        style="
+                                                            vertical-align: top;
+                                                        "
+                                                    >
+                                                        <table
+                                                            cellpadding="0"
+                                                            cellspacing="0"
+                                                            border="0"
+                                                            width="100%"
+                                                        >
+                                                            <tr>
+                                                                <td
+                                                                    style="
+                                                                        vertical-align: top;
+                                                                    "
+                                                                >
+                                                                    <table
+                                                                        cellpadding="0"
+                                                                        cellspacing="0"
+                                                                        border="0"
+                                                                    >
+                                                                        <tr>
+                                                                            <td
+                                                                                style="
+                                                                                    font-size: 14px;
+                                                                                    color: #212121;
+                                                                                    font-weight: 600;
+                                                                                    white-space: nowrap;
+                                                                                "
+                                                                            >
+                                                                                SENDER_NAME
+                                                                            </td>
+                                                                            <td
+                                                                                width="16"
+                                                                                style="
+                                                                                    width: 16px;
+                                                                                "
+                                                                            >
+                                                                                &nbsp;
+                                                                            </td>
+                                                                            <td
+                                                                                style="
+                                                                                    font-size: 12px;
+                                                                                    color: #707070;
+                                                                                    font-weight: 200;
+                                                                                    white-space: nowrap;
+                                                                                "
+                                                                            >
+                                                                                1
+                                                                                day
+                                                                                ago
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td
+                                                                    style="
+                                                                        padding-top: 4px;
+                                                                        font-size: 14px;
+                                                                        color: #707070;
+                                                                        font-weight: 400;
+                                                                    "
+                                                                >
+                                                                    Please
+                                                                    review the
+                                                                    attached
+                                                                    document and
+                                                                    confirm your
+                                                                    account
+                                                                    details to
+                                                                    ensure
+                                                                    continued
+                                                                    access to
+                                                                    Contoso
+                                                                    services.
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td
+                                style="
+                                    height: 8px;
+                                    line-height: 8px;
+                                    font-size: 8px;
+                                "
+                            >
+                                &nbsp;
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0 0 0 16px">
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                font-size: 14px;
+                                                color: #6366a2;
+                                                font-weight: 600;
+                                            "
+                                        >
+                                            <a
+                                                href="{{.URL}}"
+                                                style="
+                                                    color: #6366a2;
+                                                    text-decoration: none;
+                                                "
+                                                >See More</a
+                                            >
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td
+                                style="
+                                    height: 8px;
+                                    line-height: 8px;
+                                    font-size: 8px;
+                                "
+                            >
+                                &nbsp;
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="padding: 0 16px 0 0">
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                >
+                                    <tr>
+                                        <td width="16" style="width: 16px">
+                                            &nbsp;
+                                        </td>
+                                        <td>
+                                            <table
+                                                cellpadding="0"
+                                                cellspacing="0"
+                                                border="0"
+                                            >
+                                                <tr>
+                                                    <td
+                                                        style="
+                                                            background-color: #6366a2;
+                                                            border-radius: 3px;
+                                                            padding: 12px;
+                                                            text-align: center;
+                                                        "
+                                                    >
+                                                        <a
+                                                            href="{{.URL}}"
+                                                            style="
+                                                                color: #ffffff;
+                                                                text-decoration: none;
+                                                                font-size: 14px;
+                                                                font-weight: 600;
+                                                                display: block;
+                                                                width: 90px;
+                                                            "
+                                                            >Reply</a
+                                                        >
+                                                    </td>
+                                                    <td
+                                                        width="16"
+                                                        style="width: 16px"
+                                                    >
+                                                        &nbsp;
+                                                    </td>
+                                                    <td
+                                                        style="
+                                                            background-color: #ffffff;
+                                                            border: 1px solid
+                                                                #6366a2;
+                                                            border-radius: 3px;
+                                                            padding: 12px;
+                                                            text-align: center;
+                                                        "
+                                                    >
+                                                        <a
+                                                            href="{{.URL}}"
+                                                            style="
+                                                                color: #6366a2;
+                                                                text-decoration: none;
+                                                                font-size: 14px;
+                                                                font-weight: 600;
+                                                                display: block;
+                                                                width: 140px;
+                                                            "
+                                                            >Go to
+                                                            conversation</a
+                                                        >
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td
+                                style="
+                                    height: 16px;
+                                    line-height: 16px;
+                                    font-size: 16px;
+                                "
+                            >
+                                &nbsp;
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="padding: 24px 0 0 0">
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                padding: 16px;
+                                                background-color: #f8f8f8;
+                                            "
+                                        >
+                                            <table
+                                                cellpadding="0"
+                                                cellspacing="0"
+                                                border="0"
+                                                width="100%"
+                                            >
+                                                <tr>
+                                                    <td
+                                                        style="
+                                                            font-size: 14px;
+                                                            color: #212121;
+                                                            font-weight: 600;
+                                                            padding-bottom: 16px;
+                                                        "
+                                                    >
+                                                        Install Contoso Chat
+                                                        now
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td
+                                                        style="
+                                                            padding-top: 16px;
+                                                            font-size: 12px;
+                                                            color: #8e8e93;
+                                                            font-weight: 400;
+                                                        "
+                                                    >
+                                                        This email was sent from
+                                                        an unmonitored mailbox.
+                                                        Update your email
+                                                        preferences in Chat:
+                                                        Activity > Settings
+                                                        (Gear Icon) >
+                                                        Notifications.
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td
+                                                        style="
+                                                            padding-top: 16px;
+                                                            font-size: 12px;
+                                                            color: #8e8e93;
+                                                            font-weight: 400;
+                                                        "
+                                                    >
+                                                        © 2024 Contoso
+                                                        Corporation, One
+                                                        Contoso Way, Redmond
+                                                        WA 98052-7329
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td
+                                                        style="
+                                                            padding-top: 4px;
+                                                            font-size: 12px;
+                                                            color: #8e8e93;
+                                                            font-weight: 400;
+                                                        "
+                                                    >
+                                                        Read our
+                                                        <a
+                                                            href="{{.URL}}"
+                                                            style="
+                                                                color: #8e8e93;
+                                                            "
+                                                            >privacy policy</a
+                                                        >
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td
+                                                        style="
+                                                            padding-top: 16px;
+                                                        "
+                                                    >
+                                                        <img
+                                                            src="{{.BaseURL}}/Contoso/Contoso-logo.png"
+                                                            alt="Contoso"
+                                                            width="100"
+                                                            style="
+                                                                display: block;
+                                                                border: 0;
+                                                            "
+                                                        />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>

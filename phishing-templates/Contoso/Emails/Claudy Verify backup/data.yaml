@@ -1,0 +1,7 @@
+name: "Contoso - Claudy - Verify backup"
+emails:
+  - name: "Contoso - Claudy - Verify backup"
+    file: "email.html"
+    envelope from: "edit@this.tld"
+    from: "Contoso <edit@this.tld>"
+    subject: "Verification required"

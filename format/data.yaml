@@ -1,0 +1,33 @@
+# This file shows the format of the data.yaml which is required in folder with
+# pages or templates.
+#
+# /dinosaur-world-invitation
+# /dinosaur-world/invitation/assets/logo.png
+# /dinosaur-world/invitation/landing.html
+# /dinosaur-world/invitation/email.html
+# /dinosaur-world/data.yaml
+#
+# data.yaml:
+# name: "Dinosaur World Invitation"
+# pages:
+#   - name: "Dinosaur World invitation"
+#     file: "landing.html"
+# emails:
+#   - name: Dinosaur World invitation"
+#     file: "email.html"
+#     envelope from: "noreply@dinosaurworld.test"
+#     from: "Dinfo <noreply@t@dinosaurworld.tes>"
+#     subject: "Email subject"
+#
+# The assets are uploaded as seen, so in this example it will upload the assets to
+# the /assets/ this will overwrite any existing asset, so you must name them uniquely!
+name: "Name of the project"
+pages:
+  - name: "name of the page"
+    file: "landing.html"
+emails:
+  - name: "name of the email"
+    file: "email.html"
+    envelope from: "edit@this.tld"
+    from: "Noreply <edit@this.tld>"
+    subject: "Email subject"

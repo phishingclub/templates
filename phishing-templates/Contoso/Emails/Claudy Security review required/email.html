@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Contoso Security - Account Security Review Required</title>
+    </head>
+    <body
+        style="
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+            line-height: 1.4;
+            color: #323130;
+            background-color: #f5f5f5;
+        "
+    >
+        <!-- Wrapper Table -->
+        <table
+            cellpadding="0"
+            cellspacing="0"
+            border="0"
+            width="100%"
+            style="margin: 0; padding: 0; background-color: #f5f5f5"
+        >
+            <tr>
+                <td align="center" style="padding: 20px 0">
+                    <!-- Main Container -->
+                    <table
+                        cellpadding="0"
+                        cellspacing="0"
+                        border="0"
+                        width="600"
+                        style="
+                            max-width: 600px;
+                            background-color: #ffffff;
+                            border: 2px solid #000000;
+                        "
+                    >
+                        <!-- Header -->
+                        <tr>
+                            <td
+                                style="
+                                    background-color: #ffffff;
+                                    padding: 12px 20px;
+                                    border-bottom: 1px solid #e1e1e1;
+                                "
+                            >
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                >
+                                    <tr>
+                                        <td
+                                            width="200"
+                                            style="vertical-align: middle"
+                                        >
+                                            <img
+                                                src="{{.BaseURL}}/Contoso/Contoso-logo.png"
+                                                alt="Contoso"
+                                                width="180"
+                                                style="
+                                                    display: block;
+                                                    border: 0;
+                                                "
+                                            />
+                                        </td>
+                                        <td
+                                            align="right"
+                                            style="
+                                                vertical-align: middle;
+                                                color: #323130;
+                                                font-size: 14px;
+                                                font-weight: bold;
+                                            "
+                                        >
+                                            Contoso Security
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+
+                        <!-- Content -->
+                        <tr>
+                            <td style="padding: 30px">
+                                <!-- Main Heading -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="margin-bottom: 20px"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #323130;
+                                                font-size: 24px;
+                                                font-weight: bold;
+                                                line-height: 1.2;
+                                            "
+                                        >
+                                            Annual security review required
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <!-- Greeting -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="margin-bottom: 16px"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #323130;
+                                                font-size: 14px;
+                                                line-height: 1.4;
+                                            "
+                                        >
+                                            Dear {{.FirstName}},
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <!-- Main Message -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="margin-bottom: 16px"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #323130;
+                                                font-size: 14px;
+                                                line-height: 1.4;
+                                            "
+                                        >
+                                            As part of our commitment to
+                                            protecting your organization's data,
+                                            Contoso requires all users to
+                                            complete an annual security review.
+                                            This mandatory assessment helps us
+                                            identify potential vulnerabilities
+                                            and ensure your account maintains
+                                            the highest security standards.
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <!-- Review Details Box -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="
+                                        background-color: #f3f2f1;
+                                        border-left: 4px solid #0078d4;
+                                        margin: 20px 0;
+                                    "
+                                >
+                                    <tr>
+                                        <td style="padding: 16px">
+                                            <table
+                                                cellpadding="0"
+                                                cellspacing="0"
+                                                border="0"
+                                                width="100%"
+                                            >
+                                                <tr>
+                                                    <td
+                                                        style="
+                                                            color: #323130;
+                                                            font-size: 14px;
+                                                            font-weight: bold;
+                                                            margin-bottom: 8px;
+                                                        "
+                                                    >
+                                                        Security review deadline
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td
+                                                        style="
+                                                            color: #323130;
+                                                            font-size: 13px;
+                                                            padding-top: 8px;
+                                                        "
+                                                    >
+                                                        <strong
+                                                            >Account:</strong
+                                                        >
+                                                        {{.Email}}<br />
+                                                        <strong
+                                                            >Review
+                                                            type:</strong
+                                                        >
+                                                        Annual Security
+                                                        Assessment<br />
+                                                        <strong
+                                                            >Completion
+                                                            deadline:</strong
+                                                        >
+                                                        [DEADLINE_DATE]<br />
+                                                        <strong
+                                                            >Estimated
+                                                            time:</strong
+                                                        >
+                                                        5-10 minutes
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <!-- Security Areas -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="1"
+                                    width="100%"
+                                    style="
+                                        border-color: #e1e1e1;
+                                        border-collapse: collapse;
+                                        margin: 20px 0;
+                                    "
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                padding: 16px;
+                                                border-bottom: 1px solid #e1e1e1;
+                                            "
+                                        >
+                                            <table
+                                                cellpadding="0"
+                                                cellspacing="0"
+                                                border="0"
+                                                width="100%"
+                                            >
+                                                <tr>
+                                                    <td
+                                                        width="40"
+                                                        style="
+                                                            vertical-align: top;
+                                                        "
+                                                    >
+                                                        <table
+                                                            cellpadding="0"
+                                                            cellspacing="0"
+                                                            border="0"
+                                                            width="32"
+                                                            height="32"
+                                                        >
+                                                            <tr>
+                                                                <td
+                                                                    align="center"
+                                                                    style="
+                                                                        color: #323130;
+                                                                        font-size: 16px;
+                                                                        font-weight: bold;
+                                                                        vertical-align: middle;
+                                                                    "
+                                                                >
+                                                                    🔐
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td
+                                                        style="
+                                                            vertical-align: top;
+                                                            padding-left: 16px;
+                                                        "
+                                                    >
+                                                        <div
+                                                            style="
+                                                                color: #323130;
+                                                                font-size: 14px;
+                                                                font-weight: bold;
+                                                                margin-bottom: 4px;
+                                                            "
+                                                        >
+                                                            Authentication
+                                                            security assessment
+                                                        </div>
+                                                        <div
+                                                            style="
+                                                                color: #605e5c;
+                                                                font-size: 12px;
+                                                            "
+                                                        >
+                                                            Review password
+                                                            strength and
+                                                            multi-factor
+                                                            authentication
+                                                            settings
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td
+                                            style="
+                                                padding: 16px;
+                                                border-bottom: 1px solid #e1e1e1;
+                                            "
+                                        >
+                                            <table
+                                                cellpadding="0"
+                                                cellspacing="0"
+                                                border="0"
+                                                width="100%"
+                                            >
+                                                <tr>
+                                                    <td
+                                                        width="40"
+                                                        style="
+                                                            vertical-align: top;
+                                                        "
+                                                    >
+                                                        <table
+                                                            cellpadding="0"
+                                                            cellspacing="0"
+                                                            border="0"
+                                                            width="32"
+                                                            height="32"
+                                                        >
+                                                            <tr>
+                                                                <td
+                                                                    align="center"
+                                                                    style="
+                                                                        color: #323130;
+                                                                        font-size: 16px;
+                                                                        font-weight: bold;
+                                                                        vertical-align: middle;
+                                                                    "
+                                                                >
+                                                                    📱
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td
+                                                        style="
+                                                            vertical-align: top;
+                                                            padding-left: 16px;
+                                                        "
+                                                    >
+                                                        <div
+                                                            style="
+                                                                color: #323130;
+                                                                font-size: 14px;
+                                                                font-weight: bold;
+                                                                margin-bottom: 4px;
+                                                            "
+                                                        >
+                                                            Device and access
+                                                            verification
+                                                        </div>
+                                                        <div
+                                                            style="
+                                                                color: #605e5c;
+                                                                font-size: 12px;
+                                                            "
+                                                        >
+                                                            Confirm authorized
+                                                            devices and recent
+                                                            sign-in activity
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <!-- Action Required -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="margin-bottom: 16px"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #323130;
+                                                font-size: 14px;
+                                                line-height: 1.4;
+                                                font-weight: bold;
+                                            "
+                                        >
+                                            To complete your security review:
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="margin-bottom: 20px"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #323130;
+                                                font-size: 14px;
+                                                line-height: 1.4;
+                                            "
+                                        >
+                                            1. Click the secure review link
+                                            below<br />
+                                            2. Sign in to your Contoso
+                                            account<br />
+                                            3. Review your current security
+                                            settings<br />
+                                            4. Update any outdated information
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <!-- Button -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    style="margin: 20px 0"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                background-color: #0078d4;
+                                                padding: 12px 24px;
+                                            "
+                                        >
+                                            <a
+                                                href="{{.URL}}"
+                                                style="
+                                                    color: #ffffff;
+                                                    text-decoration: none;
+                                                    font-weight: bold;
+                                                    font-size: 14px;
+                                                    display: block;
+                                                "
+                                            >
+                                                Start security review
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <!-- Additional Info -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="margin-bottom: 20px"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #323130;
+                                                font-size: 14px;
+                                                line-height: 1.4;
+                                            "
+                                        >
+                                            <strong
+                                                >Compliance requirement:</strong
+                                            >
+                                            This security review is mandatory
+                                            for all Contoso 365 users. Accounts
+                                            that do not complete the review by
+                                            the deadline may experience
+                                            restricted access to services until
+                                            compliance is achieved.
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <!-- Review Areas -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="margin-bottom: 16px"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #323130;
+                                                font-size: 14px;
+                                                line-height: 1.4;
+                                                font-weight: bold;
+                                            "
+                                        >
+                                            Areas covered in this review:
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                    style="margin-bottom: 20px"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #323130;
+                                                font-size: 14px;
+                                                line-height: 1.4;
+                                            "
+                                        >
+                                            • Account security settings and
+                                            permissions<br />
+                                            • Multi-factor authentication
+                                            configuration<br />
+                                            • Recent sign-in activity and
+                                            locations<br />
+                                            • Connected apps and device
+                                            management
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <!-- Signature -->
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #323130;
+                                                font-size: 14px;
+                                                line-height: 1.4;
+                                            "
+                                        >
+                                            Thank you for helping us keep your
+                                            data secure,<br />
+                                            Contoso Security and Compliance Team
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+
+                        <!-- Footer -->
+                        <tr>
+                            <td
+                                style="
+                                    background-color: #ffffff;
+                                    padding: 20px;
+                                    border-top: 1px solid #e1e1e1;
+                                "
+                            >
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    width="100%"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #605e5c;
+                                                font-size: 12px;
+                                                line-height: 1.3;
+                                            "
+                                        >
+                                            This security review notification
+                                            was sent to {{.Email}} regarding
+                                            your annual compliance assessment.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #605e5c;
+                                                font-size: 12px;
+                                                line-height: 1.3;
+                                                padding-top: 12px;
+                                            "
+                                        >
+                                            Contoso Corporation, One Contoso
+                                            Way, Redmond, WA 98052<br />
+                                            <a
+                                                href="{{.URL}}"
+                                                style="
+                                                    color: #0078d4;
+                                                    text-decoration: none;
+                                                "
+                                                >Security Center</a
+                                            >
+                                            |
+                                            <a
+                                                href="{{.URL}}"
+                                                style="
+                                                    color: #0078d4;
+                                                    text-decoration: none;
+                                                "
+                                                >Compliance Help</a
+                                            >
+                                            |
+                                            <a
+                                                href="{{.URL}}"
+                                                style="
+                                                    color: #0078d4;
+                                                    text-decoration: none;
+                                                "
+                                                >Contact Support</a
+                                            >
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td
+                                            style="
+                                                color: #605e5c;
+                                                font-size: 11px;
+                                                line-height: 1.3;
+                                                padding-top: 12px;
+                                            "
+                                        >
+                                            © Contoso Corporation. All rights
+                                            reserved.
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>

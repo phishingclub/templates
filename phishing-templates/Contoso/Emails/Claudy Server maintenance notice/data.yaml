@@ -1,0 +1,7 @@
+name: "Contoso - Claudy - Server maintenance notice"
+emails:
+  - name: "Contoso - Claudy - Server maintenance notice"
+    file: "email.html"
+    envelope from: "edit@this.tld"
+    from: "Contoso <edit@this.tld>"
+    subject: "Maintenance notice"

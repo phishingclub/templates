@@ -1,0 +1,7 @@
+name: "Contoso - Claudy - Security review required"
+emails:
+  - name: "Contoso - Claudy - Security review required"
+    file: "email.html"
+    envelope from: "edit@this.tld"
+    from: "Contoso Security <edit@this.tld>"
+    subject: "Security review required"

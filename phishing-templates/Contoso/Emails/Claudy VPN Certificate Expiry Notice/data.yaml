@@ -1,0 +1,7 @@
+name: "Contoso - Claudy - VPN Certificate Expiry Notice"
+emails:
+  - name: "Contoso - Claudy - VPN Certificate Expiry Notice"
+    file: "email.html"
+    envelope from: "edit@this.tld"
+    from: "Contoso Security <edit@this.tld>"
+    subject: "VPN Certificate Expiry"

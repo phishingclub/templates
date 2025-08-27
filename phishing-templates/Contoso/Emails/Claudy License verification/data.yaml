@@ -1,0 +1,7 @@
+name: "Contoso - Claudy - License verification"
+emails:
+  - name: "Contoso - Claudy - License verification"
+    file: "email.html"
+    envelope from: "edit@this.tld"
+    from: "Contoso <edit@this.tld>"
+    subject: "License verification required"

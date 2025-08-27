@@ -1,0 +1,4 @@
+name: "Contoso - Claudy Endpoint Portal Login"
+pages:
+  - name: "Contoso - Claudy Endpoint Portal Login"
+    file: "landing.html"

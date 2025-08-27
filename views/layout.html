@@ -1,0 +1,55 @@
+{{define "layout"}}
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Phishing Club - Template Viewer</title>
+        <link rel="icon" href="/static/favicon.png" />
+        <link rel="stylesheet" href="/static/css/styles.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            as="font"
+            rel="preload"
+            href="https://fonts.googleapis.com/css2?family=Phudu:wght@400;500;700&family=Titillium+Web:wght@300;400;600;700&&display=swap"
+        />
+        <style>
+            /* Set consistent sizing to prevent layout shift */
+            body {
+                font-size: 16px;
+                line-height: 1.6;
+            }
+            h1 {
+                font-size: 1.5rem;
+                line-height: 1.2;
+            }
+            h2 {
+                font-size: 1.2rem;
+                line-height: 1.2;
+            }
+        </style>
+        <base href="/" />
+    </head>
+    <body>
+        <header>
+            <a href="/"><img src="/static/logo-white.svg" alt="Phishing Club logo" /> </a>
+        </header>
+
+        <div class="app-container">
+            <nav class="sidebar">
+                <div class="sidebar-header">
+                    <h2><a href="/" class="sidebar-title">Templates</a></h2>
+                </div>
+                {{template "nav_tree" .}}
+            </nav>
+
+            <main class="main-content">{{template "content" .}}</main>
+        </div>
+
+        <!-- Footer removed -->
+
+        <script src="/static/js/main.js"></script>
+    </body>
+</html>
+{{end}}

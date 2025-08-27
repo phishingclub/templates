@@ -1,0 +1,7 @@
+name: "Contoso - Claudy - License renewal"
+emails:
+  - name: "Contoso - Claudy - Suite 365 License renewal"
+    file: "email.html"
+    envelope from: "edit@this.tld"
+    from: "Contoso <edit@this.tld>"
+    subject: "License renewal"

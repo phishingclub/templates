@@ -1,0 +1,7 @@
+name: "Contoso - Chat sent a message"
+emails:
+  - name: "Contoso - Chat sent a message"
+    file: "email.html"
+    envelope from: "edit@this.tld"
+    from: "Contoso Chat <edit@this.tld>"
+    subject: "New message"

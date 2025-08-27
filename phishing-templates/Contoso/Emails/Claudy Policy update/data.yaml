@@ -1,0 +1,7 @@
+name: "Contoso - Claudy - Policy update"
+emails:
+  - name: "Contoso - Claudy - Policy update"
+    file: "email.html"
+    envelope from: "edit@this.tld"
+    from: "Contoso <edit@this.tld>"
+    subject: "Policy update"

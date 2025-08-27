@@ -1,0 +1,4 @@
+name: "Contoso - Login 2025"
+pages:
+  - name: "Contoso - Login 2025"
+    file: "landing.html"

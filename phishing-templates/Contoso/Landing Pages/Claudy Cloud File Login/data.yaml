@@ -1,0 +1,4 @@
+name: "Contoso - Claudy Cloud File Login"
+pages:
+  - name: "Contoso - Claudy Cloud File Login"
+    file: "landing.html"

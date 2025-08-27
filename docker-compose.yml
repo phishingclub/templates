@@ -1,0 +1,21 @@
+# Self-contained docker-compose for templates development
+# This allows running just the templates service independently
+
+services:
+  # Templates Service - Phishing Template Editor
+  templates:
+    user: "1000:1000"
+    tty: true
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: /bin/bash -c 'air -c /app/.air.docker.toml'
+    volumes:
+      - .:/app
+    environment:
+      - air_wd=/app
+      - air_conf=/app/.air.docker.toml
+      - TERM=xterm-256color
+    ports:
+      - "8005:8005" # Serve on port 8005
+    restart: on-failure

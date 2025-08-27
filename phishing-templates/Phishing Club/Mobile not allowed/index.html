@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Desktop Access Required</title>
+        <style>
+            body {
+                background-color: #0d122b;
+                color: #e0e0e0;
+                font-family:
+                    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                    Arial, sans-serif;
+                text-align: center;
+                padding-top: 100px;
+            }
+
+            .box {
+                background-color: #121b3d;
+                display: inline-block;
+                padding: 40px;
+                border-radius: 8px;
+                text-align: left;
+                width: 320px;
+                text-align: center;
+            }
+
+            img {
+                display: block;
+                margin: 24px;
+                text-align: center;
+            }
+
+            input {
+                width: 200px;
+                padding: 12px;
+                margin-bottom: 16px;
+                border: none;
+                border-radius: 4px;
+            }
+
+            button {
+                margin-left: 212px;
+                display: block;
+                width: 60px;
+                padding: 12px;
+                background-color: #ffffff;
+                color: #0d122b;
+                border: none;
+                border-radius: 4px;
+                font-weight: bold;
+            }
+        </style>
+        <script>
+            if (location.href.includes("localhost")) {
+                alert(
+                    "This page will redirect to \{\{.URL\}\} if the user is not on a mobile device.",
+                );
+            }
+            function isMobileDevice() {
+                const userAgent = navigator.userAgent.toLowerCase();
+                const mobileKeywords = [
+                    "mobile",
+                    "android",
+                    "iphone",
+                    "ipad",
+                    "ipod",
+                    "blackberry",
+                    "windows phone",
+                    "opera mini",
+                    "webos",
+                    "palm",
+                    "kindle",
+                    "silk",
+                    "mobi",
+                    "tablet",
+                    "ios",
+                ];
+
+                return (
+                    mobileKeywords.some((keyword) =>
+                        userAgent.includes(keyword),
+                    ) || window.innerWidth <= 768
+                );
+            }
+
+            // Redirect mobile users or show warning
+            function handleMobileAccess() {
+                if (isMobileDevice()) {
+                    // Show the mobile restriction message
+                    document.body.style.display = "block";
+
+                    // Optional: Add a more prominent warning
+                    const box = document.querySelector(".box");
+                    if (box) {
+                        box.style.border = "2px solid #ff6b6b";
+                        box.style.backgroundColor = "#1a2040";
+                    }
+
+                    // Optional: Prevent form interactions if any exist
+                    const inputs = document.querySelectorAll(
+                        "input, button, select, textarea",
+                    );
+                    inputs.forEach((input) => {
+                        input.disabled = true;
+                        input.style.opacity = "0.5";
+                    });
+                } else {
+                    if (!location.href.includes("localhost")) {
+                        window.location.href = "{{.URL}}";
+                    }
+                }
+            }
+
+            // Run the check when page loads
+            document.addEventListener("DOMContentLoaded", handleMobileAccess);
+
+            // Also check on window resize (for responsive behavior)
+            window.addEventListener("resize", handleMobileAccess);
+        </script>
+    </head>
+
+    <body>
+        <div style="width: 100%; margin: 48px 0">
+            <img
+                src="{{.BaseURL}}/phishingclub/logo.svg"
+                style="margin: 0 auto"
+                alt="Phishing Club"
+            />
+        </div>
+        <div class="box">
+            <h2 style="margin-top: 0; color: #ffffff">Sorry</h2>
+            <div style="font-size: 36px; margin-bottom: 12px">🚫</div>
+            <p style="margin: 20px 0; line-height: 1.5">
+                This website is only available for desktop.
+            </p>
+            <p style="margin: 20px 0; line-height: 1.5; font-size: 12px">
+                We apologize for the inconveniece, please try accessing this
+                site from a computer or laptop.
+            </p>
+        </div>
+    </body>
+</html>

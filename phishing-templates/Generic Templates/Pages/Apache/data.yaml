@@ -1,0 +1,4 @@
+name: "apache2-default-page"
+pages:
+  - name: "Apache2 - Default page"
+    file: "index.html"

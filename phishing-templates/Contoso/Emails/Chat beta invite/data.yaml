@@ -1,0 +1,7 @@
+name: "Contoso - Chat beta invite"
+emails:
+  - name: "Contoso - Chat beta invite"
+    file: "email.html"
+    envelope from: "edit@this.tld"
+    from: "Contoso Chat <edit@this.tld>"
+    subject: "Beta invite"

@@ -1,0 +1,7 @@
+name: "Contoso - Claudy Compliance training"
+emails:
+  - name: "Contoso - Claudy - Compliance training"
+    file: "email.html"
+    envelope from: "edit@this.tld"
+    from: "Contoso <edit@this.tld>"
+    subject: "Compliance training"

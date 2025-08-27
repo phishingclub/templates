@@ -1,0 +1,7 @@
+name: "Contoso - PIM activated"
+emails:
+  - name: "Contoso - PIM activated"
+    file: "email.html"
+    envelope from: "edit@this.tld"
+    from: "Contoso <edit@this.tld>"
+    subject: "PIM activated"

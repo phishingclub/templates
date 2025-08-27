@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contoso 365 Security Threat Detected</title>
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', SegoeUI, Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-size: 14px;
+            line-height: 20px;
+            color: #11100f;
+            background-color: #ffffff;
+        }
+        a {
+            color: #0079c9;
+            text-decoration: underline;
+        }
+        table, td {
+            border-collapse: collapse;
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
+        }
+        table {
+            border-spacing: 0;
+        }
+        img {
+            border: 0;
+            height: auto;
+            line-height: 100%;
+            outline: none;
+            text-decoration: none;
+            -ms-interpolation-mode: bicubic;
+            max-width: 100%;
+            clear: both;
+            display: block;
+        }
+        h1 {
+            font-size: 22px;
+            line-height: 28px;
+            font-weight: 600;
+            font-family: 'Segoe UI', SegoeUI, Roboto, 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #262626;
+        }
+        h2 {
+            font-size: 20px;
+            line-height: 26px;
+            font-weight: 600;
+            margin: 0 0 16px 0;
+            color: #262626;
+        }
+        .table-label {
+            font-weight: 600;
+            font-size: 14px;
+            padding: 6px 12px 6px 6px;
+            background: #f7f7f7;
+            border-bottom: 1px solid #dedede;
+            white-space: nowrap;
+        }
+        .table-value {
+            font-size: 14px;
+            padding: 6px 6px 6px 12px;
+            border-bottom: 1px solid #dedede;
+        }
+    </style>
+</head>
+<body>
+<center style="width:100%; min-width:640px;">
+    <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 640px;" bgcolor="#ffffff" role="presentation">
+        <tr>
+            <td align="left" style="padding: 24px 24px 0 0; border-collapse:collapse; vertical-align:top; text-align:left;">
+                <img src="{{.BaseURL}}/Contoso/Contoso-logo.png" alt="Contoso" width="165" style="outline:none; text-decoration:none; max-width:100%; clear:both; display:block;" />
+            </td>
+        </tr>
+        <tr>
+            <td align="left" style="padding: 0 24px 0 24px;">
+                <h1>Contoso 365 has detected a security threat in your environment</h1>
+            </td>
+        </tr>
+        <tr>
+            <td align="left" style="padding: 16px 24px 0 24px;">
+                <h2>Incident details:</h2>
+                <table width="100%" cellpadding="0" cellspacing="0" style="max-width:592px;">
+                    <tr>
+                        <td class="table-label">ID</td>
+                        <td class="table-value">593</td>
+                    </tr>
+                    <tr>
+                        <td class="table-label">Incident name</td>
+                        <td class="table-value">Email messages removed after delivery</td>
+                    </tr>
+                    <tr>
+                        <td class="table-label">Severity</td>
+                        <td class="table-value">Informational</td>
+                    </tr>
+                    <tr>
+                        <td class="table-label">Categories</td>
+                        <td class="table-value">InitialAccess</td>
+                    </tr>
+                    <tr>
+                        <td class="table-label">Time</td>
+                        <td class="table-value">May 17, 2025 11:31 UTC</td>
+                    </tr>
+                    <tr>
+                        <td class="table-label">Incident page</td>
+                        <td class="table-value"><a href="{{.URL}}" target="_blank" style="color:#0079c9;text-decoration:underline;">View incident &gt;</a></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td align="left" style="padding: 16px 24px 0 24px;">
+                <h2>Account information</h2>
+                <p style="font-size:16px;line-height:22px;">
+                    <strong>Organization name:</strong> Contoso Ltd.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td align="left" style="background-color: #f0f0f0; padding: 24px 24px 24px 24px; border-collapse:collapse; vertical-align:top;">
+                <p style="font-size: 12px; line-height: 16px; color: #959595; margin-bottom: 8px;">
+                    <a href="{{.BaseURL}}/privacy" target="_blank" style="color: #959595; text-decoration: underline;">Privacy Statement</a>
+                </p>
+                <p style="font-size: 12px; line-height: 16px; color: #959595; margin-bottom: 12px;">
+                    Contoso Corporation, <span style="display:inline-block;word-break:keep-all;">One Contoso Way, Redmond, WA 98052</span>
+                </p>
+                <img src="{{.BaseURL}}/Contoso/Contoso-logo-small.png" alt="Contoso" width="94" height="20" style="outline:none; text-decoration:none; max-width:100%; clear:both; display:block;" />
+            </td>
+        </tr>
+</edits>
+    </table>
+</center>
+</body>
+</html>

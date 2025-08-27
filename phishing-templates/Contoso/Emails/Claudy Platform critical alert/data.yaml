@@ -1,0 +1,7 @@
+name: "Contoso - Claudy - Platform critical alert"
+emails:
+  - name: "Contoso - Claudy - Platform critical alert"
+    file: "email.html"
+    envelope from: "edit@this.tld"
+    from: "Contoso Security <edit@this.tld>"
+    subject: "Critical alert"

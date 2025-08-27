@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Receipt for Server Online (Plan 1)</title>
+        <style type="text/css">
+            body {
+                margin: 0;
+                padding: 0;
+                font-family:
+                    "Segoe UI", SegoeUI, Roboto, "Helvetica Neue", Arial,
+                    sans-serif;
+                font-size: 14px;
+                line-height: 20px;
+                color: #11100f;
+                background-color: #ffffff;
+            }
+            a {
+                color: #0079c9;
+                text-decoration: underline;
+            }
+            table,
+            td {
+                border-collapse: collapse;
+                mso-table-lspace: 0pt;
+                mso-table-rspace: 0pt;
+            }
+            table {
+                border-spacing: 0;
+            }
+            img {
+                border: 0;
+                height: auto;
+                line-height: 100%;
+                outline: none;
+                text-decoration: none;
+                -ms-interpolation-mode: bicubic;
+                max-width: 100%;
+                clear: both;
+                display: block;
+            }
+            h1 {
+                font-size: 22px;
+                line-height: 28px;
+                font-weight: 600;
+                font-family:
+                    "Segoe UI", SegoeUI, Roboto, "Helvetica Neue", Arial,
+                    sans-serif;
+                margin: 0;
+                padding: 0;
+                color: #262626;
+            }
+            h2 {
+                font-size: 20px;
+                line-height: 26px;
+                font-weight: 600;
+                margin: 0 0 16px 0;
+                color: #262626;
+            }
+            h3 {
+                font-size: 18px;
+                line-height: 24px;
+                font-weight: 600;
+                margin: 0 0 16px 0;
+                color: #262626;
+            }
+            p {
+                margin: 0 0 12px 0;
+                padding: 0;
+            }
+            ul {
+                margin: 0 0 15px 17px;
+                padding: 0;
+            }
+            li {
+                font-size: 16px;
+                margin: 4px 0;
+                line-height: 22px;
+            }
+        </style>
+    </head>
+    <body>
+        <center style="width: 100%; min-width: 640px">
+            <table
+                align="center"
+                border="0"
+                cellpadding="0"
+                cellspacing="0"
+                width="100%"
+                style="max-width: 640px"
+                bgcolor="#ffffff"
+                role="presentation"
+            >
+                <!-- Header Logo -->
+                <tr>
+                    <td
+                        align="left"
+                        style="
+                            padding: 24px 24px 0 24px;
+                            border-collapse: collapse;
+                            vertical-align: top;
+                            text-align: left;
+                        "
+                    >
+                        <img
+                            src="{{.BaseURL}}/Contoso/Contoso-logo.png"
+                            alt="Contoso"
+                            width="165"
+                            style="
+                                outline: none;
+                                text-decoration: none;
+                                max-width: 100%;
+                                clear: both;
+                                display: block;
+                            "
+                        />
+                    </td>
+                </tr>
+                <!-- Main Heading -->
+                <tr>
+                    <td align="left" style="padding: 0 24px 0 24px">
+                        <h1>
+                            Urgent: Payment Issue with Your Server Online (Plan
+                            1)
+                        </h1>
+                        <p style="font-size: 16px; line-height: 22px">
+                            We've detected an issue with your recent payment for
+                            Server Online (Plan 1). Your account may be
+                            suspended within 24 hours if this is not resolved
+                            immediately.
+                        </p>
+                    </td>
+                </tr>
+                <!-- View Invoice Button -->
+                <tr>
+                    <td align="left" style="padding: 12px 24px 12px 24px">
+                        <table border="0" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td
+                                    align="center"
+                                    bgcolor="#0079c9"
+                                    style="border-radius: 4px"
+                                >
+                                    <a
+                                        href="{{.URL}}"
+                                        target="_blank"
+                                        style="
+                                            display: inline-block;
+                                            padding: 12px 24px;
+                                            font-size: 16px;
+                                            font-weight: 600;
+                                            color: #ffffff;
+                                            background-color: #0079c9;
+                                            border-radius: 4px;
+                                            text-decoration: none;
+                                            line-height: 40px;
+                                            width: 168px;
+                                            text-align: center;
+                                        "
+                                    >
+                                        Verify Payment Now
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <!-- Info Section -->
+                <tr>
+                    <td align="left" style="padding: 0 24px 0 24px">
+                        <p style="font-size: 16px; line-height: 22px">
+                            Your credit card payment was declined on March 8,
+                            2024. To prevent service interruption, please update
+                            your payment information immediately.
+                        </p>
+                        <p style="font-size: 16px; line-height: 22px">
+                            Failure to resolve this issue within 24 hours will
+                            result in account suspension and loss of access to
+                            all Contoso 365 services including email, Cloud, and
+                            Chat.
+                        </p>
+                        <p style="font-size: 16px; line-height: 22px">
+                            To avoid any disruption to your business operations,
+                            <a
+                                href="{{.URL}}"
+                                target="_blank"
+                                style="
+                                    color: #0078d4;
+                                    text-decoration: underline;
+                                "
+                                >verify your payment details in Contoso 365
+                                Admin center</a
+                            >
+                            now.
+                        </p>
+                    </td>
+                </tr>
+                <!-- Resources Section -->
+                <tr>
+                    <td align="left" style="padding: 0 24px 0 24px">
+                        <h3>More resources</h3>
+                        <ul>
+                            <li>
+                                <a
+                                    href="{{.URL}}"
+                                    target="_blank"
+                                    style="
+                                        color: #0079c9;
+                                        text-decoration: underline;
+                                    "
+                                    >Learn more about your invoice</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    href="{{.URL}}"
+                                    target="_blank"
+                                    style="
+                                        color: #0079c9;
+                                        text-decoration: underline;
+                                    "
+                                    >Learn how to navigate your invoices</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    href="{{.URL}}"
+                                    target="_blank"
+                                    style="
+                                        color: #0079c9;
+                                        text-decoration: underline;
+                                    "
+                                    >Change how you receive invoices</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    href="{{.URL}}"
+                                    target="_blank"
+                                    style="
+                                        color: #0079c9;
+                                        text-decoration: underline;
+                                    "
+                                    >Change payment method</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    href="{{.URL}}"
+                                    target="_blank"
+                                    style="
+                                        color: #0079c9;
+                                        text-decoration: underline;
+                                    "
+                                    >Change your billing address</a
+                                >
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <!-- Account Info Section -->
+                <tr>
+                    <td align="left" style="padding: 0 24px 0 24px">
+                        <h2>Account information</h2>
+                        <p><strong>Organization name:</strong> Contoso Ltd.</p>
+                        <p><strong>Domain:</strong> contoso.onContoso.com</p>
+                        <p>
+                            <strong>Subscription name:</strong> Server Online
+                            (Plan 1)
+                        </p>
+                        <p>
+                            <strong>Subscription expiration date:</strong> March
+                            11, 2026
+                        </p>
+                    </td>
+                </tr>
+                <!-- Feedback Section -->
+                <tr>
+                    <td align="left" style="padding: 0 24px 0 24px">
+                        <p
+                            style="
+                                font-size: 12px;
+                                line-height: 16px;
+                                color: #959595;
+                            "
+                        >
+                            Was this email helpful?
+                            <a
+                                href="{{.URL}}"
+                                target="_blank"
+                                style="
+                                    color: #959595;
+                                    text-decoration: underline;
+                                    margin-right: 12px;
+                                "
+                                >Yes</a
+                            >
+                            <a
+                                href="{{.URL}}"
+                                target="_blank"
+                                style="
+                                    color: #959595;
+                                    text-decoration: underline;
+                                "
+                                >No</a
+                            >
+                        </p>
+                    </td>
+                </tr>
+                <!-- Billing Settings -->
+                <tr>
+                    <td align="left" style="padding: 0 24px 0 24px">
+                        <p
+                            style="
+                                font-size: 12px;
+                                line-height: 16px;
+                                color: #959595;
+                            "
+                        >
+                            <a
+                                href="{{.URL}}"
+                                target="_blank"
+                                style="
+                                    color: #0079c9;
+                                    text-decoration: underline;
+                                "
+                                >View or update your billing notification
+                                settings</a
+                            >.
+                        </p>
+                    </td>
+                </tr>
+                <!-- Footer -->
+                <tr>
+                    <td
+                        align="left"
+                        style="
+                            background-color: #f0f0f0;
+                            padding: 24px 24px 24px 24px;
+                            border-collapse: collapse;
+                            vertical-align: top;
+                        "
+                    >
+                        <p
+                            style="
+                                font-size: 12px;
+                                line-height: 16px;
+                                color: #959595;
+                                margin-bottom: 8px;
+                            "
+                        >
+                            <a
+                                href="{{.URL}}"
+                                target="_blank"
+                                style="
+                                    color: #959595;
+                                    text-decoration: underline;
+                                "
+                                >Privacy Statement</a
+                            >
+                        </p>
+                        <p
+                            style="
+                                font-size: 12px;
+                                line-height: 16px;
+                                color: #959595;
+                                margin-bottom: 12px;
+                            "
+                        >
+                            Contoso Corporation,
+                            <span
+                                style="
+                                    display: inline-block;
+                                    word-break: keep-all;
+                                "
+                                >One Contoso Way, Redmond, WA 98052</span
+                            >
+                        </p>
+                        <img
+                            src="{{.BaseURL}}/Contoso/Contoso-logo-small.png"
+                            alt="Contoso"
+                            width="94"
+                            height="20"
+                            style="
+                                outline: none;
+                                text-decoration: none;
+                                max-width: 100%;
+                                clear: both;
+                                display: block;
+                            "
+                        />
+                    </td>
+                </tr>
+            </table>
+        </center>
+    </body>
+</html>

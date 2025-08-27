@@ -1,0 +1,276 @@
+# Phishing Template Workbench
+
+**Developer-Focused Phishing Template Development Environment**
+
+![Web Application Preview](docs/screenshot-1.png)
+
+This tool enhances the development workflow for security professionals creating phishing simulation templates. It provides an preview environment where developers can:
+
+- **Live Preview Templates**: View how templates render with test data
+- **Variable Substitution**: See template variables like `{{.BaseURL}}`, `{{.Email}}`, `{{.FirstName}}` automatically populated with sample values
+- **Naive Responsive Testing**: Preview templates across different device sizes (mobile, tablet, desktop)
+- **Asset Management**: Automatically resolve template assets with intelligent fallback to global asset directories
+- **Quick Iteration**: Copy processed HTML, download template folders, and export entire template collections
+
+Built specifically for phishing template developers who need to create, test, and refine social engineering simulation content before deployment in security awareness campaigns.
+
+Compatible with [Phishing Club](https://github.com/phishingclub/phishingclub) and GoPhish.
+
+## ⚠️ Security Warning
+
+**This application is meant ONLY for local development use. Never expose it publicly.**
+
+It is build upon AI slop, so keep it local
+
+## Quick Start
+
+1. **Clone and Start**
+   ```bash
+   git clone https://github.com/phishingclub/templates.git
+   cd templates
+   docker-compose up --build
+   ```
+
+2. **Create Your First Template in your favorite IDE**
+   ```bash
+   mkdir -p phishing-templates/generic-service/login-alert
+   # Add your email.html file
+   ```
+
+3. **Preview**
+   - Open `http://localhost:8005`
+   - Navigate to your template
+   - Click on `email.html` to preview
+
+## Installation Options
+
+### Option 1: Docker Compose (Recommended)
+
+```bash
+git clone https://github.com/phishingclub/templates.git
+cd templates
+docker-compose up --build
+```
+
+The Docker setup includes hot-reloading for development.
+
+### Option 2: Local Go Installation
+
+```bash
+git clone https://github.com/phishingclub/templates.git
+cd templates
+go build
+./templates
+```
+
+**Options:**
+- `-port 8080` - Change server port (default: 8080)
+- `-templates ./my-templates` - Specify templates directory
+- `--export` - Export all templates to ZIP and exit
+
+## Template Structure
+
+### Basic Structure
+```
+phishing-templates/
+├── assets/                    # Global generic assets (available to all templates)
+│   ├── images/
+│   │   └── common-icons.png
+│   └── css/
+│       └── shared-styles.css
+├── private/                   # Client-specific templates (DO NOT COMMIT)
+│   └── client-company/
+│       ├── data.yaml
+│       └── branded-campaign/
+│           ├── email.html
+│           └── assets/
+│               └── client-logo.png
+└── generic-service/           # Generic templates safe to commit
+    ├── data.yaml             # Template metadata (required)
+    └── login-alert/
+        ├── email.html        # Email template
+        ├── landing.html      # Landing page (optional)
+        └── assets/           # Template-specific assets
+            └── generic-logo.png
+```
+
+### data.yaml
+Each template should contain a `data.yaml`, the file contains data that is used
+when importing the template into Phishing Club.
+
+By default all templates should be named Template - Name so they can be easily copied and used. When an import happens it will overwrite any existing templates with the same name. This includes the assets.
+
+
+```yaml
+emails:
+  - name: "Generic Service - Login Alert"
+    file: "email.html"
+    envelope_from: "security@service.com"
+    from: "IT Security <security@service.com>"
+    subject: "Unusual Login Activity Detected"
+
+landing_pages:
+  - name: "Generic Service Login Page"
+    file: "landing.html"
+```
+
+## Template Variables
+
+Some template variables are automatically populated with test data:
+
+| Variable | Example Value | Description |
+|----------|---------------|-------------|
+| `{{.URL}}` | `https://example.com/phishing-link` | Phishing URL |
+| `{{.BaseURL}}` | `/templates/company/campaign` | Base URL for assets |
+| `{{.FirstName}}` | `John` | Recipient's first name |
+| `{{.LastName}}` | `Doe` | Recipient's last name |
+| `{{.Email}}` | `john.doe@example.com` | Recipient's email |
+| `{{.Position}}` | `IT Manager` | Job position |
+| `{{.CompanyName}}` | `Acme Corporation` | Company name |
+| `{{.From}}` | `Security Team <security@company.com>` | Sender address |
+| `{{.Tracker}}` | `https://track.example.com/opened/id` | Email open tracking |
+| `{{.TrackingURL}}` | `https://track.example.com/clicked/id` | Link click tracking |
+| `{{.RId}}` | `1234567890` | Record ID |
+
+## Included Examples
+
+This repository comes with a collection of phishing example templates:
+
+Any example requires modification before use.
+
+Use the `Export All` and import them into Phishing Club.
+
+
+### Global Assets
+Place shared assets in the `assets/` directory:
+```
+assets/
+├── images/
+│   ├── generic-icons.png
+│   └── security-symbols/
+└── css/
+    └── email-base.css
+```
+
+Use in templates: `{{.BaseURL}}/images/generic-icons.png`
+
+### Template-Specific Assets
+Place template-specific assets in the template's directory:
+```
+generic-service/campaign/
+├── email.html
+└── assets/
+    └── campaign-banner.png
+```
+
+Use in templates: `{{.BaseURL}}/assets/campaign-banner.png`
+
+The system automatically falls back to global assets if local assets aren't found.
+
+## Features
+
+### Preview Controls
+- **Device Presets**: Mobile (375×812), Tablet (768×1024), Desktop (1366×768), Full viewport
+- **Custom Width**: Use the slider to test any width from 320px to 1920px
+- **Copy HTML**: Get the processed HTML with variables replaced
+- **New Window**: Open template in a new tab for testing
+
+### Export & Download
+- **Export All**: Download all templates and assets in GoPhish/Phishing Club format
+- **Download Folders**: Download individual template directories
+- **Structured Output**: Organized ZIP files ready for import
+
+### Development Workflow
+1. Create generic templates in `phishing-templates/`
+2. Put client-specific templates in `private/` (never commit)
+3. Edit templates in your favorite IDE
+4. Save changes (auto-reload in Docker)
+5. Preview in browser
+6. Test across different devices and email clients
+7. Copy processed HTML for testing
+8. Export when ready for deployment
+
+## Best Practices
+
+### 1. Keep Templates Generic and Secure
+- **Never commit company names or branded assets** to the main templates directory
+- Use the `private/` folder for client-specific templates and assets
+- Keep all templates in `phishing-templates/` as generic examples
+- Use placeholder names like "Generic Service", "Example Corp", or "Your Organization"
+- Replace specific branding with generic equivalents before committing
+
+**Example Structure:**
+```
+phishing-templates/
+├── generic-bank/           ✅ Safe to commit
+│   └── login-alert/
+├── example-cloud/          ✅ Safe to commit
+│   └── security-notice/
+└── private/                ❌ DO NOT COMMIT
+    ├── actual-client/
+    └── real-company/
+```
+
+### 2. Email HTML/CSS Limitations
+Emails are not websites. Understanding email client limitations is crucial.
+
+**Recommended Resources:**
+- [Can I Email](https://www.caniemail.com/) - CSS support across email clients
+- [Email on Acid](https://www.emailonacid.com/blog/article/email-development/) - Best practices
+- [Litmus](https://litmus.com/blog/a-guide-to-bulletproof-buttons-in-email-design/) - Email development guides
+
+### 3. Progressive Enhancement Testing Strategy
+Test from the worst email client up to ensure broad compatibility:
+
+1. **Start with the worst**: Test in Outlook (Classic) 2016/2019 (Windows)
+2. **Move to mobile**: Apple Mail (iOS), Gmail (Android)
+3. **Web clients**: Gmail (Web), Outlook (Web), Yahoo Mail
+4. **Modern clients**: Apple Mail (macOS), Thunderbird
+
+**Testing Workflow:**
+- Design for Outlook's limited rendering engine first
+- Enhance progressively for better clients
+- Always test with images disabled
+- Verify dark mode compatibility
+- Test forwarding behavior (styles often get stripped)
+
+**Key Testing Points:**
+- Button rendering across clients
+- Font fallbacks when custom fonts fail
+- Layout integrity without images
+- Text readability in dark mode
+- Mobile responsiveness (especially Gmail mobile)
+
+## Restrictions
+
+The following directory names are reserved and cannot be used in the root template folder:
+- `api`
+- `preview`
+- `raw`
+- `static`
+- `private` (recommended for client-specific content)
+
+## Template Inspiration
+
+There is a lot of excellent starting points and examples for email templates:
+- [Mailgun Transactional Templates](https://github.com/mailgun/transactional-email-templates/)
+- [SendGrid Email Templates](https://github.com/sendgrid/email-templates)
+- [Konsav Email Templates](https://github.com/konsav/email-templates/)
+- [ColorlibHQ Email Templates](https://github.com/ColorlibHQ/email-templates)
+- [MailPace Templates](https://github.com/mailpace/templates)
+- [Cerberus Email Templates](https://github.com/emailmonday/Cerberus)
+- [EmailOctopus Templates](https://github.com/threeheartsdigital/emailoctopus-templates)
+
+## Contributing
+
+Contributions welcome for:
+- New template formats
+- Additional GoPhish variable support
+- Enhanced preview features
+- Bug fixes and improvements
+
+Do not make pull requests with Microsoft, Facebook or similar, instead use a ficticous name and logo that can be replaced.
+
+## Disclaimer
+
+**This tool is intended for authorized security testing and awareness training only. Users are responsible for ensuring compliance with applicable laws and organizational policies.**

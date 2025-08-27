@@ -1,0 +1,7 @@
+name: "Contoso - Claudy - Device login alert"
+emails:
+  - name: "Contoso - Claudy - Device login alert"
+    file: "email.html"
+    envelope from: "edit@this.tld"
+    from: "Contoso Security <edit@this.tld>"
+    subject: "Was this your sign-in"

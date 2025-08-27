@@ -1,0 +1,7 @@
+name: "Contoso - New recommendation"
+emails:
+  - name: "Contoso - New recommendation"
+    file: "email.html"
+    envelope from: "edit@this.tld"
+    from: "Contoso <edit@this.tld>"
+    subject: "New recommendation"

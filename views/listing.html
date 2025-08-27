@@ -1,0 +1,68 @@
+{{define "content"}}
+<div class="directory-listing">
+    <div class="breadcrumb">
+        <ul>
+            <li><a href="/">root</a></li>
+            {{if not .IsRoot}} {{$parts := split .Path "/"}} {{$fullPath := ""}}
+            {{range $index, $part := $parts}} {{if $part}} {{$fullPath = join
+            $fullPath $part "/"}}
+            <li><a href="/{{$fullPath}}">{{$part}}</a></li>
+            {{end}} {{end}} {{end}}
+        </ul>
+    </div>
+
+    <!-- Directory header removed - using breadcrumb navigation instead -->
+
+    <div class="directory-contents">
+        {{if or .Dirs .Files}}
+        <div class="file-browser">
+            {{range .Dirs}}
+            <div class="browser-item directory">
+                <a href="/{{.Path}}">
+                    <span class="icon">📁</span>
+                    <span class="name">{{.Name}}</span>
+                </a>
+            </div>
+            {{end}} {{range .Files}}
+            <div class="browser-item file">
+                {{if eq (ext .Name) ".html"}}
+                <a href="/preview/{{.Path}}">
+                    <span class="icon">📄</span>
+                    <span class="name">{{.Name}}</span>
+                </a>
+                {{else if or (eq (ext .Name) ".jpg") (eq (ext .Name) ".jpeg")
+                (eq (ext .Name) ".png") (eq (ext .Name) ".gif") (eq (ext .Name)
+                ".svg")}}
+                <a
+                    href="/templates/{{.Path}}"
+                    target="_blank"
+                    class="file-with-thumbnail"
+                >
+                    <div class="image-thumbnail">
+                        <img
+                            src="/templates/{{.Path}}"
+                            alt="{{.Name}}"
+                            loading="lazy"
+                        />
+                    </div>
+                    <span class="name">{{.Name}}</span>
+                </a>
+                {{else}}
+                <a href="/raw/{{.Path}}" target="_blank">
+                    <span class="icon">
+                        {{if eq (ext .Name) ".pdf"}}📑 {{else}}📄 {{end}}
+                    </span>
+                    <span class="name">{{.Name}}</span>
+                </a>
+                {{end}}
+            </div>
+            {{end}} {{if and (not .Dirs) (not .Files)}}
+            <div class="empty-browser">This directory is empty.</div>
+            {{end}}
+        </div>
+        {{else}}
+        <div class="empty-directory">This directory is empty.</div>
+        {{end}}
+    </div>
+</div>
+{{end}}

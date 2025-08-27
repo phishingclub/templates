@@ -1,0 +1,7 @@
+name: "Contoso - Shared file"
+emails:
+  - name: "Contoso - Shared file"
+    file: "email.html"
+    envelope from: "edit@this.tld"
+    from: "Contoso <edit@this.tld>"
+    subject: "Shared file"

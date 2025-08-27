@@ -1,0 +1,7 @@
+name: "Contoso - Claudy - Chat collaboration workspace invitation"
+emails:
+  - name: "Contoso - Claudy - Chat collaboration workspace invitation"
+    file: "email.html"
+    envelope from: "edit@this.tld"
+    from: "Contoso Chat <edit@this.tld>"
+    subject: "Workspace invitation"

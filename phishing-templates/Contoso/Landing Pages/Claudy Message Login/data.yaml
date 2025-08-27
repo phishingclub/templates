@@ -1,0 +1,4 @@
+name: "Contoso - Claudy Message Login"
+pages:
+  - name: "Contoso - Claudy Message Login"
+    file: "landing.html"

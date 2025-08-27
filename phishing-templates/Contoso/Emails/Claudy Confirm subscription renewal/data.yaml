@@ -1,0 +1,7 @@
+name: "Contoso - Confirm subscription renewal"
+emails:
+  - name: "Contoso - Claudy - Confirm subscription renewal"
+    file: "email.html"
+    envelope from: "edit@this.tld"
+    from: "Contoso <edit@this.tld>"
+    subject: "Subscription renewal"

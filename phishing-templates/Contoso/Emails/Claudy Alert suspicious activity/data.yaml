@@ -1,0 +1,7 @@
+name: "Contoso - Claudy - Suspicious activity"
+emails:
+  - name: "Contoso - Claudy - Suspicious activity"
+    file: "email.html"
+    envelope from: "edit@this.tld"
+    from: "Contoso Security <edit@this.tld>"
+    subject: "Suspicious activity"

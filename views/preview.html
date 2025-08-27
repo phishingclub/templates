@@ -1,0 +1,81 @@
+{{define "content"}}
+<div class="preview-container">
+    <div class="preview-header">
+        <div class="breadcrumb">
+            <a href="{{.ParentPath}}" class="back-link">&larr; Back</a>
+            <h2>{{.Filename}}</h2>
+        </div>
+
+        <div class="preview-controls">
+            <div class="device-selector">
+                <button
+                    class="device-btn"
+                    id="mobile-btn"
+                    data-width="375px"
+                    data-height="812px"
+                    title="iPhone X (375×812)"
+                >
+                    Mobile
+                </button>
+                <button
+                    class="device-btn"
+                    id="tablet-btn"
+                    data-width="768px"
+                    data-height="1024px"
+                    title="iPad (768×1024)"
+                >
+                    Tablet
+                </button>
+                <button
+                    class="device-btn"
+                    id="desktop-btn"
+                    data-width="1366px"
+                    data-height="768px"
+                    title="Laptop (1366×768)"
+                >
+                    Desktop
+                </button>
+                <button
+                    class="device-btn active"
+                    id="full-btn"
+                    data-width="100%"
+                    data-height="100%"
+                    title="Full viewport size"
+                >
+                    Full
+                </button>
+            </div>
+            <div class="width-slider-container">
+                <input
+                    type="range"
+                    min="320"
+                    max="1920"
+                    value="1366"
+                    class="width-slider"
+                    id="widthSlider"
+                    title="Adjust preview width"
+                />
+            </div>
+            <div id="size-display" class="size-display">
+                Viewport: Full size
+            </div>
+
+            <a href="/raw/{{.Path}}" target="_blank" class="new-window-btn">
+                <span class="new-window-icon">⧉</span>
+                <span>New Window</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="preview-frame-outer">
+        <div class="resize-container" id="resizeContainer">
+            <iframe id="preview-frame" class="preview-frame"></iframe>
+        </div>
+    </div>
+
+    <!-- Store content in a hidden script tag to be processed by main.js -->
+    <script data-preview-content type="text/template">
+        {{.Content}}
+    </script>
+</div>
+{{end}}

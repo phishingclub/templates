@@ -1,0 +1,4 @@
+name: "Contoso - Claudy VPN Login"
+pages:
+  - name: "Contoso - Claudy VPN Login"
+    file: "landing.html"

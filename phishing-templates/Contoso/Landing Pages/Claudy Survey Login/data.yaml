@@ -1,0 +1,4 @@
+name: "Contoso - Claudy Survey Login"
+pages:
+  - name: "Contoso - Claudy Survey Login"
+    file: "landing.html"

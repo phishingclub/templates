@@ -1,0 +1,7 @@
+name: "Contoso - Claudy - Admin access request"
+emails:
+  - name: "Contoso - Claudy - Admin access request"
+    file: "email.html"
+    envelope from: "edit@this.tld"
+    from: "Contoso <edit@this.tld>"
+    subject: "Administrative access request pending"

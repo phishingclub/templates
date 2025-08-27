@@ -1,0 +1,7 @@
+name: "Contoso - Claudy - Document approval"
+emails:
+  - name: "Contoso - Claudy - Document approval"
+    file: "email.html"
+    envelope from: "edit@this.tld"
+    from: "Contoso <edit@this.tld>"
+    subject: "Document for approval"

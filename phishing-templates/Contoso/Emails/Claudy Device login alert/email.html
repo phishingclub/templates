@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Contoso Account - Device Login Alert</title>
+    </head>
+    <body
+        style="
+            margin: 0;
+            padding: 0;
+            background-color: #f3f2f1;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #323130;
+        "
+    >
+        <table
+            width="100%"
+            cellpadding="0"
+            cellspacing="0"
+            border="0"
+            style="background-color: #f3f2f1"
+        >
+            <tr>
+                <td align="center" style="padding: 32px 0">
+                    <table
+                        width="600"
+                        cellpadding="0"
+                        cellspacing="0"
+                        border="0"
+                        style="background-color: #fff; border: 1px solid #e1e1e1; max-width: 600px"
+                    >
+                        <!-- Header -->
+                        <tr>
+                            <td
+                                style="
+                                    padding: 18px 24px 12px 24px;
+                                    border-bottom: 1px solid #e1e1e1;
+                                "
+                            >
+                                <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                    <tr>
+                                        <td width="180">
+                                            <img
+                                                src="{{.BaseURL}}/Contoso/Contoso-logo.png"
+                                                alt="Contoso"
+                                                width="180"
+                                                style="display: block"
+                                            />
+                                        </td>
+                                        <td align="right" style="font-size: 14px; color: #323130">
+                                            Contoso Security
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!-- Headline -->
+                        <tr>
+                            <td style="padding: 28px 24px 0 24px">
+                                <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                    <tr>
+                                        <td
+                                            style="
+                                                font-size: 22px;
+                                                font-weight: bold;
+                                                color: #323130;
+                                                padding-bottom: 8px;
+                                            "
+                                        >
+                                            Was this your sign-in?
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size: 14px; color: #323130">
+                                            <br /><br />
+                                            Hi {{.FirstName}},
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!-- Main Message -->
+                        <tr>
+                            <td style="padding: 16px 24px 0 24px">
+                                <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                    <tr>
+                                        <td style="font-size: 14px; color: #323130">
+                                            We noticed a sign-in to your Contoso account
+                                            <b>{{.Email}}</b> from a device we don't recognize. If
+                                            this was you, you can safely ignore this email. If not,
+                                            please review your account activity.
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!-- Device Details -->
+                        <tr>
+                            <td style="padding: 24px 24px 0 24px">
+                                <table
+                                    width="100%"
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="1"
+                                    style="
+                                        border-color: #e1e1e1;
+                                        border-collapse: collapse;
+                                        background-color: #f8f9fa;
+                                    "
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                padding: 10px;
+                                                font-size: 14px;
+                                                color: #323130;
+                                                font-weight: bold;
+                                                width: 140px;
+                                            "
+                                        >
+                                            Device
+                                        </td>
+                                        <td style="padding: 10px; font-size: 14px; color: #323130">
+                                            Windows 10 Laptop
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td
+                                            style="
+                                                padding: 10px;
+                                                font-size: 14px;
+                                                color: #323130;
+                                                font-weight: bold;
+                                            "
+                                        >
+                                            Browser
+                                        </td>
+                                        <td style="padding: 10px; font-size: 14px; color: #323130">
+                                            Edge 120.0
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td
+                                            style="
+                                                padding: 10px;
+                                                font-size: 14px;
+                                                color: #323130;
+                                                font-weight: bold;
+                                            "
+                                        >
+                                            Location
+                                        </td>
+                                        <td style="padding: 10px; font-size: 14px; color: #323130">
+                                            Chicago, IL, USA
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td
+                                            style="
+                                                padding: 10px;
+                                                font-size: 14px;
+                                                color: #323130;
+                                                font-weight: bold;
+                                            "
+                                        >
+                                            IP Address
+                                        </td>
+                                        <td
+                                            style="
+                                                padding: 10px;
+                                                font-size: 14px;
+                                                color: #323130;
+                                                font-family: monospace;
+                                            "
+                                        >
+                                            192.0.2.45
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td
+                                            style="
+                                                padding: 10px;
+                                                font-size: 14px;
+                                                color: #323130;
+                                                font-weight: bold;
+                                            "
+                                        >
+                                            Date
+                                        </td>
+                                        <td style="padding: 10px; font-size: 14px; color: #323130">
+                                            April 18, 2025
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td
+                                            style="
+                                                padding: 10px;
+                                                font-size: 14px;
+                                                color: #323130;
+                                                font-weight: bold;
+                                            "
+                                        >
+                                            Time
+                                        </td>
+                                        <td style="padding: 10px; font-size: 14px; color: #323130">
+                                            09:42 AM (CDT)
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!-- Issues Detected -->
+                        <tr>
+                            <td style="padding: 24px 24px 0 24px">
+                                <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                    <tr>
+                                        <td
+                                            style="
+                                                font-size: 14px;
+                                                color: #323130;
+                                                font-weight: bold;
+                                                padding-bottom: 6px;
+                                            "
+                                        >
+                                            Detected issues:
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size: 14px; color: #323130">
+                                            • Unrecognized device sign-in<br />
+                                            • Location differs from usual activity
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!-- Actions -->
+                        <tr>
+                            <td style="padding: 24px 24px 0 24px">
+                                <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                    <tr>
+                                        <td
+                                            style="
+                                                font-size: 14px;
+                                                color: #323130;
+                                                font-weight: bold;
+                                                padding-bottom: 6px;
+                                            "
+                                        >
+                                            What you can do:
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size: 14px; color: #323130">
+                                            1.
+                                            <a
+                                                href="{{.URL}}"
+                                                style="color: #0078d4; text-decoration: none"
+                                                >Review recent account activity</a
+                                            ><br />
+                                            2. Change your password if you did not recognize this
+                                            sign-in
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!-- Security Tip -->
+                        <tr>
+                            <td style="padding: 24px 24px 0 24px">
+                                <table
+                                    width="100%"
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                    style="
+                                        background-color: #f3f2f1;
+                                        border-left: 4px solid #0078d4;
+                                    "
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                padding: 14px 16px;
+                                                font-size: 13px;
+                                                color: #323130;
+                                            "
+                                        >
+                                            <span style="font-weight: bold">Security tip:</span> For
+                                            extra protection, enable two-step verification on your
+                                            Contoso account.
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!-- Footer -->
+                        <tr>
+                            <td style="padding: 24px 24px 24px 24px; border-top: 1px solid #e1e1e1">
+                                <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                    <tr>
+                                        <td style="font-size: 12px; color: #605e5c">
+                                            This security notification was sent to {{.Email}} to
+                                            help protect your Contoso account.<br />
+                                            Contoso Corporation, One Contoso Way, Redmond, WA
+                                            98052<br />
+                                            <a
+                                                href="{{.URL}}"
+                                                style="color: #0078d4; text-decoration: none"
+                                                >Account Security</a
+                                            >
+                                            |
+                                            <a
+                                                href="{{.URL}}"
+                                                style="color: #0078d4; text-decoration: none"
+                                                >Privacy</a
+                                            >
+                                            |
+                                            <a
+                                                href="{{.URL}}"
+                                                style="color: #0078d4; text-decoration: none"
+                                                >Unsubscribe</a
+                                            >
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td
+                                            style="
+                                                font-size: 11px;
+                                                color: #605e5c;
+                                                padding-top: 10px;
+                                            "
+                                        >
+                                            © Contoso Corporation. All rights reserved.
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>

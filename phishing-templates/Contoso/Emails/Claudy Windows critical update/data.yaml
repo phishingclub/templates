@@ -1,0 +1,7 @@
+name: "Contoso - Claudy - Windows critical update"
+emails:
+  - name: "Contoso - Claudy - Windows critical update"
+    file: "email.html"
+    envelope from: "edit@this.tld"
+    from: "Contoso Security <edit@this.tld>"
+    subject: "Critical update"

@@ -1,0 +1,140 @@
+{{define "nav_tree"}}
+<div class="export-button-container">
+    <button id="exportButton" class="export-btn" title="Export all templates and assets">
+        📤 Export All
+    </button>
+</div>
+<div class="navigation-tree" id="navTree">
+    <!-- Server-side rendered navigation tree -->
+    {{$currentPath := .CurrentPath}}
+    {{range .NavTree}}
+    <div class="tree-node{{if .IsOpen}} expanded{{end}}{{if eq $currentPath .Path}} active{{end}}" data-path="{{.Path}}">
+        {{if .IsDir}}
+        <div class="tree-node-header">
+            <span class="tree-node-toggle">{{if .IsOpen}}▼{{else}}►{{end}}</span>
+            <a href="/{{.Path}}" class="node-link" title="{{.Name}}">
+                <span class="tree-node-icon">📁</span>
+                <span class="tree-node-label">{{.Name}}</span>
+            </a>
+        </div>
+        {{else}}
+        <div class="tree-node-header">
+            <span class="tree-node-toggle" style="visibility: hidden;"></span>
+            {{if eq (ext .Name) ".html"}}
+            <a href="/preview/{{.Path}}" class="node-link" title="{{.Name}}">
+                <span class="tree-node-icon">📄</span>
+                <span class="tree-node-label">{{.Name}}</span>
+            </a>
+            {{else}}
+            <a href="/templates/{{.Path}}" class="node-link" target="_blank" title="{{.Name}}">
+                <span class="tree-node-icon">
+                    {{if eq (ext .Name) ".jpg"}}🖼️
+                    {{else if eq (ext .Name) ".jpeg"}}🖼️
+                    {{else if eq (ext .Name) ".png"}}🖼️
+                    {{else if eq (ext .Name) ".gif"}}🖼️
+                    {{else if eq (ext .Name) ".svg"}}🖼️
+                    {{else if eq (ext .Name) ".pdf"}}📑
+                    {{else}}📄
+                    {{end}}
+                </span>
+                <span class="tree-node-label">{{.Name}}</span>
+            </a>
+            {{end}}
+        </div>
+        {{end}}
+        {{if and .IsDir .IsOpen}}
+        <div class="tree-node-children">
+            {{range .Children}}
+            <div class="tree-node{{if .IsOpen}} expanded{{end}}{{if eq $currentPath .Path}} active{{end}}" data-path="{{.Path}}">
+                {{if .IsDir}}
+                <div class="tree-node-header">
+                    <span class="tree-node-toggle">{{if .IsOpen}}▼{{else}}►{{end}}</span>
+                    <a href="/{{.Path}}" class="node-link" title="{{.Name}}">
+                        <span class="tree-node-icon">📁</span>
+                        <span class="tree-node-label">{{.Name}}</span>
+                    </a>
+                </div>
+                {{else}}
+                <div class="tree-node-header">
+                    <span class="tree-node-toggle" style="visibility: hidden;"></span>
+                    {{if eq (ext .Name) ".html"}}
+                    <a href="/preview/{{.Path}}" class="node-link" title="{{.Name}}">
+                        <span class="tree-node-icon">📄</span>
+                        <span class="tree-node-label">{{.Name}}</span>
+                    </a>
+                    {{else}}
+                    <a href="/templates/{{.Path}}" class="node-link" target="_blank" title="{{.Name}}">
+                        <span class="tree-node-icon">
+                            {{if eq (ext .Name) ".jpg"}}🖼️
+                            {{else if eq (ext .Name) ".jpeg"}}🖼️
+                            {{else if eq (ext .Name) ".png"}}🖼️
+                            {{else if eq (ext .Name) ".gif"}}🖼️
+                            {{else if eq (ext .Name) ".svg"}}🖼️
+                            {{else if eq (ext .Name) ".pdf"}}📑
+                            {{else}}📄
+                            {{end}}
+                        </span>
+                        <span class="tree-node-label">{{.Name}}</span>
+                    </a>
+                    {{end}}
+                </div>
+                {{end}}
+                {{if and .IsDir .IsOpen}}
+                <div class="tree-node-children">
+                    {{template "nav_tree_children" dict "Items" .Children "CurrentPath" $currentPath}}
+                </div>
+                {{end}}
+            </div>
+            {{end}}
+        </div>
+        {{end}}
+    </div>
+    {{end}}
+</div>
+{{end}}
+
+{{define "nav_tree_children"}}
+    {{$currentPath := .CurrentPath}}
+    {{range .Items}}
+    <div class="tree-node{{if .IsOpen}} expanded{{end}}{{if eq $currentPath .Path}} active{{end}}" data-path="{{.Path}}">
+        {{if .IsDir}}
+        <div class="tree-node-header">
+            <span class="tree-node-toggle">{{if .IsOpen}}▼{{else}}►{{end}}</span>
+            <a href="/{{.Path}}" class="node-link" title="{{.Name}}">
+                <span class="tree-node-icon">📁</span>
+                <span class="tree-node-label">{{.Name}}</span>
+            </a>
+        </div>
+        {{else}}
+        <div class="tree-node-header">
+            <span class="tree-node-toggle" style="visibility: hidden;"></span>
+            {{if eq (ext .Name) ".html"}}
+            <a href="/preview/{{.Path}}" class="node-link" title="{{.Name}}">
+                <span class="tree-node-icon">📄</span>
+                <span class="tree-node-label">{{.Name}}</span>
+            </a>
+            {{else}}
+            <a href="/templates/{{.Path}}" class="node-link" target="_blank" title="{{.Name}}">
+                <span class="tree-node-icon">
+                    {{if eq (ext .Name) ".jpg"}}🖼️
+                    {{else if eq (ext .Name) ".jpeg"}}🖼️
+                    {{else if eq (ext .Name) ".png"}}🖼️
+                    {{else if eq (ext .Name) ".gif"}}🖼️
+                    {{else if eq (ext .Name) ".svg"}}🖼️
+                    {{else if eq (ext .Name) ".pdf"}}📑
+                    {{else}}📄
+                    {{end}}
+                </span>
+                <span class="tree-node-label">{{.Name}}</span>
+            </a>
+            {{end}}
+        </div>
+        {{end}}
+        {{if and .IsDir .IsOpen}}
+        <div class="tree-node-children">
+            {{template "nav_tree_children" dict "Items" .Children "CurrentPath" $currentPath}}
+        </div>
+        {{end}}
+    </div>
+    {{end}}
+{{end}}

@@ -1,0 +1,7 @@
+name: "Contoso - Security warning"
+emails:
+  - name: "Contoso - Security warning"
+    file: "email.html"
+    envelope from: "edit@this.tld"
+    from: "Contoso <edit@this.tld>"
+    subject: "Security warning"
