@@ -16,6 +16,12 @@ Built specifically for phishing template developers who need to create, test, an
 
 Compatible with [Phishing Club](https://github.com/phishingclub/phishingclub) and GoPhish.
 
+## Just give me some templates
+
+While this tool is for editing and checking templates, sometimes you just want quick templates to import
+into Phishing Club. On the [Releases page](https://github.com/phishingclub/templates/releases) you can download a .zip with the templates which can be imported via the Settings page in Phishing Club
+
+
 ## ⚠️ Security Warning
 
 **This application is meant ONLY for local development use. Never expose it publicly.**
@@ -67,6 +73,7 @@ go build
 - `-port 8080` - Change server port (default: 8080)
 - `-templates ./my-templates` - Specify templates directory
 - `--export` - Export all templates to ZIP and exit
+
 
 ## Template Structure
 
