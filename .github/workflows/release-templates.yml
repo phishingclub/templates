@@ -1,0 +1,75 @@
+name: Build and Release Templates
+
+on:
+  push:
+    branches: [release]
+  pull_request:
+    branches: [release]
+  workflow_dispatch:
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: "1.23"
+
+      - name: Cache Go modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/go-build
+            ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
+
+      - name: Build application
+        run: go build -o templates
+
+      - name: Export templates
+        run: ./templates --export
+
+      - name: Find export file
+        id: find_export
+        run: |
+          export_file=$(ls export-*.zip | head -1)
+          echo "export_file=$export_file" >> $GITHUB_OUTPUT
+          echo "Found export file: $export_file"
+
+      - name: Delete existing release
+        if: github.ref == 'refs/heads/release'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if gh release view latest >/dev/null 2>&1; then
+            gh release delete latest --yes --cleanup-tag
+          fi
+        continue-on-error: true
+
+      - name: Create latest release
+        if: github.ref == 'refs/heads/release'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git tag latest
+          git push origin latest
+          gh release create latest \
+            --title "Templates" \
+            --notes "Ready for import." \
+            --latest \
+            ${{ steps.find_export.outputs.export_file }}
+
+      - name: Upload export as artifact (for PRs)
+        if: github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v3
+        with:
+          name: phishing-club-templates
+          path: ${{ steps.find_export.outputs.export_file }}
+          retention-days: 7
