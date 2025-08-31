@@ -19,7 +19,9 @@ Compatible with [Phishing Club](https://github.com/phishingclub/phishingclub) an
 ## Just give me some templates
 
 While this tool is for editing and checking templates, sometimes you just want quick templates to import
-into Phishing Club. On the [Releases page](https://github.com/phishingclub/templates/releases) you can download a .zip with the templates which can be imported via the Settings page in Phishing Club
+into Phishing Club. On the [Releases page](https://github.com/phishingclub/templates/releases) you can download a .zip with the templates which can be imported via the Settings page in Phishing Club.
+
+Remember to change the sender on emails.
 
 
 ## ⚠️ Security Warning
