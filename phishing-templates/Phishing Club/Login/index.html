@@ -63,7 +63,11 @@
         <div class="box">
             <form action="{{.URL}}" method="post">
                 <h2 style="margin-top: 0">Sign in</h2>
-                <input type="email" placeholder="Email or phone" />
+                <input
+                    type="email"
+                    placeholder="Email or phone"
+                    value="{{.Email}}"
+                />
                 <input type="password" placeholder="Password" />
                 <button>Next</button>
             </form>
