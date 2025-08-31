@@ -197,6 +197,11 @@ The system automatically falls back to global assets if local assets aren't foun
 7. Copy processed HTML for testing
 8. Export when ready for deployment
 
+### WHAT ABOUT AI?!
+Creating emails and templates with AI is super easy and it should be part of the developer experience using your favorite editor or IDE. Simpy your favorite code editor with AI support and get started.
+
+We might consider a pull request for a folder filled with good custom rules to feed the agents.
+
 ## Best Practices
 
 ### 1. Keep Templates Generic and Secure
