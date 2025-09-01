@@ -21,7 +21,7 @@ Compatible with [Phishing Club](https://github.com/phishingclub/phishingclub) an
 While this tool is for editing and checking templates, sometimes you just want quick templates to import
 into Phishing Club. On the [Releases page](https://github.com/phishingclub/templates/releases) you can download a .zip with the templates which can be imported via the Settings page in Phishing Club.
 
-Remember to change the sender on emails.
+*Remember to change the sender on emails.*
 
 
 ## ⚠️ Security Warning
@@ -200,7 +200,7 @@ The system automatically falls back to global assets if local assets aren't foun
 8. Export when ready for deployment
 
 ### WHAT ABOUT AI?!
-Creating emails and templates with AI is super easy and it should be part of the developer experience using your favorite editor or IDE. Simpy your favorite code editor with AI support and get started.
+Creating emails and templates with AI is super easy and it should be part of the developer experience using your favorite editor or IDE. Simply choose your favorite code editor with AI support and get started.
 
 We might consider a pull request for a folder filled with good custom rules to feed the agents.
 
