@@ -1,0 +1,10 @@
+# github.com/go-errors/errors v1.4.2
+## explicit; go 1.14
+github.com/go-errors/errors
+# github.com/yeqown/go-qrcode/v2 v2.2.2
+## explicit; go 1.18
+github.com/yeqown/go-qrcode/v2
+# github.com/yeqown/reedsolomon v1.0.0
+## explicit
+github.com/yeqown/reedsolomon
+github.com/yeqown/reedsolomon/binary

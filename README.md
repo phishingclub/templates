@@ -125,21 +125,99 @@ landing_pages:
 
 ## Template Variables
 
-Some template variables are automatically populated with test data:
+Template variables are automatically populated with test data during preview:
 
+### Recipient Data
+| Variable | Example Value | Description |
+|----------|---------------|-------------|
+| `{{.rID}}` | `1234567890` | Recipient record ID |
+| `{{.FirstName}}` | `John` | Recipient's first name |
+| `{{.LastName}}` | `Doe` | Recipient's last name |
+| `{{.Email}}` | `john.doe@example.com` | Recipient's email address |
+| `{{.To}}` | `john.doe@example.com` | Alias for Email |
+| `{{.Phone}}` | `+1-555-123-4567` | Phone number |
+| `{{.ExtraIdentifier}}` | `EMP001` | Additional identifier |
+| `{{.Position}}` | `IT Manager` | Job position |
+| `{{.Department}}` | `Information Technology` | Department |
+| `{{.City}}` | `New York` | City |
+| `{{.Country}}` | `United States` | Country |
+| `{{.Misc}}` | `Additional Info` | Miscellaneous data |
+
+### Tracking & URLs
 | Variable | Example Value | Description |
 |----------|---------------|-------------|
 | `{{.URL}}` | `https://example.com/phishing-link` | Phishing URL |
 | `{{.BaseURL}}` | `/templates/company/campaign` | Base URL for assets |
-| `{{.FirstName}}` | `John` | Recipient's first name |
-| `{{.LastName}}` | `Doe` | Recipient's last name |
-| `{{.Email}}` | `john.doe@example.com` | Recipient's email |
-| `{{.Position}}` | `IT Manager` | Job position |
-| `{{.CompanyName}}` | `Acme Corporation` | Company name |
+| `{{.Tracker}}` | HTML tracking pixel | Email open tracking image |
+| `{{.TrackingURL}}` | `https://track.example.com/clicked/id` | Link click tracking URL |
+
+### Sender Information
+| Variable | Example Value | Description |
+|----------|---------------|-------------|
 | `{{.From}}` | `Security Team <security@company.com>` | Sender address |
-| `{{.Tracker}}` | `https://track.example.com/opened/id` | Email open tracking |
-| `{{.TrackingURL}}` | `https://track.example.com/clicked/id` | Link click tracking |
-| `{{.RId}}` | `1234567890` | Record ID |
+
+### API Sender Fields
+| Variable | Example Value | Description |
+|----------|---------------|-------------|
+| `{{.APIKey}}` | _(empty)_ | API key |
+| `{{.CustomField1}}` | _(empty)_ | Custom field 1 |
+| `{{.CustomField2}}` | _(empty)_ | Custom field 2 |
+| `{{.CustomField3}}` | _(empty)_ | Custom field 3 |
+| `{{.CustomField4}}` | _(empty)_ | Custom field 4 |
+
+## Template Functions
+
+The template system supports the same functions as the Phishing Club platform:
+
+### Text Processing
+| Function | Example | Description |
+|----------|---------|-------------|
+| `{{urlEscape "hello world"}}` | `hello%20world` | URL encode a string |
+| `{{htmlEscape "<script>"}}` | `&lt;script&gt;` | HTML escape a string |
+| `{{base64 "hello"}}` | `aGVsbG8=` | Base64 encode a string |
+
+### Random Generation
+| Function | Example | Description |
+|----------|---------|-------------|
+| `{{randInt 1 10}}` | `7` | Random integer between 1 and 10 (inclusive) |
+| `{{randAlpha 8}}` | `AbCdEfGh` | Random alphabetic string of specified length |
+
+### Date & Time
+| Function | Example | Description |
+|----------|---------|-------------|
+| `{{date "Y-m-d"}}` | `2024-01-15` | Current date in specified format |
+| `{{date "Y-m-d H:i:s"}}` | `2024-01-15 14:30:25` | Current date and time |
+| `{{date "Y-m-d" 3600}}` | `2024-01-15` | Date with offset (3600 seconds = 1 hour) |
+
+**Date Format Codes:**
+- `Y` - 4-digit year (2024)
+- `y` - 2-digit year (24)
+- `m` - 2-digit month (01-12)
+- `n` - Month without leading zero (1-12)
+- `M` - Short month name (Jan, Feb)
+- `F` - Full month name (January, February)
+- `d` - 2-digit day (01-31)
+- `j` - Day without leading zero (1-31)
+- `H` - 24-hour format hour (00-23)
+- `h` - 12-hour format hour (01-12)
+- `i` - Minutes (00-59)
+- `s` - Seconds (00-59)
+- `A` - Uppercase AM/PM
+- `a` - Lowercase am/pm
+
+### QR Codes
+| Function | Example | Description |
+|----------|---------|-------------|
+| `{{qr .URL }}` | HTML table QR code | Generate QR code as HTML |
+| `{{qr .URL 6}}` | Larger QR code | QR code with custom dot size |
+
+**Example Usage:**
+```html
+<p>Hello {{.FirstName}}, today is {{date "F j, Y"}}!</p>
+<p>Your confirmation code is: {{randAlpha 6}}</p>
+<p>Lucky number: {{randInt 1 100}}</p>
+<div>{{qr .URL 8}}</div>
+```
 
 ## Included Examples
 
@@ -279,7 +357,6 @@ There is a lot of excellent starting points and examples for email templates:
 
 Contributions welcome for:
 - New template formats
-- Additional GoPhish variable support
 - Enhanced preview features
 - Bug fixes and improvements
 

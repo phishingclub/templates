@@ -3,6 +3,7 @@
 package handler
 
 import (
+	"bytes"
 	"fmt"
 	"html"
 	"html/template"
@@ -299,18 +300,41 @@ type PreviewData struct {
 	ExpandedDirs map[string]bool
 }
 
-// Map of GoPhish template variables with default values for preview
+// Map of template variables with default values for preview
 var templateVars = map[string]string{
-	"{{.URL}}":         "https://example.com/phishing-link",
-	"{{.Tracker}}":     "https://track.example.com/opened/unique-id",
-	"{{.FirstName}}":   "John",
-	"{{.LastName}}":    "Doe",
-	"{{.Position}}":    "IT Manager",
-	"{{.Email}}":       "john.doe@example.com",
-	"{{.From}}":        "Security Team <security@trusted-domain.com>",
-	"{{.TrackingURL}}": "https://track.example.com/clicked/unique-id",
-	"{{.RId}}":         "1234567890",
-	"{{.CompanyName}}": "Acme Corporation",
+	// Recipient fields
+	"{{.rID}}":             "1234567890",
+	"{{.FirstName}}":       "John",
+	"{{.LastName}}":        "Doe",
+	"{{.Email}}":           "john.doe@example.com",
+	"{{.To}}":              "john.doe@example.com", // alias of Email
+	"{{.Phone}}":           "+1-555-123-4567",
+	"{{.ExtraIdentifier}}": "EMP001",
+	"{{.Position}}":        "IT Manager",
+	"{{.Department}}":      "Information Technology",
+	"{{.City}}":            "New York",
+	"{{.Country}}":         "United States",
+	"{{.Misc}}":            "Additional Info",
+
+	// Tracking fields
+	"{{.Tracker}}":     `<img src="https://example.com/opened/unique-id" alt="" width="1" height="1" border="0" style="height:1px !important;width:1px" />`,
+	"{{.TrackingURL}}": "https://example.com/clicked/unique-id",
+
+	// Sender fields
+	"{{.From}}": "Security Team <security@trusted-domain.com>",
+
+	// General fields
+	"{{.BaseURL}}": "https://example.com",
+	"{{.URL}}":     "https://example.com/phishing-link",
+
+	// API sender fields
+	"{{.APIKey}}":       "",
+	"{{.CustomField1}}": "",
+	"{{.CustomField2}}": "",
+	"{{.CustomField3}}": "",
+	"{{.CustomField4}}": "",
+
+	// Legacy/additional fields for compatibility
 }
 
 // IndexHandler renders the directory listing view
@@ -863,13 +887,50 @@ func processTemplateContent(content, reqPath, baseDir string) string {
 	// Clean the URL to remove any duplicate slashes or unnecessary path elements
 	baseURL = strings.TrimRight(baseURL, "/")
 
-	content = strings.Replace(content, "{{.BaseURL}}", baseURL, -1)
+	// Create template data with all variables and BaseURL
+	templateData := make(map[string]any)
 
-	// Process other template variables
+	// Add BaseURL to template data
+	templateData["BaseURL"] = baseURL
+
+	// Add all template variables to data (removing the {{. }} wrapper)
 	for placeholder, value := range templateVars {
-		content = strings.Replace(content, placeholder, value, -1)
+		// Extract variable name from {{.VarName}} format
+		if strings.HasPrefix(placeholder, "{{.") && strings.HasSuffix(placeholder, "}}") {
+			varName := strings.TrimPrefix(strings.TrimSuffix(placeholder, "}}"), "{{.")
+			templateData[varName] = value
+		}
 	}
 
+	// Parse and execute the template with functions
+	tmpl, err := template.New("content").Funcs(TemplateFuncs).Parse(content)
+	if err != nil {
+		// If template parsing fails, fall back to string replacement
+		content = strings.Replace(content, "{{.BaseURL}}", baseURL, -1)
+		for placeholder, value := range templateVars {
+			content = strings.Replace(content, placeholder, value, -1)
+		}
+		return processAssetPaths(content, reqPath, baseDir)
+	}
+
+	var buf bytes.Buffer
+	err = tmpl.Execute(&buf, templateData)
+	if err != nil {
+		// If template execution fails, fall back to string replacement
+		content = strings.Replace(content, "{{.BaseURL}}", baseURL, -1)
+		for placeholder, value := range templateVars {
+			content = strings.Replace(content, placeholder, value, -1)
+		}
+		return processAssetPaths(content, reqPath, baseDir)
+	}
+
+	content = buf.String()
+
+	return processAssetPaths(content, reqPath, baseDir)
+}
+
+// processAssetPaths handles asset path processing for template content
+func processAssetPaths(content, reqPath, baseDir string) string {
 	// Fix any double slashes in paths (except for http:// or https://)
 	content = strings.Replace(content, "src=\"//", "src=\"/", -1)
 	content = strings.Replace(content, "href=\"//", "href=\"/", -1)
