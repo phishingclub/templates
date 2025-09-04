@@ -185,9 +185,9 @@ The template system supports the same functions as the Phishing Club platform:
 ### Date & Time
 | Function | Example | Description |
 |----------|---------|-------------|
-| `{{date "Y-m-d"}}` | `2024-01-15` | Current date in specified format |
-| `{{date "Y-m-d H:i:s"}}` | `2024-01-15 14:30:25` | Current date and time |
-| `{{date "Y-m-d" 3600}}` | `2024-01-15` | Date with offset (3600 seconds = 1 hour) |
+| `{{date "Y-m-d"}}` | `2025-01-15` | Current date in specified format |
+| `{{date "Y-m-d H:i:s"}}` | `2024-05-15 14:30:25` | Current date and time |
+| `{{date "Y-m-d H:i:s" 3600}}` | `2024-05-15 15:30:25` | Date with offset (3600 seconds = 1 hour) |
 
 **Date Format Codes:**
 - `Y` - 4-digit year (2024)
