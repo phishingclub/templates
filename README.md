@@ -12,7 +12,7 @@ This tool enhances the development workflow for security professionals creating 
 - **Asset Management**: Automatically resolve template assets with intelligent fallback to global asset directories
 - **Quick Iteration**: Copy processed HTML, download template folders, and export entire template collections
 
-Built specifically for phishing template developers who need to create, test, and refine social engineering simulation content before deployment in security awareness campaigns.
+Built specifically for phishing template developers who need to create, test, and refine social engineering simulation content.
 
 Compatible with [Phishing Club](https://github.com/phishingclub/phishingclub) and GoPhish.
 
