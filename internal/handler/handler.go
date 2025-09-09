@@ -890,9 +890,6 @@ func processTemplateContent(content, reqPath, baseDir string) string {
 	// Create template data with all variables and BaseURL
 	templateData := make(map[string]any)
 
-	// Add BaseURL to template data
-	templateData["BaseURL"] = baseURL
-
 	// Add all template variables to data (removing the {{. }} wrapper)
 	for placeholder, value := range templateVars {
 		// Extract variable name from {{.VarName}} format
@@ -902,29 +899,38 @@ func processTemplateContent(content, reqPath, baseDir string) string {
 		}
 	}
 
-	// Parse and execute the template with functions
-	tmpl, err := template.New("content").Funcs(TemplateFuncs).Parse(content)
-	if err != nil {
-		// If template parsing fails, fall back to string replacement
-		content = strings.Replace(content, "{{.BaseURL}}", baseURL, -1)
-		for placeholder, value := range templateVars {
-			content = strings.Replace(content, placeholder, value, -1)
-		}
-		return processAssetPaths(content, reqPath, baseDir)
-	}
+	// Add BaseURL to template data (override the static value with computed path)
+	templateData["BaseURL"] = baseURL
 
-	var buf bytes.Buffer
-	err = tmpl.Execute(&buf, templateData)
-	if err != nil {
-		// If template execution fails, fall back to string replacement
-		content = strings.Replace(content, "{{.BaseURL}}", baseURL, -1)
-		for placeholder, value := range templateVars {
-			content = strings.Replace(content, placeholder, value, -1)
-		}
-		return processAssetPaths(content, reqPath, baseDir)
-	}
+	// Check if content contains template variables before using template execution
+	hasTemplateVars := strings.Contains(content, "{{.")
 
-	content = buf.String()
+	if hasTemplateVars {
+		// Parse and execute the template with functions
+		tmpl, err := template.New("content").Funcs(TemplateFuncs).Parse(content)
+		if err != nil {
+			// If template parsing fails, fall back to string replacement
+			content = strings.Replace(content, "{{.BaseURL}}", baseURL, -1)
+			for placeholder, value := range templateVars {
+				content = strings.Replace(content, placeholder, value, -1)
+			}
+			return processAssetPaths(content, reqPath, baseDir)
+		}
+
+		var buf bytes.Buffer
+		err = tmpl.Execute(&buf, templateData)
+		if err != nil {
+			// If template execution fails, fall back to string replacement
+			content = strings.Replace(content, "{{.BaseURL}}", baseURL, -1)
+			for placeholder, value := range templateVars {
+				content = strings.Replace(content, placeholder, value, -1)
+			}
+			return processAssetPaths(content, reqPath, baseDir)
+		}
+
+		content = buf.String()
+	}
+	// If no template variables, skip template execution to preserve content as-is
 
 	return processAssetPaths(content, reqPath, baseDir)
 }
