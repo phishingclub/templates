@@ -80,10 +80,27 @@ func main() {
 		handler.IndexHandler(absPath)(w, r)
 	})
 
+	// Calculate server address for email handler
+	serverAddr := fmt.Sprintf(":%d", *port)
+
 	// API endpoints
 	mux.HandleFunc("/api/structure", handler.StructureHandler(absPath))
 	mux.HandleFunc("/api/download", handler.DownloadHandler(absPath))
 	mux.HandleFunc("/api/export", handler.ExportHandler(absPath))
+	mux.HandleFunc("/api/check-email-template", handler.CheckEmailTemplateHandler(absPath))
+	mux.HandleFunc("/api/send-test-email", handler.SendTestEmailHandler(absPath, serverAddr))
+
+	// Email tracking endpoints for testing
+	mux.HandleFunc("/api/track/clicked/", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "text/html")
+		w.Write([]byte("<html><body><h1>Link Clicked!</h1><p>This would track the click in a real phishing campaign.</p></body></html>"))
+	})
+	mux.HandleFunc("/api/track/opened/", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "image/gif")
+		// 1x1 transparent GIF
+		gif := []byte{0x47, 0x49, 0x46, 0x38, 0x39, 0x61, 0x01, 0x00, 0x01, 0x00, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0x21, 0xf9, 0x04, 0x01, 0x00, 0x00, 0x00, 0x00, 0x2c, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x01, 0x00, 0x00, 0x02, 0x02, 0x44, 0x01, 0x00, 0x3b}
+		w.Write(gif)
+	})
 
 	// Raw template view handler
 	mux.HandleFunc("/raw/", handler.RawViewHandler(absPath))
@@ -93,7 +110,7 @@ func main() {
 
 	// Start the server with our custom handler
 	server := &http.Server{
-		Addr:    fmt.Sprintf(":%d", *port),
+		Addr:    serverAddr,
 		Handler: mux,
 	}
 

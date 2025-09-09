@@ -19,3 +19,39 @@ services:
     ports:
       - "8005:8005" # Serve on port 8005
     restart: on-failure
+    depends_on:
+      - mailer
+    networks:
+      - default
+
+  # Mailer - SMTP server for testing
+  # Mailpit for email testing and inspection
+  mailer:
+    image: axllent/mailpit
+    container_name: mailpit
+    restart: unless-stopped
+    ports:
+      - 8102:8025
+      - 1025:1025
+    environment:
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
+      MP_ENABLE_SPAMASSASSIN: spamassassin:783
+    depends_on:
+      - spamassassin
+    networks:
+      - default
+
+  # SpamAssassin - Spam detection and scoring
+  spamassassin:
+    image: axllent/spamassassin
+    container_name: spamassassin
+    restart: unless-stopped
+    volumes:
+      - ../config/spamassassin/99_local_override.cf:/etc/mail/spamassassin/99_local_override.cf:ro
+    networks:
+      - default
+
+networks:
+  default:
+    driver: bridge

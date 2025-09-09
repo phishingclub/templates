@@ -317,15 +317,15 @@ var templateVars = map[string]string{
 	"{{.Misc}}":            "Additional Info",
 
 	// Tracking fields
-	"{{.Tracker}}":     `<img src="https://example.com/opened/unique-id" alt="" width="1" height="1" border="0" style="height:1px !important;width:1px" />`,
-	"{{.TrackingURL}}": "https://example.com/clicked/unique-id",
+	"{{.Tracker}}":     `<img src="https://phishing.test/opened/unique-id" alt="" width="1" height="1" border="0" style="height:1px !important;width:1px" />`,
+	"{{.TrackingURL}}": "https://phishing.test/clicked/unique-id",
 
 	// Sender fields
-	"{{.From}}": "Security Team <security@trusted-domain.com>",
+	"{{.From}}": "Security Team <security@phishing.test>",
 
 	// General fields
-	"{{.BaseURL}}": "https://example.com",
-	"{{.URL}}":     "https://example.com/phishing-link",
+	"{{.BaseURL}}": "https://phishing.test",
+	"{{.URL}}":     "https://phishing.test/phishing-link",
 
 	// API sender fields
 	"{{.APIKey}}":       "",

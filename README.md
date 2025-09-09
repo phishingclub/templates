@@ -6,13 +6,12 @@
 
 This tool enhances the development workflow for security professionals creating phishing simulation templates. It provides an preview environment where developers can:
 
-- **Live Preview Templates**: View how templates render with test data
+- **Preview Templates**: View how templates render with test data
 - **Variable Substitution**: See template variables like `{{.BaseURL}}`, `{{.Email}}`, `{{.FirstName}}` automatically populated with sample values
 - **Naive Responsive Testing**: Preview templates across different device sizes (mobile, tablet, desktop)
+- **Naive Email Testing**: Check emails templates in Mailpit and check HTML/CSS scores with different email clients and SpamAssassin score.
 - **Asset Management**: Automatically resolve template assets with intelligent fallback to global asset directories
 - **Quick Iteration**: Copy processed HTML, download template folders, and export entire template collections
-
-Built specifically for phishing template developers who need to create, test, and refine social engineering simulation content.
 
 Compatible with [Phishing Club](https://github.com/phishingclub/phishingclub) and GoPhish.
 
@@ -21,6 +20,8 @@ Compatible with [Phishing Club](https://github.com/phishingclub/phishingclub) an
 While this tool is for editing and checking templates, sometimes you just want quick templates to import
 into Phishing Club. On the [Releases page](https://github.com/phishingclub/templates/releases) you can download a .zip with the templates which can be imported via the Settings page in Phishing Club.
 
+Must templates require a little editing..
+
 *Remember to change the sender on emails.*
 
 
@@ -28,7 +29,7 @@ into Phishing Club. On the [Releases page](https://github.com/phishingclub/templ
 
 **This application is meant ONLY for local development use. Never expose it publicly.**
 
-It is build upon AI slop, so keep it local
+It is build upon AI 🤖 slop, so keep it local
 
 ## Quick Start
 
@@ -36,33 +37,27 @@ It is build upon AI slop, so keep it local
    ```bash
    git clone https://github.com/phishingclub/templates.git
    cd templates
+   make up
+   # or manually:
    docker-compose up --build
    ```
 
-2. **Create Your First Template in your favorite IDE**
-   ```bash
-   mkdir -p phishing-templates/generic-service/login-alert
-   # Add your email.html file
-   ```
-
-3. **Preview**
+2. **Preview and start creating**
    - Open `http://localhost:8005`
-   - Navigate to your template
-   - Click on `email.html` to preview
+   - Check out the templates and data.yml files
+   - Start editing or creating new phishing templates!
 
 ## Installation Options
 
-### Option 1: Docker Compose (Recommended)
+### Option 1: Docker Compose with Makefile (Recommended)
 
 ```bash
 git clone https://github.com/phishingclub/templates.git
 cd templates
-docker-compose up --build
+make up
 ```
 
-The Docker setup includes hot-reloading for development.
-
-### Option 2: Local Go Installation
+### Option 2: Local Go Installation (no mailpit/spamassassin)
 
 ```bash
 git clone https://github.com/phishingclub/templates.git
@@ -76,6 +71,31 @@ go build
 - `-templates ./my-templates` - Specify templates directory
 - `--export` - Export all templates to ZIP and exit
 
+## Naive Email Testing
+
+Emails templates with a correct `data.yml` can be sent to a local mailpit container.
+
+Mailpit is setup with an awesome HTML check feature that lets you know how supported the HTML/CSS is in
+different mail clients AND a Spam analysis via. its Spamassassin integration.
+
+The Spamassassin rule config has been adjusted slightly to avoid spam scores that are not relevant
+when previewing.
+
+Check it out by opening a email templates, click the `Send Test Email` and open mailpit by clicking the 📬 icon.
+
+## Services and Ports
+
+| Port | Service | Description |
+|------|---------|-------------|
+| 8005 | Templates | Template workbench web interface |
+| 8102 | Mailpit | Email testing web interface with SpamAssassin integration |
+| 1025 | SMTP | Internal SMTP server (not exposed publicly) |
+
+All services run in Docker containers and are only accessible locally during development.
+
+## Development Commands
+
+The project includes a comprehensive Makefile for common development tasks:
 
 ## Template Structure
 
@@ -273,6 +293,7 @@ The system automatically falls back to global assets if local assets aren't foun
 3. Edit templates in your favorite IDE
 4. Save changes (auto-reload in Docker)
 5. Preview in browser
+5.5. If email, send to mailpit and check html/css/spam scores
 6. Test across different devices and email clients
 7. Copy processed HTML for testing
 8. Export when ready for deployment
@@ -320,7 +341,7 @@ Test from the worst email client up to ensure broad compatibility:
 4. **Modern clients**: Apple Mail (macOS), Thunderbird
 
 **Testing Workflow:**
-- Design for Outlook's limited rendering engine first
+- Design for Outlook Classic very limited rendering engine first
 - Enhance progressively for better clients
 - Always test with images disabled
 - Verify dark mode compatibility

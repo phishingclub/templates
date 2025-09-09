@@ -699,6 +699,120 @@ footer {
     font-size: 1.2rem;
 }
 
+/* Send Email Button */
+.send-email-btn {
+    display: flex;
+    align-items: center;
+    padding: 6px 12px;
+    background-color: #4a9b8a;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    color: white;
+    font-weight: 500;
+    font-family: "Titillium Web", sans-serif;
+    text-decoration: none;
+    font-size: 0.9rem;
+    height: 32px;
+    cursor: pointer;
+    margin-right: 8px;
+}
+
+.send-email-btn:hover {
+    background-color: #5abfa7;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+}
+
+.send-email-btn:disabled {
+    background-color: #ccc;
+    color: #999;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.email-icon {
+    margin-right: 8px;
+    font-size: 1.2rem;
+}
+
+/* Mailpit Button */
+.mailpit-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 8px;
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    color: white;
+    font-weight: 500;
+    font-family: "Titillium Web", sans-serif;
+    text-decoration: none;
+    font-size: 0.9rem;
+    height: 32px;
+    width: 44px;
+    cursor: pointer;
+    margin-right: 8px;
+}
+
+.mailpit-btn:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+}
+
+.mailpit-icon {
+    font-size: 1.2rem;
+}
+
+/* Toast Notification */
+.toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: var(--pc-green);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    font-family: "Titillium Web", sans-serif;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    animation: toastSlideIn 0.3s ease-out;
+}
+
+.toast.toast-hide {
+    animation: toastSlideOut 0.3s ease-in forwards;
+}
+
+@keyframes toastSlideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes toastSlideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
 .preview-frame-outer {
     flex: 1;
     display: flex;

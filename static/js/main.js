@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initCopyContentButton();
   initDownloadFolderButton();
   initExportButton();
+  initSendEmailButton();
   highlightActiveNode();
   highlightCurrentLocation();
   initResizeTracking();
@@ -629,4 +630,123 @@ function requestExport() {
     exportButton.innerHTML = originalText;
     exportButton.disabled = false;
   }, 2000);
+}
+
+// Email functionality
+function initSendEmailButton() {
+  const sendEmailBtn = document.getElementById("sendEmailBtn");
+  if (sendEmailBtn) {
+    // Check if this is an email template
+    checkIfEmailTemplate();
+
+    sendEmailBtn.addEventListener("click", function () {
+      sendTestEmail();
+    });
+  }
+}
+
+function checkIfEmailTemplate() {
+  const templateData = document.getElementById("template-data");
+  if (!templateData) return;
+
+  const data = JSON.parse(templateData.textContent);
+  const templatePath = data.path;
+
+  fetch(`/api/check-email-template?path=${encodeURIComponent(templatePath)}`)
+    .then((response) => response.json())
+    .then((data) => {
+      const sendEmailBtn = document.getElementById("sendEmailBtn");
+      const mailpitBtn = document.querySelector(".mailpit-btn");
+
+      if (data.isEmail && sendEmailBtn) {
+        sendEmailBtn.style.display = "flex";
+
+        // Show Mailpit button as well
+        if (mailpitBtn) {
+          mailpitBtn.style.display = "flex";
+        }
+
+        // Update button with email config if available
+        if (data.emailConfig) {
+          sendEmailBtn.title = `Send "${data.emailConfig.subject}" from ${data.emailConfig.from}`;
+        }
+      }
+    })
+    .catch((error) => {
+      console.error("Error checking email template:", error);
+    });
+}
+
+function sendTestEmail() {
+  const templateData = document.getElementById("template-data");
+  if (!templateData) {
+    alert("Template data not found");
+    return;
+  }
+
+  const data = JSON.parse(templateData.textContent);
+  const templatePath = data.path;
+
+  // Show loading state
+  const sendEmailBtn = document.getElementById("sendEmailBtn");
+  const originalContent = sendEmailBtn.innerHTML;
+  sendEmailBtn.innerHTML =
+    '<span class="email-icon">⏳</span><span>Sending...</span>';
+  sendEmailBtn.disabled = true;
+
+  // Send the email with default recipient
+  fetch("/api/send-test-email", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      templatePath: templatePath,
+      to: "test@example.com",
+    }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        showToast("📧 Email sent successfully!");
+      } else {
+        alert(`❌ Error: ${data.message}`);
+      }
+    })
+    .catch((error) => {
+      console.error("Error sending email:", error);
+      alert("❌ Error sending email. Please check the console for details.");
+    })
+    .finally(() => {
+      // Reset button state
+      sendEmailBtn.innerHTML = originalContent;
+      sendEmailBtn.disabled = false;
+    });
+}
+
+// Toast notification function
+function showToast(message) {
+  // Remove any existing toast
+  const existingToast = document.querySelector(".toast");
+  if (existingToast) {
+    existingToast.remove();
+  }
+
+  // Create toast element
+  const toast = document.createElement("div");
+  toast.className = "toast";
+  toast.textContent = message;
+
+  // Add to document
+  document.body.appendChild(toast);
+
+  // Auto-hide after 3 seconds
+  setTimeout(() => {
+    toast.classList.add("toast-hide");
+    setTimeout(() => {
+      if (toast.parentNode) {
+        toast.parentNode.removeChild(toast);
+      }
+    }, 300); // Match animation duration
+  }, 3000);
 }

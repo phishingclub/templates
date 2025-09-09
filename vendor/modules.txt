@@ -8,3 +8,6 @@ github.com/yeqown/go-qrcode/v2
 ## explicit
 github.com/yeqown/reedsolomon
 github.com/yeqown/reedsolomon/binary
+# gopkg.in/yaml.v3 v3.0.1
+## explicit
+gopkg.in/yaml.v3

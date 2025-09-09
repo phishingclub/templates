@@ -60,6 +60,26 @@
                 Viewport: Full size
             </div>
 
+            <button
+                id="sendEmailBtn"
+                class="send-email-btn"
+                style="display: none"
+                title="Send test email to test@example.com in Mailpit"
+            >
+                <span class="email-icon">📧</span>
+                <span>Send Test Email</span>
+            </button>
+
+            <a
+                href="http://localhost:8102"
+                target="_blank"
+                class="mailpit-btn"
+                style="display: none"
+                title="Open Mailpit to view emails"
+            >
+                <span class="mailpit-icon">📬</span>
+            </a>
+
             <a href="/raw/{{.Path}}" target="_blank" class="new-window-btn">
                 <span class="new-window-icon">⧉</span>
                 <span>New Window</span>
@@ -76,6 +96,13 @@
     <!-- Store content in a hidden script tag to be processed by main.js -->
     <script data-preview-content type="text/template">
         {{.Content}}
+    </script>
+
+    <!-- Store template path for email functionality -->
+    <script id="template-data" type="application/json">
+        {
+            "path": "{{.Path}}"
+        }
     </script>
 </div>
 {{end}}
