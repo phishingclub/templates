@@ -1,7 +1,0 @@
-name: "SpamAssassin Test Template"
-emails:
-  - name: "SpamAssassin Spam Test Email"
-    file: "spam-test.html"
-    envelope from: "test@example.com"
-    from: "Test Sender <test@example.com>"
-    subject: "SpamAssassin Test - Should Trigger Spam Rules"

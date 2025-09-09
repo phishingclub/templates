@@ -370,6 +370,11 @@ header h1 a:hover {
     overflow-y: auto;
 }
 
+/* Remove padding for preview pages */
+.main-content:has(.preview-container) {
+    padding: 0;
+}
+
 /* Footer - Hidden */
 footer {
     display: none;
@@ -818,7 +823,7 @@ footer {
     display: flex;
     justify-content: center;
     align-items: flex-start; /* Align to top */
-    padding: 20px;
+    padding: 0;
     overflow: auto; /* Allow scrolling if content is larger */
     background-color: var(--bg-color);
 }
