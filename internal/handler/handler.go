@@ -895,7 +895,12 @@ func processTemplateContent(content, reqPath, baseDir string) string {
 		// Extract variable name from {{.VarName}} format
 		if strings.HasPrefix(placeholder, "{{.") && strings.HasSuffix(placeholder, "}}") {
 			varName := strings.TrimPrefix(strings.TrimSuffix(placeholder, "}}"), "{{.")
-			templateData[varName] = value
+			// Special handling for Tracker - it should be rendered as unescaped HTML
+			if varName == "Tracker" {
+				templateData[varName] = template.HTML(value)
+			} else {
+				templateData[varName] = value
+			}
 		}
 	}
 
