@@ -1,0 +1,7 @@
+name: "Phishing Club - Invitation Email"
+emails:
+  - name: "Phishing Club Invitation"
+    file: "invitation.html"
+    envelope from: "edit@this.tld"
+    from: "Phishing Club <edit@this.tld>"
+    subject: "🎣 You've been invited to join Phishing Club!"
