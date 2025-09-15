@@ -228,12 +228,6 @@ function setupPreviewIframe() {
   const iframe = document.getElementById("preview-frame");
   if (!iframe) return;
 
-  // Get content from script element
-  const contentScript = document.querySelector("script[data-preview-content]");
-  if (!contentScript) return;
-
-  const content = contentScript.textContent;
-
   // Load content via src to ensure template processing
   const baseUrl = window.location.pathname.replace("/preview/", "/raw/");
   iframe.src = baseUrl;
