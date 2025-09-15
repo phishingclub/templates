@@ -300,8 +300,18 @@ func CheckEmailTemplateHandler(baseDir string) http.HandlerFunc {
 // processTemplateContentForEmail processes template content specifically for email sending
 // Uses localhost URLs for working links and assets in Mailpit
 func processTemplateContentForEmail(content, reqPath, baseDir, serverAddr string) string {
-	// For emails viewed in Mailpit, use localhost and point to assets directory
-	baseURL := fmt.Sprintf("http://localhost%s/templates/assets", serverAddr)
+	// Process BaseURL specially to make it relative to the current template (same as web preview)
+	dirPath := filepath.ToSlash(filepath.Dir(reqPath))
+
+	// Handle special case for root directory
+	if dirPath == "." {
+		dirPath = ""
+	}
+
+	baseURL := fmt.Sprintf("http://localhost%s/templates/%s", serverAddr, dirPath)
+
+	// Clean the URL to remove any duplicate slashes or unnecessary path elements
+	baseURL = strings.TrimRight(baseURL, "/")
 
 	// Use direct string replacement with rewritten URLs for email
 	content = strings.Replace(content, "{{.BaseURL}}", baseURL, -1)
