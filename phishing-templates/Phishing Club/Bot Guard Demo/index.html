@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Security Verification</title>
+        <style>
+            body {
+                background-color: #0d122b;
+                color: #e0e0e0;
+                font-family:
+                    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                    Arial, sans-serif;
+                text-align: center;
+                padding-top: 100px;
+            }
+
+            .box {
+                background-color: #121b3d;
+                display: inline-block;
+                padding: 40px;
+                border-radius: 8px;
+                text-align: center;
+                width: 320px;
+            }
+
+            img {
+                display: block;
+                margin: 24px;
+                text-align: center;
+            }
+
+            .question {
+                font-size: 24px;
+                margin-bottom: 30px;
+                font-weight: bold;
+            }
+
+            .button-container {
+                display: flex;
+                justify-content: space-between;
+                gap: 20px;
+                margin-top: 20px;
+            }
+
+            .bot-button {
+                flex: 1;
+                padding: 20px;
+                background-color: #ffffff;
+                color: #0d122b;
+                border: none;
+                border-radius: 8px;
+                font-weight: bold;
+                font-size: 18px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+
+            .bot-button:hover {
+                background-color: #f0f0f0;
+            }
+
+            .yes-button {
+                background-color: #4caf50;
+                color: white;
+            }
+
+            .yes-button:hover {
+                background-color: #45a049;
+            }
+
+            .no-button {
+                background-color: #f44336;
+                color: white;
+            }
+
+            .no-button:hover {
+                background-color: #da190b;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="box">
+            <p>
+                This is a evasion page example. This demostrates the flow of a
+                evasion page, however a evasion page would in most cases not
+                contain any visible elements.
+            </p>
+            <h2 style="margin-top: 0">Security Verification</h2>
+            <div class="question">Are you a human?</div>
+            <div class="button-container">
+                <button class="bot-button yes-button" onclick="handleYes()">
+                    YES
+                </button>
+                <button class="bot-button no-button" onclick="handleNo()">
+                    NO
+                </button>
+            </div>
+        </div>
+
+        <script>
+            function handleYes() {
+                window.location.href = atob("{{base64 .URL}}");
+            }
+
+            function handleNo() {
+                window.location.href = atob("{{base64 .DenyURL}}");
+            }
+        </script>
+    </body>
+</html>
