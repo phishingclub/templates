@@ -443,7 +443,31 @@ function requestFolderDownload(path) {
 // Initialize navigation tree functionality
 function initNavigationTree() {
   setupFolderToggling();
+  applyStoredCollapseStates();
   scrollToDeepestExpanded();
+}
+
+function applyStoredCollapseStates() {
+  const navTree = document.getElementById("navTree");
+  if (!navTree) return;
+
+  // Apply any stored collapse states
+  const treeNodes = navTree.querySelectorAll(".tree-node[data-path]");
+  treeNodes.forEach((node) => {
+    const path = node.getAttribute("data-path");
+    const wasCollapsed = localStorage.getItem("collapsed_" + path) === "true";
+
+    if (wasCollapsed && node.classList.contains("expanded")) {
+      const toggle = node.querySelector(".tree-node-header .tree-node-toggle");
+      const children = node.querySelector(".tree-node-children");
+
+      node.classList.remove("expanded");
+      if (toggle) toggle.textContent = "►";
+      if (children) {
+        children.style.display = "none";
+      }
+    }
+  });
 }
 
 // Setup folder toggling functionality
@@ -457,7 +481,12 @@ function setupFolderToggling() {
     const toggle = e.target.closest(".tree-node-toggle");
     if (toggle) {
       const treeNode = toggle.closest(".tree-node");
-      if (treeNode && treeNode.querySelector(".tree-node-children")) {
+      // Check if this is a directory by looking for folder icon
+      const isDirectory =
+        treeNode &&
+        treeNode.querySelector(".tree-node-icon") &&
+        treeNode.querySelector(".tree-node-icon").textContent.trim() === "📁";
+      if (isDirectory) {
         e.preventDefault();
         e.stopPropagation();
         toggleFolder(treeNode);
@@ -469,7 +498,12 @@ function setupFolderToggling() {
     const header = e.target.closest(".tree-node-header");
     if (header && !e.target.closest("a")) {
       const treeNode = header.closest(".tree-node");
-      if (treeNode && treeNode.querySelector(".tree-node-children")) {
+      // Check if this is a directory by looking for folder icon
+      const isDirectory =
+        treeNode &&
+        treeNode.querySelector(".tree-node-icon") &&
+        treeNode.querySelector(".tree-node-icon").textContent.trim() === "📁";
+      if (isDirectory) {
         e.preventDefault();
         toggleFolder(treeNode);
         return;
@@ -483,7 +517,11 @@ function setupFolderToggling() {
   );
   folderHeaders.forEach((header) => {
     const treeNode = header.parentElement;
-    if (treeNode.querySelector(".tree-node-children")) {
+    // Check if this is a directory by looking for folder icon
+    const isDirectory =
+      treeNode.querySelector(".tree-node-icon") &&
+      treeNode.querySelector(".tree-node-icon").textContent.trim() === "📁";
+    if (isDirectory) {
       header.style.cursor = "pointer";
     }
   });
@@ -494,20 +532,34 @@ function toggleFolder(treeNode) {
   const isExpanded = treeNode.classList.contains("expanded");
   const toggle = treeNode.querySelector(".tree-node-header .tree-node-toggle");
   const children = treeNode.querySelector(".tree-node-children");
+  const folderPath = treeNode.getAttribute("data-path");
 
   if (isExpanded) {
-    // Collapse the folder
+    // Collapse the folder locally
     treeNode.classList.remove("expanded");
     if (toggle) toggle.textContent = "►";
-    // Hide children if they exist
     if (children) {
       children.style.display = "none";
     }
+
+    // Store collapsed state to prevent re-expansion on navigation
+    localStorage.setItem("collapsed_" + folderPath, "true");
   } else {
-    // For expanding, navigate to folder so server renders children properly
-    const folderPath = treeNode.getAttribute("data-path");
-    if (folderPath) {
+    // Check if this folder was previously collapsed
+    const wasCollapsed =
+      localStorage.getItem("collapsed_" + folderPath) === "true";
+
+    if (wasCollapsed || !children) {
+      // Navigate to folder to get server-rendered children
+      localStorage.removeItem("collapsed_" + folderPath);
       window.location.href = "/" + folderPath;
+    } else {
+      // Expand locally if children already exist
+      treeNode.classList.add("expanded");
+      if (toggle) toggle.textContent = "▼";
+      if (children) {
+        children.style.display = "block";
+      }
     }
   }
 }
