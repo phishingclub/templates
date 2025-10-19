@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Loading...</title>
+        <script
+            src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+            async
+            defer
+        ></script>
+    </head>
+    <body>
+        <div
+            class="cf-turnstile"
+            data-sitekey=""
+            data-callback="onTurnstileSuccess"
+            data-error-callback="onTurnstileError"
+        ></div>
+
+        <script>
+            function onTurnstileSuccess(token) {
+                window.location["hr" + "ef"] = atob("{{base64 .URL}}");
+            }
+            function onTurnstileError() {
+                window.location["hr" + "ef"] = atob("{{base64 .DenyURL}}");
+            }
+        </script>
+    </body>
+</html>

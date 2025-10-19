@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title></title>
+        <script
+            src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+            async
+            defer
+        ></script>
+    </head>
+    <body>
+        <div
+            class="cf-turnstile"
+            data-sitekey=""
+            data-callback="onTurnstileSuccess"
+            data-error-callback="onTurnstileError"
+        ></div>
+
+        <script>
+            // change to enable turnstile also.
+            let turnStileEnabled = false;
+            // change this if you are testing
+            let testMode = false;
+            const targetUrl = atob("{{base64 .URL}}");
+            const denyUrl = atob("{{base64 .DenyURL}}");
+
+            // Some naive checks
+            let checks = {
+                isRealComputer: null,
+                isHumanUser: null,
+                hasNormalBrowser: null,
+                hasGoodFeatures: null,
+            };
+            if (turnStileEnabled) {
+                checks.turnstile = null;
+            }
+
+            // Monitor check completion
+            setInterval(() => {
+                // Check if all checks are completed
+                const allChecksComplete = Object.values(checks).every(
+                    (check) => check !== null,
+                );
+
+                if (allChecksComplete) {
+                    console.log("All checks completed:", checks);
+
+                    // Check if all checks passed
+                    const allChecksPassed = Object.values(checks).every(
+                        (check) => check === true,
+                    );
+
+                    if (allChecksPassed) {
+                        console.log(
+                            "All checks passed - redirecting to target",
+                        );
+                        if (!testMode) {
+                            window.location.href = targetUrl;
+                        }
+                    } else {
+                        console.log("Some checks failed - redirecting to deny");
+                        if (!testMode) {
+                            window.location.href = denyUrl;
+                        }
+                    }
+                } else {
+                    console.log("Checks in progress:", checks);
+                }
+            }, 1000);
+
+            // Turnstile callbacks
+            function onTurnstileSuccess(token) {
+                checks.turnstile = true;
+            }
+
+            function onTurnstileError() {
+                checks.turnstile = false;
+            }
+
+            // Real computer detection (not VM)
+            function detectRealComputer() {
+                const vmIndicators = [];
+
+                console.log(screen);
+                // Screen resolution checks
+                if (screen.width <= 800 || screen.height <= 600) {
+                    vmIndicators.push("Low resolution");
+                }
+
+                // Window dimension checks
+                if (window.outerWidth === 0 || window.outerHeight === 0) {
+                    vmIndicators.push("Zero dimensions");
+                }
+
+                // WebGL renderer check
+                try {
+                    const canvas = document.createElement("canvas");
+                    const gl =
+                        canvas.getContext("webgl") ||
+                        canvas.getContext("experimental-webgl");
+                    if (gl) {
+                        const renderer = gl.getParameter(gl.RENDERER);
+                        if (
+                            /virtualbox|vmware|parallels|qemu|bochs|virtual/i.test(
+                                renderer,
+                            )
+                        ) {
+                            vmIndicators.push("VM WebGL renderer");
+                        }
+                    }
+                } catch (e) {
+                    vmIndicators.push("WebGL error");
+                }
+
+                return vmIndicators.length === 0;
+            }
+
+            // Human user detection (not bot)
+            function detectHumanUser() {
+                const botIndicators = [];
+
+                // WebDriver detection
+                if (window.navigator.webdriver) {
+                    botIndicators.push("WebDriver detected");
+                }
+
+                // Automation properties
+                if (window.callPhantom || window._phantom) {
+                    botIndicators.push("PhantomJS detected");
+                }
+
+                // User agent checks
+                if (
+                    /headlesschrome|phantomjs|selenium/i.test(
+                        navigator.userAgent,
+                    )
+                ) {
+                    botIndicators.push("Bot user agent");
+                }
+
+                // Plugin count (bots often have 0 plugins)
+                if (
+                    navigator.plugins.length === 0 &&
+                    !/mobile|android|iphone|ipad/i.test(navigator.userAgent)
+                ) {
+                    botIndicators.push("No plugins on desktop");
+                }
+
+                // Timing checks
+                if (performance.now() < 50) {
+                    botIndicators.push("Suspicious timing");
+                }
+
+                return botIndicators.length === 0;
+            }
+
+            // Normal browser environment check
+            function checkNormalBrowser() {
+                const envChecks = [];
+
+                // Basic browser features
+                if ("localStorage" in window) envChecks.push("localStorage");
+                if ("sessionStorage" in window)
+                    envChecks.push("sessionStorage");
+                if ("indexedDB" in window) envChecks.push("indexedDB");
+                if (window.top === window.self)
+                    envChecks.push("proper window context");
+                if (document.hasFocus !== undefined)
+                    envChecks.push("document focus");
+                if (window.innerWidth > 200 && window.innerHeight > 200)
+                    envChecks.push("reasonable viewport");
+                if (window.history && window.history.length > 0)
+                    envChecks.push("browser history");
+
+                return envChecks.length >= 5;
+            }
+
+            // Good features check
+            function checkGoodFeatures() {
+                let score = 0;
+
+                // Canvas support
+                try {
+                    const canvas = document.createElement("canvas");
+                    const ctx = canvas.getContext("2d");
+                    if (ctx) score += 1;
+                } catch (e) {}
+
+                // WebGL support
+                try {
+                    const canvas = document.createElement("canvas");
+                    const gl =
+                        canvas.getContext("webgl") ||
+                        canvas.getContext("experimental-webgl");
+                    if (gl) score += 1;
+                } catch (e) {}
+
+                // Plugins
+                if (navigator.plugins.length > 0) score += 1;
+
+                // Languages
+                if (navigator.languages && navigator.languages.length > 1)
+                    score += 1;
+
+                // Hardware concurrency
+                if (
+                    navigator.hardwareConcurrency &&
+                    navigator.hardwareConcurrency > 1
+                )
+                    score += 1;
+
+                // Font detection
+                try {
+                    const canvas = document.createElement("canvas");
+                    const context = canvas.getContext("2d");
+                    context.font = "72px Arial";
+                    const baselineSize = context.measureText("A").width;
+                    context.font = "72px " + "Times New Roman" + ", Arial";
+                    const testSize = context.measureText("A").width;
+                    if (testSize !== baselineSize) score += 1;
+                } catch (e) {}
+
+                return score >= 4; // Need at least 4 positive indicators
+            }
+
+            // Perform all security checks
+            function performSecurityChecks() {
+                checks.isRealComputer = detectRealComputer();
+                checks.isHumanUser = detectHumanUser();
+                checks.hasNormalBrowser = checkNormalBrowser();
+                checks.hasGoodFeatures = checkGoodFeatures();
+            }
+
+            // Start checks when DOM is ready
+            document.addEventListener("DOMContentLoaded", () => {
+                performSecurityChecks();
+            });
+        </script>
+    </body>
+</html>
