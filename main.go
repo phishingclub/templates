@@ -2,6 +2,8 @@ package main
 
 import (
 	"archive/zip"
+	"crypto/sha256"
+	"encoding/hex"
 	"flag"
 	"fmt"
 	"io"
@@ -87,6 +89,7 @@ func main() {
 	mux.HandleFunc("/api/structure", handler.StructureHandler(absPath))
 	mux.HandleFunc("/api/download", handler.DownloadHandler(absPath))
 	mux.HandleFunc("/api/export", handler.ExportHandler(absPath))
+	mux.HandleFunc("/api/validate-campaigns", handler.ValidateCampaignsHandler(absPath))
 	mux.HandleFunc("/api/check-email-template", handler.CheckEmailTemplateHandler(absPath))
 	mux.HandleFunc("/api/send-test-email", handler.SendTestEmailHandler(absPath, serverAddr))
 
@@ -224,6 +227,8 @@ func addBrandingAssets(zipWriter *zip.Writer, brandingPath string) error {
 
 // addPhishingTemplates recursively finds template folders (containing *.html files) and adds them to templates/
 func addPhishingTemplates(zipWriter *zip.Writer, baseDir string) error {
+	usedNames := make(map[string]bool)
+
 	return filepath.Walk(baseDir, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
@@ -239,6 +244,15 @@ func addPhishingTemplates(zipWriter *zip.Writer, baseDir string) error {
 			return filepath.SkipDir
 		}
 
+		// Skip private directories (client-specific content that should not be exported)
+		relPath, err := filepath.Rel(baseDir, path)
+		if err == nil {
+			pathComponents := strings.Split(filepath.ToSlash(relPath), "/")
+			if len(pathComponents) > 0 && strings.ToLower(pathComponents[0]) == "private" {
+				return filepath.SkipDir
+			}
+		}
+
 		// Check if this directory contains any HTML files
 		hasHTML, err := containsHTMLFiles(path)
 		if err != nil {
@@ -248,6 +262,18 @@ func addPhishingTemplates(zipWriter *zip.Writer, baseDir string) error {
 		// If this directory contains HTML files, it's a template directory
 		if hasHTML {
 			templateName := filepath.Base(path)
+
+			// Handle name conflicts by adding a hash suffix
+			if usedNames[templateName] {
+				// Create a unique hash based on the full path and current time
+				hashInput := fmt.Sprintf("%s-%d", path, time.Now().UnixNano())
+				hasher := sha256.New()
+				hasher.Write([]byte(hashInput))
+				hash := hex.EncodeToString(hasher.Sum(nil))[:8] // Use first 8 chars
+				templateName = fmt.Sprintf("%s-%s", templateName, hash)
+			}
+			usedNames[templateName] = true
+
 			return addTemplateToZip(zipWriter, path, templateName)
 		}
 

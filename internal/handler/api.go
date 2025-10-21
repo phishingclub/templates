@@ -2,6 +2,8 @@ package handler
 
 import (
 	"archive/zip"
+	"crypto/sha256"
+	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -10,6 +12,8 @@ import (
 	"path/filepath"
 	"strings"
 	"time"
+
+	"gopkg.in/yaml.v3"
 )
 
 // DirectoryItem represents a single file or directory in the navigation tree
@@ -18,9 +22,37 @@ type DirectoryItem struct {
 	IsDir bool   `json:"isDir"`
 }
 
+// CampaignInfo represents campaign metadata
+type CampaignInfo struct {
+	Name string `yaml:"name"`
+	Path string
+	Dir  string
+}
+
+// DuplicateError represents a duplicate campaign error
+type DuplicateError struct {
+	Type      string   // "name" or "folder"
+	Value     string   // the duplicate name or folder
+	Campaigns []string // paths of conflicting campaigns
+}
+
+func (e DuplicateError) Error() string {
+	if e.Type == "name" {
+		return fmt.Sprintf("Duplicate campaign name '%s' found in: %s", e.Value, strings.Join(e.Campaigns, ", "))
+	}
+	return fmt.Sprintf("Multiple campaigns found in folder '%s': %s", e.Value, strings.Join(e.Campaigns, ", "))
+}
+
 // DownloadHandler creates a zip archive of a directory and sends it to the client
 func DownloadHandler(baseDir string) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		// First validate campaigns for duplicates
+		err := validateCampaigns(baseDir)
+		if err != nil {
+			http.Error(w, fmt.Sprintf(`{"error":"Campaign validation failed: %s"}`, err), http.StatusConflict)
+			return
+		}
+
 		// Get requested path from query parameter
 		reqPath := r.URL.Query().Get("path")
 		if reqPath == "" {
@@ -151,6 +183,13 @@ func DownloadHandler(baseDir string) http.HandlerFunc {
 // ExportHandler creates a structured zip export with assets and templates
 func ExportHandler(baseDir string) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		// First validate campaigns for duplicates
+		err := validateCampaigns(baseDir)
+		if err != nil {
+			http.Error(w, fmt.Sprintf(`{"error":"Campaign validation failed: %s"}`, err), http.StatusConflict)
+			return
+		}
+
 		// Create a timestamp for the zip filename
 		timestamp := time.Now().Format("20060102-150405")
 		zipFilename := fmt.Sprintf("export-%s.zip", timestamp)
@@ -184,11 +223,44 @@ func ExportHandler(baseDir string) http.HandlerFunc {
 		}
 
 		// Process phishing templates
-		err := addPhishingTemplates(zipWriter, baseDir)
+		err = addPhishingTemplates(zipWriter, baseDir)
 		if err != nil {
 			http.Error(w, fmt.Sprintf(`{"error":"Error processing templates: %s"}`, err), http.StatusInternalServerError)
 			return
 		}
+	}
+}
+
+// ValidateCampaignsHandler provides an endpoint to validate campaigns for duplicates
+func ValidateCampaignsHandler(baseDir string) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+
+		err := validateCampaigns(baseDir)
+		if err != nil {
+			// Return conflict status with detailed error information
+			response := map[string]interface{}{
+				"valid": false,
+				"error": err.Error(),
+			}
+
+			if dupErr, ok := err.(DuplicateError); ok {
+				response["type"] = dupErr.Type
+				response["value"] = dupErr.Value
+				response["campaigns"] = dupErr.Campaigns
+			}
+
+			w.WriteHeader(http.StatusConflict)
+			json.NewEncoder(w).Encode(response)
+			return
+		}
+
+		// No conflicts found
+		response := map[string]interface{}{
+			"valid":   true,
+			"message": "No campaign conflicts detected",
+		}
+		json.NewEncoder(w).Encode(response)
 	}
 }
 
@@ -251,8 +323,140 @@ func addAssets(zipWriter *zip.Writer, assetsPath string) error {
 	})
 }
 
+// validateCampaigns checks for duplicate campaign names and folder conflicts
+func validateCampaigns(baseDir string) error {
+	campaigns := make([]CampaignInfo, 0)
+	nameMap := make(map[string][]string)
+	folderMap := make(map[string][]string)
+
+	// Collect all campaigns
+	err := filepath.Walk(baseDir, func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
+
+		// Skip if not a directory
+		if !info.IsDir() {
+			return nil
+		}
+
+		// Skip the assets directories
+		if strings.Contains(path, "Assets") || strings.Contains(path, "assets") {
+			return filepath.SkipDir
+		}
+
+		// Skip private directories (client-specific content that should not be validated)
+		relPath, err := filepath.Rel(baseDir, path)
+		if err == nil {
+			pathComponents := strings.Split(filepath.ToSlash(relPath), "/")
+			if len(pathComponents) > 0 && strings.ToLower(pathComponents[0]) == "private" {
+				return filepath.SkipDir
+			}
+		}
+
+		// Check if this directory contains any HTML files
+		hasHTML, err := containsHTMLFiles(path)
+		if err != nil {
+			return err
+		}
+
+		// If this directory contains HTML files, it's a campaign directory
+		if hasHTML {
+			relPath, err := filepath.Rel(baseDir, path)
+			if err != nil {
+				return err
+			}
+
+			campaign := CampaignInfo{
+				Path: relPath,
+				Dir:  filepath.Base(path),
+			}
+
+			// Try to read campaign name from data.yaml (top-level name field)
+			dataYamlPath := filepath.Join(path, "data.yaml")
+			if _, err := os.Stat(dataYamlPath); err == nil {
+				data, err := os.ReadFile(dataYamlPath)
+				if err == nil {
+					var yamlData struct {
+						Name string `yaml:"name"`
+						// Note: emails and landing_pages sections are ignored for campaign-level validation
+						// as they can have the same names within a single campaign
+					}
+					if yaml.Unmarshal(data, &yamlData) == nil && yamlData.Name != "" {
+						campaign.Name = yamlData.Name
+					}
+				}
+			}
+
+			// If no name in data.yaml, use directory name as campaign name
+			if campaign.Name == "" {
+				campaign.Name = campaign.Dir
+			}
+
+			campaigns = append(campaigns, campaign)
+
+			// Track by campaign name (not individual email/page names)
+			nameMap[campaign.Name] = append(nameMap[campaign.Name], campaign.Path)
+
+			// Track by folder (directory name) - prevent same folder conflicts
+			folderMap[campaign.Dir] = append(folderMap[campaign.Dir], campaign.Path)
+		}
+
+		return nil
+	})
+
+	if err != nil {
+		return err
+	}
+
+	// Check for duplicate campaign names first
+	for name, paths := range nameMap {
+		if len(paths) > 1 {
+			// Check if this is a legitimate email/landing page organization
+			isEmailLandingOrg := true
+			orgTypes := make(map[string]bool)
+
+			for _, path := range paths {
+				pathParts := strings.Split(filepath.ToSlash(path), "/")
+				if len(pathParts) >= 2 {
+					// Check if parent directory indicates content type
+					parentDir := strings.ToLower(pathParts[len(pathParts)-2])
+					if parentDir == "emails" || parentDir == "landing pages" || parentDir == "pages" {
+						orgTypes[parentDir] = true
+					} else {
+						isEmailLandingOrg = false
+						break
+					}
+				} else {
+					isEmailLandingOrg = false
+					break
+				}
+			}
+
+			// If this appears to be email/landing page organization with different types, allow it
+			if isEmailLandingOrg && len(orgTypes) > 1 {
+				continue // Allow this duplicate name
+			}
+
+			// Otherwise, it's a real duplicate campaign name conflict
+			return DuplicateError{
+				Type:      "name",
+				Value:     name,
+				Campaigns: paths,
+			}
+		}
+	}
+
+	// Note: Folder conflicts are now automatically resolved during export by adding number suffixes
+	// No need to block export for folder name conflicts since the data.yaml determines import behavior
+
+	return nil
+}
+
 // addPhishingTemplates recursively finds template folders (containing *.html files) and adds them to templates/
 func addPhishingTemplates(zipWriter *zip.Writer, baseDir string) error {
+	usedNames := make(map[string]bool)
+
 	return filepath.Walk(baseDir, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
@@ -268,6 +472,15 @@ func addPhishingTemplates(zipWriter *zip.Writer, baseDir string) error {
 			return filepath.SkipDir
 		}
 
+		// Skip private directories (client-specific content that should not be exported)
+		relPath, err := filepath.Rel(baseDir, path)
+		if err == nil {
+			pathComponents := strings.Split(filepath.ToSlash(relPath), "/")
+			if len(pathComponents) > 0 && strings.ToLower(pathComponents[0]) == "private" {
+				return filepath.SkipDir
+			}
+		}
+
 		// Check if this directory contains any HTML files
 		hasHTML, err := containsHTMLFiles(path)
 		if err != nil {
@@ -277,6 +490,18 @@ func addPhishingTemplates(zipWriter *zip.Writer, baseDir string) error {
 		// If this directory contains HTML files, it's a template directory
 		if hasHTML {
 			templateName := filepath.Base(path)
+
+			// Handle name conflicts by adding a hash suffix
+			if usedNames[templateName] {
+				// Create a unique hash based on the full path and current time
+				hashInput := fmt.Sprintf("%s-%d", path, time.Now().UnixNano())
+				hasher := sha256.New()
+				hasher.Write([]byte(hashInput))
+				hash := hex.EncodeToString(hasher.Sum(nil))[:8] // Use first 8 chars
+				templateName = fmt.Sprintf("%s-%s", templateName, hash)
+			}
+			usedNames[templateName] = true
+
 			return addTemplateToZip(zipWriter, path, templateName)
 		}
 
