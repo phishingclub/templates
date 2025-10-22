@@ -305,7 +305,7 @@ header h1 a:hover {
 }
 
 .tree-node-children {
-    margin-left: 12px;
+    margin-left: 20px;
     display: none;
     padding-top: 2px;
     padding-bottom: 2px;
@@ -313,26 +313,26 @@ header h1 a:hover {
 
 /* Progressive indentation reduction for deeply nested folders */
 .tree-node-children .tree-node-children {
-    margin-left: 8px;
+    margin-left: 16px;
 }
 
 .tree-node-children .tree-node-children .tree-node-children {
-    margin-left: 6px;
+    margin-left: 12px;
 }
 
 .tree-node-children
+    .tree-node-children
+    .tree-node-children
+    .tree-node-children {
+    margin-left: 8px;
+}
+
+.tree-node-children
+    .tree-node-children
     .tree-node-children
     .tree-node-children
     .tree-node-children {
     margin-left: 4px;
-}
-
-.tree-node-children
-    .tree-node-children
-    .tree-node-children
-    .tree-node-children
-    .tree-node-children {
-    margin-left: 2px;
 }
 
 .tree-node.expanded > .tree-node-children {
@@ -1136,6 +1136,33 @@ footer {
     .tree-node-icon i {
         width: 12px;
         height: 12px;
+    }
+
+    .tree-node-children {
+        margin-left: 16px;
+    }
+
+    .tree-node-children .tree-node-children {
+        margin-left: 12px;
+    }
+
+    .tree-node-children .tree-node-children .tree-node-children {
+        margin-left: 8px;
+    }
+
+    .tree-node-children
+        .tree-node-children
+        .tree-node-children
+        .tree-node-children {
+        margin-left: 6px;
+    }
+
+    .tree-node-children
+        .tree-node-children
+        .tree-node-children
+        .tree-node-children
+        .tree-node-children {
+        margin-left: 4px;
     }
 
     .export-btn {
