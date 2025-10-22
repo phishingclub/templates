@@ -1,14 +1,31 @@
 {{define "content"}}
 <div class="directory-listing">
-    <div class="breadcrumb">
-        <ul>
-            <li><a href="/">root</a></li>
-            {{if not .IsRoot}} {{$parts := split .Path "/"}} {{$fullPath := ""}}
-            {{range $index, $part := $parts}} {{if $part}} {{$fullPath = join
-            $fullPath $part "/"}}
-            <li><a href="/{{$fullPath}}">{{$part}}</a></li>
-            {{end}} {{end}} {{end}}
-        </ul>
+    <div class="breadcrumb-container">
+        <div class="breadcrumb">
+            <ul>
+                {{if .IsRoot}}
+                <li><a href="/">/</a></li>
+                {{else}}
+                <li><a href="/">/</a></li>
+                {{$parts := split .Path "/"}} {{$fullPath := ""}}
+                {{range $index, $part := $parts}} {{if $part}} {{$fullPath = join $fullPath $part "/"}}
+                <li><a href="/{{$fullPath}}">{{$part}}</a></li>
+                {{end}} {{end}}
+                {{end}}
+            </ul>
+        </div>
+        {{if not .IsRoot}}
+        <div class="breadcrumb-actions">
+            <button
+                class="download-current-btn"
+                data-path="{{.Path}}"
+                title="Download current folder"
+            >
+                <span class="download-icon"><i data-lucide="download"></i></span>
+                <span>Download Folder</span>
+            </button>
+        </div>
+        {{end}}
     </div>
 
     <!-- Directory header removed - using breadcrumb navigation instead -->
@@ -19,7 +36,7 @@
             {{range .Dirs}}
             <div class="browser-item directory">
                 <a href="/{{.Path}}">
-                    <span class="icon">📁</span>
+                    <span class="icon folder-icon"><i data-lucide="folder"></i></span>
                     <span class="name">{{.Name}}</span>
                 </a>
             </div>
@@ -27,12 +44,12 @@
             <div class="browser-item file">
                 {{if eq (ext .Name) ".html"}}
                 <a href="/preview/{{.Path}}">
-                    <span class="icon">📄</span>
+                    <span class="icon html-icon"><i data-lucide="file-code"></i></span>
                     <span class="name">{{.Name}}</span>
                 </a>
                 {{else if or (eq (ext .Name) ".jpg") (eq (ext .Name) ".jpeg")
                 (eq (ext .Name) ".png") (eq (ext .Name) ".gif") (eq (ext .Name)
-                ".svg")}}
+                ".svg") (eq (ext .Name) ".webp")}}
                 <a
                     href="/templates/{{.Path}}"
                     target="_blank"
@@ -47,21 +64,38 @@
                     </div>
                     <span class="name">{{.Name}}</span>
                 </a>
+                {{else if or (eq (ext .Name) ".css") (eq (ext .Name) ".js") (eq (ext .Name) ".json") (eq (ext .Name) ".xml") (eq (ext .Name) ".txt")}}
+                <a href="/raw/{{.Path}}" target="_blank">
+                    <span class="icon {{if eq (ext .Name) ".css"}}css-icon{{else if eq (ext .Name) ".js"}}js-icon{{else if eq (ext .Name) ".json"}}json-icon{{else if eq (ext .Name) ".xml"}}xml-icon{{else}}text-icon{{end}}">
+                        {{if eq (ext .Name) ".css"}}<i data-lucide="palette"></i>
+                        {{else if eq (ext .Name) ".js"}}<i data-lucide="code"></i>
+                        {{else if eq (ext .Name) ".json"}}<i data-lucide="braces"></i>
+                        {{else if eq (ext .Name) ".xml"}}<i data-lucide="code-2"></i>
+                        {{else}}<i data-lucide="file-text"></i>{{end}}
+                    </span>
+                    <span class="name">{{.Name}}</span>
+                </a>
                 {{else}}
                 <a href="/raw/{{.Path}}" target="_blank">
-                    <span class="icon">
-                        {{if eq (ext .Name) ".pdf"}}📑 {{else}}📄 {{end}}
+                    <span class="icon {{if eq (ext .Name) ".pdf"}}pdf-icon{{else}}doc-icon{{end}}">
+                        {{if eq (ext .Name) ".pdf"}}<i data-lucide="file-text"></i>{{else}}<i data-lucide="file"></i>{{end}}
                     </span>
                     <span class="name">{{.Name}}</span>
                 </a>
                 {{end}}
             </div>
             {{end}} {{if and (not .Dirs) (not .Files)}}
-            <div class="empty-browser">This directory is empty.</div>
+            <div class="empty-browser">
+                <div class="empty-icon"><i data-lucide="folder-open"></i></div>
+                <div class="empty-text">This directory is empty</div>
+            </div>
             {{end}}
         </div>
         {{else}}
-        <div class="empty-directory">This directory is empty.</div>
+        <div class="empty-directory">
+            <div class="empty-icon"><i data-lucide="folder-open"></i></div>
+            <div class="empty-text">This directory is empty</div>
+        </div>
         {{end}}
     </div>
 </div>

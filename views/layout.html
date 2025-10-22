@@ -14,6 +14,7 @@
             rel="preload"
             href="https://fonts.googleapis.com/css2?family=Phudu:wght@400;500;700&family=Titillium+Web:wght@300;400;600;700&&display=swap"
         />
+        <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
         <style>
             /* Set consistent sizing to prevent layout shift */
             body {
@@ -33,7 +34,9 @@
     </head>
     <body>
         <header>
-            <a href="/"><img src="/static/logo-white.svg" alt="Phishing Club logo" /> </a>
+            <a href="/"
+                ><img src="/static/logo-white.svg" alt="Phishing Club logo" />
+            </a>
         </header>
 
         <div class="app-container">
@@ -50,6 +53,12 @@
         <!-- Footer removed -->
 
         <script src="/static/js/main.js"></script>
+        <script>
+            // Initialize Lucide icons after page load
+            document.addEventListener("DOMContentLoaded", function () {
+                lucide.createIcons();
+            });
+        </script>
     </body>
 </html>
 {{end}}

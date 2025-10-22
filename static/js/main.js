@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initDeviceButtons();
   setupPreviewIframe();
   initCopyContentButton();
-  initDownloadFolderButton();
+  initBreadcrumbDownload();
   initExportButton();
   initSendEmailButton();
   highlightActiveNode();
@@ -11,10 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initWidthSlider();
   initNavigationTree();
 
-  // Add download buttons with delay to ensure DOM is ready
-  setTimeout(addDirectoryDownloadButtons, 200);
-
-  // Also add download buttons after any page navigation
+  // Watch for content changes to re-initialize breadcrumb download
   observeContentChanges();
 });
 
@@ -323,13 +320,13 @@ function initCopyContentButton() {
   }
 }
 
-// Function to initialize download folder button
-function initDownloadFolderButton() {
-  // Add hover download buttons to directory items in the main content
-  addDirectoryDownloadButtons();
+// Function to initialize breadcrumb download button
+function initBreadcrumbDownload() {
+  // Add listener for breadcrumb download button
+  attachBreadcrumbDownloadListener();
 }
 
-// Function to observe content changes and re-add download buttons
+// Function to observe content changes and re-attach breadcrumb download listener
 function observeContentChanges() {
   // Use MutationObserver to detect when new content is loaded
   const targetNode = document.querySelector(".main-content");
@@ -340,23 +337,28 @@ function observeContentChanges() {
   const callback = function (mutationsList, observer) {
     for (let mutation of mutationsList) {
       if (mutation.type === "childList" && mutation.addedNodes.length > 0) {
-        // Check if any directory items were added
-        const hasDirectoryItems = Array.from(mutation.addedNodes).some(
+        // Check if any breadcrumb download buttons were added
+        const hasDownloadButtons = Array.from(mutation.addedNodes).some(
           (node) => {
             return (
               node.nodeType === Node.ELEMENT_NODE &&
               ((node.querySelector &&
-                node.querySelector(".browser-item.directory")) ||
+                node.querySelector(".download-current-btn")) ||
                 (node.classList &&
-                  node.classList.contains("browser-item") &&
-                  node.classList.contains("directory")))
+                  node.classList.contains("download-current-btn")))
             );
           },
         );
 
-        if (hasDirectoryItems) {
+        if (hasDownloadButtons) {
           // Small delay to ensure DOM is fully updated
-          setTimeout(addDirectoryDownloadButtons, 100);
+          setTimeout(() => {
+            attachBreadcrumbDownloadListener();
+            // Re-initialize Lucide icons for new content
+            if (typeof lucide !== "undefined") {
+              lucide.createIcons();
+            }
+          }, 100);
         }
       }
     }
@@ -366,50 +368,41 @@ function observeContentChanges() {
   observer.observe(targetNode, config);
 }
 
-// Function to initialize email button and modal
+// Function to attach listener to breadcrumb download button
+function attachBreadcrumbDownloadListener() {
+  const breadcrumbDownloadBtn = document.querySelector(".download-current-btn");
 
-// Function to add download buttons to directory items
-function addDirectoryDownloadButtons() {
-  const directoryItems = document.querySelectorAll(".browser-item.directory");
+  if (
+    breadcrumbDownloadBtn &&
+    !breadcrumbDownloadBtn.hasAttribute("data-listener-attached")
+  ) {
+    const folderPath = breadcrumbDownloadBtn.getAttribute("data-path");
 
-  directoryItems.forEach((item) => {
-    // Skip if already has a download button
-    if (item.querySelector(".download-folder-btn")) {
-      return;
-    }
+    if (folderPath) {
+      breadcrumbDownloadBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
 
-    // Get the folder path from the link
-    const link = item.querySelector("a");
+        // Add loading state
+        const originalContent = breadcrumbDownloadBtn.innerHTML;
+        breadcrumbDownloadBtn.innerHTML =
+          '<span class="download-icon">⏳</span><span>Downloading...</span>';
+        breadcrumbDownloadBtn.disabled = true;
 
-    if (link) {
-      const folderPath = link.getAttribute("href");
-
-      if (folderPath) {
-        // Remove leading slash if present
-        const cleanPath = folderPath.startsWith("/")
-          ? folderPath.substring(1)
-          : folderPath;
-
-        // Create download button
-        const downloadBtn = document.createElement("button");
-        downloadBtn.className = "download-folder-btn item-download";
-        downloadBtn.innerHTML = "📦";
-        downloadBtn.title = "Download folder";
-        downloadBtn.setAttribute("data-path", cleanPath);
-
-        // Add click handler
-        downloadBtn.addEventListener("click", function (e) {
-          e.preventDefault();
-          e.stopPropagation();
-          requestFolderDownload(cleanPath);
+        requestFolderDownload(folderPath).finally(() => {
+          // Restore original button state
+          breadcrumbDownloadBtn.innerHTML = originalContent;
+          breadcrumbDownloadBtn.disabled = false;
         });
+      });
 
-        // Add to the item
-        item.appendChild(downloadBtn);
-      }
+      // Mark as having listener attached
+      breadcrumbDownloadBtn.setAttribute("data-listener-attached", "true");
     }
-  });
+  }
 }
+
+// Function to initialize email button and modal
 
 // Function to request folder download
 function requestFolderDownload(path) {

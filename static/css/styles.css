@@ -276,13 +276,21 @@ header h1 a:hover {
 }
 
 .tree-node-icon {
-    margin-right: 6px;
-    width: 14px;
+    margin-right: 8px;
+    width: 20px;
+    height: 20px;
     text-align: center;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+}
+
+.tree-node-icon i {
+    width: 14px;
+    height: 14px;
+    stroke-width: 2;
+    color: var(--grayblue-dark);
 }
 
 .tree-node-label {
@@ -381,8 +389,16 @@ footer {
 }
 
 /* Breadcrumb */
-.breadcrumb {
+.breadcrumb-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 20px;
+    gap: 20px;
+}
+
+.breadcrumb {
+    flex: 1;
 }
 
 .preview-container .breadcrumb {
@@ -406,9 +422,50 @@ footer {
 }
 
 .breadcrumb li:not(:last-child)::after {
-    content: "/";
+    content: " / ";
+    color: var(--grayblue-dark);
     margin: 0 8px;
-    color: #888;
+}
+
+.breadcrumb-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.download-current-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background-color: var(--pc-lightblue);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: "Titillium Web", sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--pc-darkblue);
+    text-decoration: none;
+}
+
+.download-current-btn:hover {
+    background-color: var(--highlight-blue);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.download-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.download-icon i {
+    width: 16px;
+    height: 16px;
+    stroke-width: 2;
 }
 
 /* Directory Listing */
@@ -467,18 +524,19 @@ footer {
 
 .file-browser {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 15px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
     margin-bottom: 30px;
+    padding: 10px 0;
 }
 
 .browser-item {
     border: 1px solid var(--border-color);
-    border-radius: 8px;
-    transition:
-        box-shadow 0.2s,
-        transform 0.2s;
+    border-radius: 12px;
+    transition: all 0.3s ease;
     background-color: white;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .browser-item.active-item {
@@ -489,8 +547,9 @@ footer {
 }
 
 .browser-item:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    transform: translateY(-3px);
+    border-color: var(--pc-purple);
 }
 
 .browser-item {
@@ -500,11 +559,11 @@ footer {
 .browser-item a {
     display: flex;
     align-items: center;
-    padding: 15px;
+    padding: 20px;
     color: var(--text-color);
     text-decoration: none;
     width: 100%;
-    min-height: 60px;
+    min-height: 80px;
 }
 
 .browser-item a.file-with-thumbnail {
@@ -515,34 +574,86 @@ footer {
 }
 
 .browser-item .icon {
-    margin-right: 12px;
-    font-size: 1.5rem;
+    margin-right: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    flex-shrink: 0;
+}
+
+.browser-item .icon i {
+    width: 24px;
+    height: 24px;
+    stroke-width: 2;
 }
 
 .image-thumbnail {
     width: 100%;
-    height: 140px;
+    height: 160px;
     overflow: hidden;
-    margin-bottom: 10px;
-    border-radius: 4px;
+    margin-bottom: 15px;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #f5f5f5;
+    background: linear-gradient(
+        135deg,
+        var(--pleasant-gray),
+        var(--grayblue-light)
+    );
+    border: 1px solid var(--grayblue-dark);
+    box-shadow: 0 2px 8px rgba(154, 154, 183, 0.1);
 }
 
 .image-thumbnail img {
     max-width: 100%;
-    max-height: 140px;
+    max-height: 160px;
     object-fit: contain;
+    border-radius: 8px;
+    transition: transform 0.2s ease;
 }
 
-.directory .icon {
+.browser-item:hover .image-thumbnail img {
+    transform: scale(1.02);
+}
+
+.folder-icon i {
+    color: var(--grayblue-dark);
+}
+
+.html-icon i {
+    color: var(--cta-orange2);
+}
+
+.pdf-icon i {
+    color: var(--pc-red);
+}
+
+.doc-icon i {
+    color: var(--cta-blue);
+}
+
+.css-icon i {
+    color: var(--cta-blue);
+}
+
+.js-icon i {
+    color: var(--cta-orange2);
+}
+
+.json-icon i {
+    color: var(--pc-green);
+}
+
+.xml-icon i {
     color: var(--pc-purple);
 }
 
-.file .icon {
-    color: var(--cta-blue);
+.text-icon i {
+    color: var(--grayblue-dark);
 }
 
 .browser-item .name {
@@ -550,25 +661,73 @@ footer {
     word-wrap: break-word;
     word-break: break-word;
     overflow: visible;
-    font-weight: 500;
+    font-weight: 600;
     line-height: 1.3;
+    font-size: 1.1rem;
 }
 
 .empty-browser {
     grid-column: 1 / -1;
-    color: #888;
-    font-style: italic;
-    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
     text-align: center;
-    background-color: #f9f9f9;
-    border-radius: 8px;
+    background: linear-gradient(
+        135deg,
+        var(--pleasant-gray),
+        var(--grayblue-light)
+    );
+    border-radius: 12px;
+    border: 2px dashed var(--grayblue-dark);
+    min-height: 200px;
+}
+
+.empty-browser .empty-icon {
+    margin-bottom: 16px;
+    opacity: 0.6;
+}
+
+.empty-browser .empty-icon i {
+    width: 48px;
+    height: 48px;
+    stroke-width: 1.5;
+    color: var(--grayblue-dark);
+}
+
+.empty-browser .empty-text {
+    color: var(--devil-gray);
+    font-size: 1.1rem;
+    font-weight: 500;
 }
 
 .empty-directory {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    padding: 50px 0;
-    color: #888;
-    font-style: italic;
+    padding: 80px 20px;
+    min-height: 300px;
+}
+
+.empty-directory .empty-icon {
+    margin-bottom: 20px;
+    opacity: 0.6;
+}
+
+.empty-directory .empty-icon i {
+    width: 64px;
+    height: 64px;
+    stroke-width: 1.5;
+    color: var(--grayblue-dark);
+}
+
+.empty-directory .empty-text {
+    color: var(--devil-gray);
+    font-size: 1.2rem;
+    font-weight: 500;
 }
 
 /* Preview Page */
@@ -885,83 +1044,133 @@ footer {
     background-color: var(--border-color);
 }
 
-/* Download Folder Button */
-.download-folder-btn {
-    padding: 5px 10px;
-    background-color: var(--pc-lightblue);
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.2s;
-    font-family: "Titillium Web", sans-serif;
-    font-size: 0.9rem;
-    margin: 8px 0;
-}
-
-.download-folder-btn:hover {
-    background-color: var(--highlight-blue);
-    color: white;
-}
-
-.download-folder-btn.item-download {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 5px;
-    border-radius: 50%;
-    opacity: 0;
-    margin: 0;
-    z-index: 2;
-    background-color: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-    transition:
-        transform 0.2s,
-        background-color 0.2s;
-}
-
-.browser-item:hover .download-folder-btn.item-download {
-    opacity: 1;
-}
-
-.download-folder-btn.item-download:hover {
-    background-color: var(--pc-lightblue);
-    transform: translateY(-2px);
-}
-
-/* Hide any folder actions that might be added to the navigation tree */
-.tree-node-children .folder-actions {
-    display: none;
-}
-
 @media (max-width: 768px) {
+    .breadcrumb-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+
+    .breadcrumb-actions {
+        align-self: flex-end;
+    }
+
+    .download-current-btn {
+        padding: 4px 8px;
+        font-size: 0.8rem;
+        gap: 4px;
+    }
+
+    .download-icon i {
+        width: 14px;
+        height: 14px;
+    }
+
+    .file-browser {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 15px 0;
+    }
+
+    .browser-item {
+        border-radius: 10px;
+    }
+
+    .browser-item a {
+        padding: 16px;
+        min-height: 70px;
+    }
+
+    .browser-item .icon {
+        width: 40px;
+        height: 40px;
+        margin-right: 12px;
+    }
+
+    .browser-item .icon i {
+        width: 20px;
+        height: 20px;
+    }
+
+    .browser-item .name {
+        font-size: 1rem;
+    }
+
+    .image-thumbnail {
+        height: 120px;
+        margin-bottom: 12px;
+    }
+
+    .image-thumbnail img {
+        max-height: 120px;
+    }
+
+    .browser-item a.file-with-thumbnail {
+        padding: 15px;
+        min-height: 160px;
+    }
+
+    .empty-browser,
+    .empty-directory {
+        padding: 40px 15px;
+        min-height: 150px;
+    }
+
+    .empty-browser .empty-icon i,
+    .empty-directory .empty-icon i {
+        width: 40px;
+        height: 40px;
+    }
+
+    .empty-browser .empty-text,
+    .empty-directory .empty-text {
+        font-size: 1rem;
+    }
+
+    .tree-node-icon {
+        width: 18px;
+        height: 18px;
+        margin-right: 6px;
+    }
+
+    .tree-node-icon i {
+        width: 12px;
+        height: 12px;
+    }
+
+    .export-btn {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+        gap: 6px;
+    }
+
+    .export-btn i {
+        width: 14px;
+        height: 14px;
+    }
+
     .preview-header {
         flex-direction: column;
         align-items: flex-start;
-        gap: 10px;
+        gap: 15px;
     }
 
     .preview-controls {
         width: 100%;
-        justify-content: space-between;
+        justify-content: flex-start;
     }
 
     .preview-frame-container {
-        flex: 1;
+        margin-top: 20px;
     }
 
     .header-left {
         flex-direction: column;
         align-items: flex-start;
-        gap: 8px;
+        gap: 10px;
     }
 
     .preview-header h2 {
-        max-width: 200px;
+        margin: 0;
     }
 }
