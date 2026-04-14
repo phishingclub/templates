@@ -134,11 +134,11 @@ By default all templates should be named Template - Name so they can be easily c
 emails:
   - name: "Generic Service - Login Alert"
     file: "email.html"
-    envelope_from: "security@service.com"
+    envelope from: "security@service.com"
     from: "IT Security <security@service.com>"
     subject: "Unusual Login Activity Detected"
 
-landing_pages:
+pages:
   - name: "Generic Service Login Page"
     file: "landing.html"
 ```
