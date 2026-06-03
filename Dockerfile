@@ -1,5 +1,5 @@
 # development docker file
-FROM golang:1.24.5
+FROM golang:1.25.10
 
 EXPOSE 8005
 

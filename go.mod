@@ -1,6 +1,6 @@
 module github.com/phishingclub/templates
 
-go 1.23.8
+go 1.25.10
 
 require (
 	github.com/go-errors/errors v1.4.2
